@@ -1,1452 +1,617 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workshop Receita Recorrente - Domine o Steadyflow</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Receita Recorrente - Domine o Steadyflow</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#8C7A5B',
+                            olive: '#4B5320',
+                            lightOlive: '#6B7A48',
+                            deepOlive: '#1a1e16',
+                            earth: '#3D3222',
+                            sand: '#C2B280',
+                            gunmetal: '#2B2E25',
+                        },
+                        dark: {
+                            base: '#0F120D',
+                            surface: '#161914',
+                            border: '#3E452F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        stencil: ['Black Ops One', 'cursive'],
+                    },
+                    animation: {
+                        'scanline': 'scanline 8s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 5px #8C7A5B, 0 0 10px #8C7A5B' },
+                            'to': { boxShadow: '0 0 20px #8C7A5B, 0 0 30px #4B5320' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- Custom Config -->
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-brand: {
-gold: '#8C7A5B',      // Replaced Gold with Military Brown/Khaki
-olive: '#4B5320',     // Classic Army Green
-lightOlive: '#6B7A48', // Highlighting Olive
-deepOlive: '#1a1e16', // Darker Background
-earth: '#3D3222',     // Dark Military Brown
-sand: '#C2B280',      // Desert Sand (Secondary Text)
-gunmetal: '#2B2E25',  // Equipment Grey
-},
-dark: {
-base: '#0F120D',      // Very Dark Olive/Black Base
-surface: '#161914',   // Surface
-border: '#3E452F',    // Olive Border
-}
-},
-fontFamily: {
-sans: ['Inter', 'sans-serif'],
-display: ['Outfit', 'sans-serif'],
-mono: ['JetBrains Mono', 'monospace'],
-stencil: ['Black Ops One', 'cursive'],
-},
-animation: {
-'scan': 'scan 4s linear infinite',
-'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-'float': 'float 6s ease-in-out infinite',
-'float-delayed': 'float 6s ease-in-out 3s infinite',
-'spin-slow': 'spin 12s linear infinite',
-},
-keyframes: {
-scan: {
-'0%': { top: '0%', opacity: 0 },
-'10%': { opacity: 0.3 },
-'90%': { opacity: 0.3 },
-'100%': { top: '100%', opacity: 0 },
-},
-float: {
-'0%, 100%': { transform: 'translateY(0)' },
-'50%': { transform: 'translateY(-10px)' },
-}
-}
-}
-}
-}
-</script>
-
-<style>
-body {
-background-color: #0F120D;
-color: #d4d4d4;
-overflow-x: hidden;
-}
-
-/* UTILITIES */
-.clip-angled {
-clip-path: polygon(
-10px 0, 100% 0, 
-100% calc(100% - 10px), calc(100% - 10px) 100%, 
-0 100%, 0 10px
-);
-}
-
-.text-shadow-sm {
-text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-}
-
-/* FADE IN ANIMATION CLASSES */
-.fade-in-section {
-opacity: 0;
-transform: translateY(20px);
-transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-section.is-visible {
-opacity: 1;
-transform: none;
-}
-
-/* ACCORDION TRANSITION */
-.accordion-content {
-transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-max-height: 0;
-opacity: 0;
-overflow: hidden;
-}
-.accordion-content.open {
-opacity: 1;
-}
-.accordion-icon {
-transition: transform 0.3s ease;
-}
-.accordion-btn[aria-expanded="true"] .accordion-icon {
-transform: rotate(45deg); 
-}
-.accordion-arrow {
-transition: transform 0.3s ease;
-display: inline-block;
-}
-.accordion-btn[aria-expanded="true"] .accordion-arrow {
-transform: rotate(90deg);
-}
-
-/* CUSTOM SCROLLBAR */
-::-webkit-scrollbar {
-width: 8px;
-}
-::-webkit-scrollbar-track {
-background: #0F120D; 
-}
-::-webkit-scrollbar-thumb {
-background: #4B5320; 
-border-radius: 0px;
-}
-::-webkit-scrollbar-thumb:hover {
-background: #6B7A48; 
-}
-</style>
-</head>
-<body class="antialiased font-sans selection:bg-brand-olive selection:text-white bg-dark-base relative">
-
-<!-- BACKGROUND LAYERS -->
-<div class="fixed inset-0 pointer-events-none z-0 opacity-[0.07]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
-<div class="fixed inset-0 pointer-events-none z-0 bg-gradient-to-b from-[#0F120D] via-[#161912] to-[#0a0b08]"></div>
-
-<!-- TOP HUD NAV -->
-<nav class="relative w-full z-[60] border-b border-[#3e452f] bg-[#0F120D]/95 backdrop-blur-md h-12 flex items-center shadow-md">
-<div class="max-w-7xl mx-auto w-full px-4 flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest">
-<div class="flex items-center gap-2 text-[#8C7A5B]">
-<i data-lucide="shield" class="w-3.5 h-3.5"></i>
-<span>SECURE CHANNEL</span>
-</div>
-<div class="flex gap-4 text-[#6B7A48]">
-<span class="hidden md:inline">OP: 23.12.25</span>
-<div class="flex items-center gap-2">
-<i data-lucide="signal" class="w-3 h-3"></i>
-<i data-lucide="battery" class="w-3 h-3"></i>
-</div>
-</div>
-</div>
-</nav>
-
-<!-- ALERT BANNER -->
-<div class="w-full bg-[#3D3222] relative overflow-hidden border-b-4 border-black z-50">
-<div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
-<div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center text-center relative z-10">
-<p class="text-[10px] md:text-xs font-bold tracking-wide text-[#C2B280] flex flex-col md:flex-row items-center gap-2 uppercase font-mono">
-<span class="flex items-center gap-1 bg-black text-[#8C7A5B] px-2 py-0.5 rounded-sm">
-<i data-lucide="alert-triangle" class="w-3 h-3 fill-current"></i>
-Atenção
-</span>
-<span>
-O Workshop Receita Recorrente começa em:
-</span>
-</p>
-</div>
-</div>
-
-<!-- HERO SECTION -->
-<section class="relative pt-12 pb-20 px-4 z-10">
-    <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+    <style>
+        body { background-color: #0F120D; color: #d4d4d4; overflow-x: hidden; }
         
-        <!-- TIMER CONTAINER -->
-        <div class="fade-in-section mb-12 relative">
-            <!-- Floating Icons: Alterados para z-30 para flutuarem sobre o timer -->
-            <div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float z-30">
-                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
-                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
-            </div>
-            <div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed z-30">
-                <i data-lucide="satellite" class="w-8 h-8"></i>
-                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
-            </div>
+        /* Tactical HUD Overlays */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 100;
+        }
 
-            <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
-                Mission Countdown
+        .clip-angled {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .fade-in-section {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-section.is-visible { opacity: 1; transform: none; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0F120D; }
+        ::-webkit-scrollbar-thumb { background: #8C7A5B; }
+        
+        .glow-hover:hover { box-shadow: 0 0 15px rgba(140, 122, 91, 0.4); }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-brand-gold selection:text-black bg-dark-base relative">
+
+    <!-- HUD OVERLAY -->
+    <div class="scanlines"></div>
+    <div class="fixed inset-0 pointer-events-none z-[90] opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
+
+    <!-- TOP NAV -->
+    <nav class="fixed top-0 w-full z-[100] border-b border-brand-olive/30 bg-dark-base/90 backdrop-blur-md h-12 flex items-center">
+        <div class="max-w-7xl mx-auto w-full px-6 flex justify-between items-center text-[10px] font-mono tracking-[0.2em]">
+            <div class="flex items-center gap-3 text-brand-gold">
+                <div class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></div>
+                <span class="font-bold">ENCRYPTED_CHANNEL // STEADYFLOW</span>
             </div>
-            
-            <!-- JS Timer Rendered Here -->
-            <!-- Alteração: Adicionado text-[#8C7A5B] para que os números herdem a cor clara/dourada solicitada -->
-            <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative z-10 text-[#8C7A5B]">
-                <!-- Screws -->
-                <div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                
-                <!-- Digits inserted by JS will now be #8C7A5B -->
+            <div class="flex gap-6 text-brand-lightOlive">
+                <span class="hidden md:inline">NODE: BRAZIL_SAT_01</span>
+                <span class="flex items-center gap-1"><i data-lucide="cpu" class="w-3 h-3"></i> 2.4 Teraflops</span>
             </div>
         </div>
+    </nav>
 
-        <!-- HEADLINE -->
-        <div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
-            <div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
-                <i data-lucide="terminal" class="w-3 h-3"></i>
-                <span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
-            </div>
-            
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
-                Domine o Jogo do <br />
-                <span class="text-[#8C7A5B] text-shadow-sm">
-                    "CashFlow Recorrente"
+    <!-- ALERT BANNER -->
+    <div class="w-full bg-brand-earth mt-12 relative overflow-hidden border-b-2 border-black z-50">
+        <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center relative z-10">
+            <p class="text-[10px] md:text-xs font-bold tracking-widest text-brand-sand flex items-center gap-3 uppercase font-mono">
+                <span class="bg-black text-brand-gold px-2 py-0.5 rounded flex items-center gap-2">
+                    <i data-lucide="alert-octagon" class="w-3 h-3"></i> URGENTE
                 </span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
-                O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
-                <span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
+                <span>O Workshop Receita Recorrente começa em breve:</span>
             </p>
         </div>
+    </div>
 
-        <!-- VIDEO PLACEHOLDER -->
-        <div class="fade-in-section w-full max-w-4xl relative group">
-            <!-- Floating Badge -->
-            <div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
-                <div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
-                    <div class="border border-[#8C7A5B] border-dashed p-1">
-                        <p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
-                            TOP SECRET<br/>ACCESS
-                        </p>
-                    </div>
-                    <div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-                    <div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+    <!-- HERO SECTION -->
+    <section class="relative pt-20 pb-24 px-4 z-10">
+        <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+            
+            <!-- TIMER -->
+            <div class="fade-in-section mb-16 relative">
+                <div class="absolute -left-32 top-1/2 hidden lg:flex opacity-20 text-brand-gold items-center gap-3 animate-float">
+                    <i data-lucide="activity" class="w-10 h-10"></i>
+                    <span class="text-[8px] font-mono tracking-widest border border-brand-gold/30 p-1">SYS_HEARTBEAT</span>
+                </div>
+
+                <div class="inline-block mb-4 text-[10px] font-mono text-brand-gold tracking-[0.4em] uppercase bg-brand-deepOlive border border-brand-gold/30 px-4 py-1.5 shadow-xl">
+                    Operation Countdown
+                </div>
+                
+                <div id="countdown-timer" class="flex gap-3 items-center justify-center bg-black/40 border-2 border-brand-olive/50 p-4 rounded-lg shadow-[0_0_40px_rgba(0,0,0,0.5)] relative z-10">
+                    <!-- Timer content via JS -->
                 </div>
             </div>
 
-            <div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
-                     <!-- Top Bar Decoration -->
-                     <script>
-                        for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
-                     </script>
+            <!-- HEADLINE -->
+            <div class="fade-in-section mb-16 max-w-5xl space-y-8">
+                <div class="inline-flex items-center gap-3 text-brand-sand font-mono text-xs bg-black/50 px-5 py-2 border-l-4 border-brand-gold shadow-lg">
+                    <i data-lucide="terminal" class="w-4 h-4 text-brand-gold"></i>
+                    <span id="typewriter-text">// BOOTING_PROTOCOL...</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-white font-stencil drop-shadow-2xl">
+                    Domine o Jogo do <br />
+                    <span class="text-brand-gold inline-block mt-2">"CashFlow Recorrente"</span>
+                </h1>
+                
+                <p class="text-lg md:text-2xl text-brand-sand font-sans max-w-3xl mx-auto border-l-2 border-brand-olive pl-8 text-left md:text-center md:border-none md:pl-0 leading-relaxed opacity-90">
+                    O sistema que nos faz faturar <span class="text-white font-bold bg-brand-olive/40 px-2 border border-brand-gold/20">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
+                </p>
+            </div>
+
+            <!-- VIDEO -->
+            <div class="fade-in-section w-full max-w-4xl relative group">
+                <div class="absolute -top-10 -right-10 z-30 hidden md:block animate-float-delayed">
+                    <div class="bg-brand-deepOlive border-2 border-brand-gold p-5 shadow-2xl transform rotate-3">
+                        <p class="text-[10px] font-black text-brand-gold uppercase tracking-widest text-center leading-none">
+                            CLASSIFIED<br/>ACCESS ONLY
+                        </p>
+                    </div>
                 </div>
 
-                <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
-                    <div class="text-center w-full h-full flex flex-col items-center justify-center relative">
-                        <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
-                        
-                        <span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
-                        
-                        <button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
-                            <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
+                <div class="relative aspect-video bg-black border-[6px] border-brand-gunmetal shadow-[0_0_60px_rgba(0,0,0,0.8)] overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
+                        <div class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#1a1e16_10px,#1a1e16_20px)]"></div>
+                        <button class="w-24 h-24 flex items-center justify-center border-4 border-brand-gold bg-brand-gold/10 text-brand-gold rounded-full hover:bg-brand-gold hover:text-black transition-all duration-500 relative z-10 shadow-[0_0_40px_rgba(140,122,91,0.3)] hover:scale-110">
+                            <i data-lucide="play" class="w-10 h-10 fill-current ml-1"></i>
                         </button>
                     </div>
-                </div>
-                
-                <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
-                    <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
-                    <span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- INTEL TEXT -->
-        <div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
-            <div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
-                <p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
-                    // REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket "tradicional"...
-                    <br class="hidden md:block">
-                    <span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
-                </p>
-            </div>
-            
-            <div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
-                <p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
-                    Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
-                </p>
-            </div>
-        </div>
-
-        <!-- CTA SECTION & DOSSIER -->
-        <div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
-            
-            <div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
-
-            <!-- MAIN BUTTON -->
-            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
-                <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
-                    DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
-                </span>
-            </a>
-            
-            <!-- DOSSIER LIST (Cardboard File Style) -->
-            <div class="w-full mt-20 relative z-10 max-w-3xl mx-auto">
-                <div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
-                    <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
-                        <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
-                    </span>
-                </div>
-
-                <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
-                    <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
                     
-                    <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
-                        <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
-                            <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
-                        </span>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
-                        
-                        <!-- Alteração: Itens internos agora usam font-mono para efeito typewriter -->
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Imediato a nosso Grupo Vip
-                            </span>
-                        </div>
-
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Aprenda a criar uma recorrência em dólar
-                            </span>
-                        </div>
-
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Workshop Prático, com foco em Executar
-                            </span>
-                        </div>
-
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Diretamente aos mentores para tirar dúvidas
-                            </span>
-                        </div>
-
-                        <div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
-                            <i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
-                            <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
-                                100% ao vivo, na terça-feira, às 20h
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
-
-                         <div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
-                            <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
-                            <div class="relative z-10">
-                                <div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
-                                <span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
-                                    [IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
-                                </span>
-                            </div>
-                         </div>
-                         <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
+                    <div class="absolute top-6 left-6 z-20 flex items-center gap-3 bg-black/60 backdrop-blur-md px-3 py-1.5 border border-brand-gold/20">
+                        <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_15px_red]"></div>
+                        <span class="text-white font-mono text-[10px] font-bold tracking-[0.3em]">LIVE_FEED</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-  
-<!-- CLASSIFIED INTEL SECTION -->
-<section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
-    <!-- Overlay de textura para profundidade -->
-    <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#141612_20px,#141612_40px)]"></div>
+    </section>
 
-    <div class="max-w-5xl mx-auto px-4 relative z-10">
-        <div class="flex flex-col md:flex-row gap-12 items-center">
-            
-            <!-- TEXT COLUMN: Argumentação Estratégica -->
-            <div class="fade-in-section w-full md:w-1/2 space-y-6">
-                <!-- TOP SECRET simplificado -->
-                <div class="inline-block bg-[#7f1d1d] border border-red-500/50 px-3 py-1 text-white font-mono text-xs tracking-widest uppercase font-bold shadow-md">
-                    TOP SECRET
+    <!-- INTEL COLUMN -->
+    <section class="py-20 bg-brand-deepOlive/50 border-y border-brand-olive/20">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row gap-16 items-center">
+            <div class="fade-in-section w-full md:w-1/2 space-y-8">
+                <div class="inline-block bg-red-900/20 border border-red-500/30 px-4 py-1 text-red-500 font-mono text-[10px] tracking-widest uppercase font-black">
+                    TOP SECRET // PRIORITY_ONE
                 </div>
-
-                <!-- Título Principal: Ajustado para 3xl/5xl para garantir impacto visual -->
-                <h2 class="text-2xl md:text-4xl font-black uppercase text-white font-stencil tracking-wider leading-tight">
-                    Você está diante da estratégia <span class="text-[#8C7A5B]">pouco conhecida</span> e mais lucrativa do Mercado digital
+                <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil leading-tight">
+                    Você está diante da estratégia <span class="text-brand-gold">pouco conhecida</span> e mais lucrativa do mercado
                 </h2>
-
-                <div class="space-y-4 font-mono text-sm md:text-base text-gray-400">
+                <div class="space-y-6 font-mono text-sm md:text-base text-gray-400">
+                    <p class="border-l-2 border-brand-gold pl-4 italic">
+                        "O mercado mudou. Se você vende uma vez só, você não tem um negócio, tem um emprego de vendas."
+                    </p>
                     <p>
-                        // REPORT: Se você vende apenas uma vez para o cliente, sua margem de <span class="text-white font-bold underline">LUCRO</span> é baixa, e muitas vezes quase ZERO. 
-                        <span class="block text-xs mt-2 text-[#8C7A5B] font-bold opacity-80 uppercase tracking-tighter">(Mas aqui o papo não é sobre backend)</span>
+                        A estrutura de <span class="text-white font-bold">SaaS Low Ticket na Gringa</span> elimina a montanha-russa emocional de picos de vendas seguidos de zeros absolutos.
                     </p>
-
-                    <!-- Bloco de Destaque: Recorrência -->
-                    <div class="bg-[#141612] border-l-4 border-amber-600 p-6 shadow-md border border-[#3E452F]">
-                        <p class="text-gray-300">
-                            <span class="text-amber-500 font-bold">AGORA:</span> E se o cliente te pagar todo mês? Exatamente isso que você está pensando: uma receita recorrente!
-                        </p>
-                    </div>
-
-                    <p class="leading-relaxed">
-                        Mas peraí, e se for <strong class="text-white">DÓLAR</strong>? Pois é. Estamos falando de multiplicar até <strong class="text-[#8C7A5B] border-b border-[#8C7A5B]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! 
-                    </p>
-
-                    <p>
-                        Este é o jogo onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO. Afinal, com a estrutura que nós montamos criamos um negócio real, honesto e lucrativo! 
-                    </p>
-
-                    <p>
-                        Com o SaaS na Gringa você terá lucros mais previsíveis, escaláveis e estáveis. Sem sofrer a famosa <span class="bg-black text-[#8C7A5B] px-1 font-bold italic">“MONTANHA RUSSA DO MERCADO”</span> de picos de vendas ou estar no absoluto ZERO no dia seguinte.
-                    </p>
-
-                    <!-- Fechamento sem a palavra "Protocolo" -->
-                    <p class="text-[#C2B280] font-bold italic border-t border-[#3E452F] pt-4">
-                        > Podendo construir uma receita recorrente de mais de 100K já no primeiro mês...
+                    <p class="text-brand-sand font-bold">
+                        > Criando uma receita previsível de +100K/mês...
                     </p>
                 </div>
             </div>
 
-            <!-- TACTICAL DEVICE (PHONE MOCKUP) -->
-            <div class="fade-in-section w-full md:w-1/2 flex justify-center">
-                <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
-                    <!-- Botões Físicos -->
-                    <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
-                    <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
-                    <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
-
-                    <div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
-                        <div class="h-8 bg-[#141612] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
-                            <span>SAT_LINK_ACTIVE</span>
-                            <div class="flex gap-2">
-                                <i data-lucide="signal" class="w-2.5 h-2.5 text-white"></i>
-                                <i data-lucide="battery" class="w-2.5 h-2.5 text-white"></i>
-                            </div>
+            <!-- PHONE MOCKUP -->
+            <div class="fade-in-section w-full md:w-1/2">
+                <div class="relative mx-auto w-72 md:w-80 aspect-[9/18] bg-brand-gunmetal rounded-[2.5rem] border-[10px] border-brand-earth shadow-2xl overflow-hidden">
+                    <div class="h-full bg-black flex flex-col">
+                        <div class="h-10 bg-brand-gunmetal flex justify-between items-center px-6 pt-2">
+                            <span class="text-[8px] font-mono text-brand-gold">SECURE_VPN</span>
+                            <div class="flex gap-2"><div class="w-2 h-2 rounded-full bg-brand-gold"></div></div>
                         </div>
-
-                        <div class="flex-1 relative flex flex-col bg-[#0c0d0b]">
-                            <div class="p-6 pb-2">
-                                <div class="flex justify-between items-center mb-4">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700"></div>
-                                        <div>
-                                            <div class="text-[10px] text-gray-400">Welcome back</div>
-                                            <div class="text-xs font-bold text-white">Operator</div>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="award" class="w-4 h-4 text-[#8C7A5B]"></i>
-                                </div>
-                                <div class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
-                                <div class="flex items-baseline gap-1">
-                                    <span class="text-2xl font-bold text-white">$</span>
-                                    <span class="text-4xl font-bold text-white tracking-tighter">12,450</span>
-                                    <span class="text-2xl font-bold text-gray-500">.00</span>
-                                </div>
-                                <div class="flex items-center gap-1 mt-1 text-[#8C7A5B] text-xs font-medium">
-                                    <i data-lucide="trending-up" class="w-3 h-3"></i>
-                                    <span>+12.5% today</span>
-                                </div>
+                        <div class="p-6 space-y-6">
+                            <div class="space-y-1">
+                                <p class="text-[10px] text-gray-500 uppercase">Monthly Revenue</p>
+                                <p class="text-4xl font-black text-white font-display tracking-tighter">$24,850<span class="text-brand-gold">.00</span></p>
                             </div>
-
-                            <div class="h-24 w-full relative px-2">
-                                <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#8C7A5B]/10 to-transparent"></div>
-                                <svg class="w-full h-full text-[#8C7A5B] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
-                                    <path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" stroke-width="2" />
-                                    <circle cx="100" cy="5" r="3" fill="currentColor" class="animate-pulse" />
+                            <div class="h-32 bg-brand-deepOlive/40 border border-brand-gold/10 rounded-xl relative overflow-hidden">
+                                <svg class="w-full h-full text-brand-gold" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                    <path d="M0 35 Q 25 35, 30 20 T 60 15 T 80 5 T 100 10" fill="none" stroke="currentColor" stroke-width="2" />
                                 </svg>
                             </div>
-
-                            <div class="flex-1 bg-[#141612] mt-4 rounded-t-3xl p-6 space-y-3">
-                                <script>
-                                    for(let i=1; i<=3; i++) {
-                                        document.write(`
-                                            <div class="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
-                                                <div class="flex items-center gap-3">
-                                                    <div class="w-8 h-8 rounded-full bg-[#8C7A5B]/10 flex items-center justify-center text-[#8C7A5B]">
-                                                        <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="text-xs font-bold text-white">Sale #29${i}3</div>
-                                                        <div class="text-[9px] text-gray-500">Just now</div>
-                                                    </div>
-                                                </div>
-                                                <div class="text-xs font-bold text-white">+$49.90</div>
-                                            </div>
-                                        `);
-                                    }
-                                </script>
-                            </div>
-                            <div class="absolute bottom-4 left-0 right-0 text-center">
-                                <p class="text-[10px] font-mono text-gray-500 bg-black/80 inline-block px-2 py-1 rounded">
-                                    Há 4 meses isso se tornou a nossa Realidade...
-                                </p>
+                            <div class="space-y-3">
+                                <div class="h-12 bg-white/5 rounded-lg flex items-center px-4 justify-between border border-white/5">
+                                    <div class="w-6 h-6 bg-brand-gold/20 rounded flex items-center justify-center"><i data-lucide="plus" class="w-3 h-3 text-brand-gold"></i></div>
+                                    <span class="text-[10px] text-gray-300">$49.90 Recurrence</span>
+                                </div>
+                                <div class="h-12 bg-white/5 rounded-lg flex items-center px-4 justify-between border border-white/5 opacity-50">
+                                    <div class="w-6 h-6 bg-brand-gold/20 rounded flex items-center justify-center"><i data-lucide="plus" class="w-3 h-3 text-brand-gold"></i></div>
+                                    <span class="text-[10px] text-gray-300">$49.90 Recurrence</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- ================================================================= -->
-<!-- NOVA SEÇÃO 01: WORKSHOP DELIVERABLES (O QUE IRÁ RECEBER) -->
-<!-- ================================================================= -->
-<section class="py-24 bg-[#0F120D] relative overflow-hidden border-b border-[#3E452F]">
-    <!-- Linha de scan superior -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#8C7A5B]/30 to-transparent"></div>
-    
-    <div class="max-w-6xl mx-auto px-4 relative z-10">
-        <!-- Título e Introdução -->
-        <div class="text-center mb-16 fade-in-section">
-            <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-widest mb-6">
-                VEJA TUDO QUE VOCÊ IRÁ <span class="text-[#8C7A5B]">RECEBER</span> NESTE WORKSHOP
+    <!-- WORKSHOP DELIVERABLES -->
+    <section class="py-24 bg-dark-base border-b border-brand-olive/20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-widest mb-4">
+                    TUDO QUE VOCÊ IRÁ <span class="text-brand-gold">RECEBER</span>
+                </h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="fade-in-section group bg-dark-surface border border-brand-olive/30 p-10 hover:border-brand-gold/50 transition-all duration-500 shadow-xl">
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 shrink-0 bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-black transition-all">
+                            <i data-lucide="map" class="w-7 h-7"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-white font-stencil text-xl uppercase tracking-wider">O Mapa da Estabilidade</h3>
+                            <p class="text-gray-400 font-mono text-sm leading-relaxed">Sair da instabilidade do digital comum para construir uma empresa previsível e vendível.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in-section group bg-dark-surface border border-brand-olive/30 p-10 hover:border-brand-gold/50 transition-all duration-500 shadow-xl">
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 shrink-0 bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-black transition-all">
+                            <i data-lucide="globe" class="w-7 h-7"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-white font-stencil text-xl uppercase tracking-wider">Arbitragem de Moeda</h3>
+                            <p class="text-gray-400 font-mono text-sm leading-relaxed">As 3 perguntas estratégicas para decidir entre faturar no Brasil ou na Gringa.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in-section group bg-dark-surface border border-brand-olive/30 p-10 hover:border-brand-gold/50 transition-all duration-500 shadow-xl">
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 shrink-0 bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-black transition-all">
+                            <i data-lucide="zap" class="w-7 h-7"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-white font-stencil text-xl uppercase tracking-wider">Aquisição de Elite</h3>
+                            <p class="text-gray-400 font-mono text-sm leading-relaxed">Canais ignorados pelo mercado que são 10x mais fáceis de escalar que Meta Ads.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in-section group bg-dark-surface border border-brand-olive/30 p-10 hover:border-brand-gold/50 transition-all duration-500 shadow-xl">
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 shrink-0 bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-black transition-all">
+                            <i data-lucide="cpu" class="w-7 h-7"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-white font-stencil text-xl uppercase tracking-wider">Engenharia No-Code</h3>
+                            <p class="text-gray-400 font-mono text-sm leading-relaxed">Como estruturar seu SaaS MVP sem escrever uma única linha de código.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALIDATION -->
+    <section class="py-24 bg-[#080907] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-brand-gold rounded-full animate-pulse"></div>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+            <div class="fade-in-section mb-12">
+                <div class="inline-flex items-center gap-2 bg-brand-olive text-white px-4 py-1 font-stencil text-sm mb-6 rounded-sm shadow-xl border border-brand-gold/30">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> ESTRATÉGIA 100% VALIDADA
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black uppercase text-white font-stencil mb-8 tracking-tighter">
+                Resultados <span class="text-brand-gold">Inquestionáveis</span>
             </h2>
-            <div class="space-y-4 max-w-4xl mx-auto">
-                <p class="text-[#C2B280] font-mono text-sm md:text-lg leading-relaxed">
-                    // REPORT: Vamos te mostrar exatamente como saímos do ZERO e estruturamos negócios de recorrência em dólar...
-                </p>
-                <div class="inline-block px-6 py-2 bg-[#161914] border-y border-[#3E452F] shadow-inner">
-                    <p class="text-white font-bold font-mono text-xs md:text-sm uppercase tracking-tighter">
-                        Através de uma aula estratégica e prática onde você vai aprender sobre:
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Grid de Conteúdos (4 Pilares) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Item 01: Roadmap -->
-            <div class="fade-in-section group bg-[#161914] border border-[#3E452F] p-8 relative overflow-hidden hover:border-[#8C7A5B]/50 transition-all duration-300">
-                <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="trending-up" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <div class="flex gap-5 relative z-10">
-                    <div class="w-12 h-12 shrink-0 bg-[#8C7A5B]/10 border border-[#8C7A5B]/30 flex items-center justify-center rounded-sm">
-                        <i data-lucide="map" class="w-6 h-6 text-[#8C7A5B]"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-white font-stencil text-lg uppercase tracking-wider">Roadmap da Previsibilidade</h3>
-                        <p class="text-gray-400 font-mono text-sm leading-relaxed">
-                            O passo a passo para sair da instabilidade do digital tradicional e começar a construir uma empresa previsível, escalável e que pode ser vendida no longo prazo.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 02: Brasil vs Gringa -->
-            <div class="fade-in-section group bg-[#161914] border border-[#3E452F] p-8 relative overflow-hidden hover:border-[#8C7A5B]/50 transition-all duration-300">
-                <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="globe-2" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <div class="flex gap-5 relative z-10">
-                    <div class="w-12 h-12 shrink-0 bg-[#8C7A5B]/10 border border-[#8C7A5B]/30 flex items-center justify-center rounded-sm">
-                        <i data-lucide="help-circle" class="w-6 h-6 text-[#8C7A5B]"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-white font-stencil text-lg uppercase tracking-wider">As 3 Perguntas Ingênuas</h3>
-                        <p class="text-gray-400 font-mono text-sm leading-relaxed">
-                            As perguntas cruciais que te ajudarão a decidir estrategicamente sobre vender no mercado brasileiro ou dominar a gringa.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 03: Tráfego e Aquisição -->
-            <div class="fade-in-section group bg-[#161914] border border-[#3E452F] p-8 relative overflow-hidden hover:border-[#8C7A5B]/50 transition-all duration-300">
-                <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="zap" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <div class="flex gap-5 relative z-10">
-                    <div class="w-12 h-12 shrink-0 bg-[#8C7A5B]/10 border border-[#8C7A5B]/30 flex items-center justify-center rounded-sm">
-                        <i data-lucide="satellite-dish" class="w-6 h-6 text-[#8C7A5B]"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-white font-stencil text-lg uppercase tracking-wider">Canais de Aquisição Invisíveis</h3>
-                        <p class="text-gray-400 font-mono text-sm leading-relaxed">
-                            As fontes de tráfego ignoradas pela maioria... mas que atualmente são <span class="text-[#8C7A5B] font-bold">10x mais fáceis de escalar</span> que o Facebook.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 04: SaaS MVP -->
-            <div class="fade-in-section group bg-[#161914] border border-[#3E452F] p-8 relative overflow-hidden hover:border-[#8C7A5B]/50 transition-all duration-300">
-                <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="binary" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <div class="flex gap-5 relative z-10">
-                    <div class="w-12 h-12 shrink-0 bg-[#8C7A5B]/10 border border-[#8C7A5B]/30 flex items-center justify-center rounded-sm">
-                        <i data-lucide="cpu" class="w-6 h-6 text-[#8C7A5B]"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-white font-stencil text-lg uppercase tracking-wider">Engenharia SaaS No-Code</h3>
-                        <p class="text-gray-400 font-mono text-sm leading-relaxed">
-                            Como construir seu SaaS MVP mesmo sem saber escrever 1 linha sequer de programação, focando em execução rápida.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ================================================================= -->
-<!-- NOVA SEÇÃO 02: VALIDATION & SOCIAL PROOF (PROVA SOCIAL) -->
-<!-- ================================================================= -->
-<section class="py-24 bg-[#0A0C08] relative overflow-hidden border-b border-[#3E452F]">
-    <!-- Background Radar Effect -->
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#8C7A5B]/30 rounded-full animate-pulse"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-[#8C7A5B]/20 rounded-full animate-pulse-slow"></div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 relative z-10">
-        <!-- Headline de Validação -->
-        <div class="text-center mb-16 fade-in-section">
-            <div class="inline-flex items-center gap-2 bg-[#4B5320] text-white px-4 py-1 font-stencil text-xs mb-6 rounded-sm shadow-lg border border-[#8C7A5B]/50">
-                <i data-lucide="shield-check" class="w-4 h-4"></i>
-                ESTRATÉGIA 100% VALIDADA
-            </div>
-            
-            <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-tighter leading-tight mb-8">
-                Revelando o que nunca foi <br class="hidden md:block"/> mostrado <span class="text-[#8C7A5B]">publicamente</span>
-            </h2>
-            
-            <div class="max-w-3xl mx-auto space-y-6 font-mono text-gray-400 text-sm md:text-base leading-relaxed">
-                <p>
-                    Em apenas 4 meses usando essa estratégia de SaaS Low Ticket em Dólar, validamos vários produtos de <span class="text-white font-bold bg-[#8C7A5B]/30 px-2 py-0.5 border border-[#8C7A5B]/50">100K de recorrência...</span>
-                </p>
-                <p>
-                    E, agora, é a primeira vez que vamos revelar isso publicamente. Toda vez que decidimos revelar algo que estamos aplicando, quem aprende conosco tem resultados <span class="text-[#8C7A5B] font-bold underline decoration-dotted underline-offset-4 decoration-2">ASTRONÔMICOS</span>.
-                </p>
-            </div>
-        </div>
-
-        <!-- Grid de Depoimentos/Prints (Placeholders) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-section">
-            
-            <!-- Card de Prova 01 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_001</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="file-text" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ PRINTS DE VENDA E FATURAMENTO - ÁREA RESTRITA ]
-                </p>
-            </div>
-
-            <!-- Card de Prova 02 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_002</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="users" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ DEPOIMENTOS REAIS + EXPERIÊNCIA DOS OPERADORES ]
-                </p>
-            </div>
-
-            <!-- Card de Prova 03 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_003</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="bar-chart-3" class="w-16 h-16 text-[#8C7A5B]"></i>
-                </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ DASHBOARDS DE RECORRÊNCIA EM DÓLAR - CLASSIFIED ]
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Linha de Status Inferior -->
-        <div class="mt-16 flex flex-col items-center gap-4">
-            <div class="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-[#3E452F] to-transparent"></div>
-            <p class="text-[#8C7A5B] font-mono text-[9px] uppercase tracking-[0.4em] animate-pulse">
-                Sincronizando dados de faturamento... OK
-            </p>
-        </div>
-    </div>
-</section>
-    
-<!-- ================================================================= -->
-<!-- UNIT COMMANDERS & STRATEGIC BRIEFING -->
-<!-- ================================================================= -->
-<section class="py-24 px-4 relative bg-[#0F120D]">
-    <div class="max-w-5xl mx-auto">
-        <!-- Título da Seção -->
-        <div class="fade-in-section flex items-center gap-4 mb-12 border-b border-[#3E452F] pb-4">
-            <i data-lucide="shield-check" class="text-[#8C7A5B] w-6 h-6"></i>
-            <h2 class="text-2xl font-bold uppercase tracking-widest font-stencil text-white">Strategic Command</h2>
-        </div>
-
-        <!-- Texto de Apresentação Conjunta -->
-        <div class="fade-in-section mb-16 space-y-6">
-            <h3 class="text-xl md:text-3xl font-black text-[#8C7A5B] uppercase font-stencil">KAUÊ PUGLIESI E SLENDER</h3>
-            <div class="space-y-4 font-mono text-sm md:text-base text-gray-400 leading-relaxed">
-                <p>
-                    São referências no mercado Digital. Juntos, já faturaram <span class="text-white font-bold">múltiplos 8 dígitos</span> construindo negócios digitais escaláveis e previsíveis.
-                </p>
-                
-                <!-- O Problema (Mercado Quebrado) -->
-                <div class="bg-[#1a1e16] border-l-4 border-red-900 p-6 my-8 border border-[#3e452f]">
-                    <p class="text-red-500 font-black mb-2 uppercase tracking-tighter italic">// ASSESSMENT: O MERCADO ESTÁ QUEBRADO</p>
-                    <p class="text-gray-300">
-                        Picos artificiais seguidos de meses de seca. Ofertas que morrem da noite para o dia. Plagiadores. Contas bloqueadas. Criativos que não performam. Dependência total de tráfego pago. E no final, nenhuma estabilidade real.
-                    </p>
-                </div>
-
-                <p>
-                    Enquanto 90% dos operadores continuavam presos nesse ciclo vicioso, Kauê e Slender se uniram para desenvolver algo completamente diferente: <span class="text-white font-bold">Um método pouco conhecido que ninguém no Brasil está fazendo: SaaS Low Ticket em Dólar com Recorrência.</span>
-                </p>
-                <p>
-                    Um modelo onde você constrói uma vez e recebe todos os meses. Sem picos. Sem instabilidade. Sem depender de ofertas black ou tráfego pago agressivo.
-                </p>
-            </div>
-        </div>
-
-        <!-- Grid de Cards Individuais (Stats) -->
-        <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-            <!-- Commander 1: Kauê -->
-            <div class="fade-in-section relative group h-full">
-                <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                    <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20">CONFIDENTIAL</div>
-                    <div class="p-6 flex flex-col items-center flex-grow pt-8 text-center">
-                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1 grayscale">
-                            <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                <i data-lucide="user" class="w-10 h-10 text-gray-500"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-2xl font-black text-white uppercase font-stencil mb-1">Kauê Pugliesi</h3>
-                        <div class="inline-block bg-[#1a1e16] px-3 py-0.5 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">EX-CAPITÃO</div>
-                        <p class="text-xs text-gray-400 font-mono leading-relaxed border-t border-[#3e452f] pt-4 italic">
-                            "Largou o posto de Capitão após 11 anos de Exército e descobriu que era possível ganhar em dólar. Em pouco tempo, escalou múltiplos 7 dígitos e provou que o mercado digital realmente funciona."
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
-                        <div class="p-2 text-center border-r border-[#3e452f]">
-                            <span class="block text-[8px] text-[#8C8674] font-mono">TRACK RECORD</span>
-                            <span class="text-[10px] font-bold text-white">8+ FIGURES</span>
-                        </div>
-                        <div class="p-2 text-center">
-                            <span class="block text-[8px] text-[#8C8674] font-mono">SPECIALTY</span>
-                            <span class="text-[10px] font-bold text-white">RECURRENCE</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Commander 2: Slender -->
-            <div class="fade-in-section relative group h-full">
-                <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                    <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20">CONFIDENTIAL</div>
-                    <div class="p-6 flex flex-col items-center flex-grow pt-8 text-center">
-                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md -rotate-1 grayscale">
-                            <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                <i data-lucide="user" class="w-10 h-10 text-gray-500"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-2xl font-black text-white uppercase font-stencil mb-1">Slender</h3>
-                        <div class="inline-block bg-[#1a1e16] px-3 py-0.5 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">TOP OPERATIVE</div>
-                        <p class="text-xs text-gray-400 font-mono leading-relaxed border-t border-[#3e452f] pt-4 italic">
-                            "Entrou no mercado em 2021 e, nos últimos 12 meses acumula mais de 10MM de faturamento, o que lhe fez vencer a competição de faturamento Fórmula 1 da Lastlink."
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
-                        <div class="p-2 text-center border-r border-[#3e452f]">
-                            <span class="block text-[8px] text-[#8C8674] font-mono">RANK</span>
-                            <span class="text-[10px] font-bold text-white">LASTLINK F1</span>
-                        </div>
-                        <div class="p-2 text-center">
-                            <span class="block text-[8px] text-[#8C8674] font-mono">STATUS</span>
-                            <span class="text-[10px] font-bold text-white">ACTIVE OPS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================================================= -->
-<!-- NOVA SEÇÃO: NOSSA MISSÃO & VALUATION -->
-<!-- ================================================================= -->
-<section class="py-24 bg-[#141612] relative overflow-hidden border-y border-[#3E452F]">
-    <!-- Linhas de Scan de Fundo -->
-    <div class="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(rgba(140,122,91,0.1)_1px,transparent_1px)] bg-[length:100%_4px]"></div>
-    
-    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
-        <div class="fade-in-section mb-12">
-            <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-tighter mb-6">
-                NOSSA <span class="text-[#8C7A5B]">MISSÃO</span>
-            </h2>
-            <p class="text-gray-400 font-mono text-sm md:text-lg leading-relaxed max-w-3xl mx-auto">
-                Mostrar que existe um caminho diferente. Um negócio que gera renda previsível, escalável e que pode ser vendido por <span class="text-white font-bold underline decoration-[#8C7A5B]">cifras MILIONÁRIAS</span>, conforme o exemplo abaixo:
+            <p class="text-gray-400 font-mono max-w-3xl mx-auto mb-16 text-lg">
+                Em apenas 4 meses de operação, validamos múltiplos produtos de 100K de recorrência em dólar. Veja o que está acontecendo:
             </p>
         </div>
 
-        <!-- Banner de Exemplo (Valuation) -->
-        <div class="fade-in-section relative group">
-            <div class="absolute -inset-1 bg-gradient-to-r from-[#3D3222] via-[#8C7A5B] to-[#3D3222] opacity-20 blur group-hover:opacity-40 transition-opacity duration-500"></div>
-            <div class="relative bg-black border-2 border-[#8C7A5B]/30 rounded-sm overflow-hidden shadow-2xl">
-                <!-- Banner Image Placeholder -->
-                <div class="aspect-[21/9] bg-[#0c0d0b] flex flex-col items-center justify-center p-8 border-b border-[#8C7A5B]/20">
-                    <div class="mb-4 text-[#8C7A5B] opacity-50">
-                        <i data-lucide="trending-up" class="w-16 h-16"></i>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-dark-surface border-2 border-dashed border-brand-olive/40 aspect-square flex flex-col items-center justify-center p-10 group hover:border-brand-gold/40 transition-all duration-500">
+                <i data-lucide="file-text" class="w-16 h-16 text-brand-gold mb-6 opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                <span class="text-[10px] font-mono text-gray-600 uppercase tracking-widest">[ DATA_VISUALIZATION_01 ]</span>
+            </div>
+            <div class="bg-dark-surface border-2 border-dashed border-brand-olive/40 aspect-square flex flex-col items-center justify-center p-10 group hover:border-brand-gold/40 transition-all duration-500">
+                <i data-lucide="users" class="w-16 h-16 text-brand-gold mb-6 opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                <span class="text-[10px] font-mono text-gray-600 uppercase tracking-widest">[ OPERATOR_FEEDBACK ]</span>
+            </div>
+            <div class="bg-dark-surface border-2 border-dashed border-brand-olive/40 aspect-square flex flex-col items-center justify-center p-10 group hover:border-brand-gold/40 transition-all duration-500">
+                <i data-lucide="trending-up" class="w-16 h-16 text-brand-gold mb-6 opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                <span class="text-[10px] font-mono text-gray-600 uppercase tracking-widest">[ REVENUE_METRICS ]</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SUPPLY DROP -->
+<section class="py-24 bg-dark-base border-t border-brand-olive/20">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in-section">
+            <h2 class="text-4xl md:text-6xl font-black text-white font-stencil tracking-widest mb-4">
+                +3 MEGA <span class="text-brand-gold">BÔNUS</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Crate 1 -->
+            <div class="fade-in-section relative group">
+                <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
+                <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-brand-gold/30 flex items-center justify-center mb-6">
+                        <i data-lucide="book-open" class="w-10 h-10 text-brand-gold"></i>
                     </div>
-                    <span class="text-[10px] font-mono text-gray-600 tracking-[0.5em] uppercase">
-                        [ RECTANGULAR BANNER: VALUATION_REPORT_01 ]
+                    <h3 class="text-xl font-black text-white mb-2 uppercase font-stencil">Playbook Completo</h3>
+                    <p class="text-brand-sand font-mono text-[10px] uppercase">O guia definitivo da recorrência em dólar.</p>
+                </div>
+            </div>
+            <!-- Crate 2 -->
+            <div class="fade-in-section relative group">
+                <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
+                <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-brand-gold/30 flex items-center justify-center mb-6">
+                        <i data-lucide="layout" class="w-10 h-10 text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white mb-2 uppercase font-stencil">Templates Prontos</h3>
+                    <p class="text-brand-sand font-mono text-[10px] uppercase">3 funis de alta conversão para deploy.</p>
+                </div>
+            </div>
+            <!-- Crate 3 -->
+            <div class="fade-in-section relative group">
+                <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
+                <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-brand-gold/30 flex items-center justify-center mb-6">
+                        <i data-lucide="search" class="w-10 h-10 text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white mb-2 uppercase font-stencil">Swipe File SaaS</h3>
+                    <p class="text-brand-sand font-mono text-[10px] uppercase">Estudos de caso das ofertas que escalam.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentoria Special -->
+        <div class="mt-16 fade-in-section max-w-4xl mx-auto bg-red-900/10 border-2 border-red-700 p-8 flex flex-col md:flex-row items-center gap-8 shadow-2xl relative">
+            <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(90deg,red,red_10px,transparent_10px,transparent_20px)] opacity-30"></div>
+            <div class="w-16 h-16 bg-red-700 flex items-center justify-center shrink-0 shadow-lg"><i data-lucide="mic" class="text-white w-8 h-8"></i></div>
+            <div class="flex-1 text-center md:text-left">
+                <h4 class="text-xl font-black text-white uppercase font-stencil">Sorteio de Mentoria Individual</h4>
+                <p class="text-gray-400 font-mono text-xs mt-2 italic">Apenas para os operadores que permanecerem até o fechamento da operação no workshop.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="py-24 bg-dark-base relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+        <div class="w-full lg:w-3/5 fade-in-section space-y-8">
+            <div class="inline-flex items-center gap-3 bg-brand-gold/10 border border-brand-gold/30 px-4 py-1">
+                <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold"></i>
+                <span class="text-brand-gold font-mono text-[10px] font-black uppercase tracking-widest">Protocolo de Risco Zero</span>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
+                GARANTIA DE <br/> <span class="text-brand-gold">30 DIAS</span>
+            </h2>
+            <div class="space-y-6 font-mono text-sm md:text-base text-gray-400 leading-relaxed border-l-2 border-brand-gold/30 pl-8">
+                <p class="text-white font-bold italic">"Se em 30 dias você sentir que o workshop não fez sentido, devolvemos cada centavo sem perguntas."</p>
+                <p>Nós fazemos isso porque confiamos na entrega. Este workshop não é conteúdo genérico; é a nossa própria experiência operando no campo de batalha internacional.</p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <span class="bg-black/40 border border-brand-olive px-4 py-2 text-[10px] uppercase font-black">Sem burocracia</span>
+                    <span class="bg-black/40 border border-brand-olive px-4 py-2 text-[10px] uppercase font-black">Sem constrangimento</span>
+                    <span class="bg-black/40 border border-brand-olive px-4 py-2 text-[10px] uppercase font-black">100% Reembolso</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-full lg:w-2/5 flex justify-center fade-in-section">
+            <div class="relative animate-float">
+                <div class="absolute inset-0 bg-brand-gold/20 blur-[80px] rounded-full"></div>
+                <div class="relative z-10 w-[320px] h-[320px] md:w-[400px] md:h-[400px] border-4 border-dashed border-brand-gold/30 rounded-full flex flex-col items-center justify-center p-10 bg-black/20 backdrop-blur-sm">
+                    <i data-lucide="shield-check" class="w-20 h-20 text-brand-gold mb-6 opacity-40"></i>
+                    <span class="text-[11px] font-mono text-brand-gold uppercase tracking-[0.4em] text-center font-black">
+                        SECURITY_SEAL <br/> [30_DAY_VALIDATION]
                     </span>
                 </div>
-                
-                <!-- Info do Banner -->
-                <div class="p-6 bg-[#1a1e16] flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-[#4B5320] flex items-center justify-center rounded-sm">
-                            <i data-lucide="dollar-sign" class="text-white w-6 h-6"></i>
-                        </div>
-                        <p class="text-left font-mono text-xs md:text-sm text-gray-300 max-w-sm">
-                            App que faz aproximadamente <span class="text-white font-bold">`R$ 16.000,00`</span> de lucro por mês (média de 1.5K por dia)...
-                        </p>
-                    </div>
-                    <div class="bg-black/50 border border-[#8C7A5B]/50 px-6 py-3 rounded-sm">
-                        <span class="block text-[9px] text-[#8C7A5B] font-mono uppercase text-center mb-1">PODE SER VENDIDO POR MAIS DE</span>
-                        <span class="text-xl md:text-2xl font-black text-white font-stencil tracking-wider">R$1MM</span>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <p class="mt-10 text-[10px] font-mono text-gray-500 italic opacity-60">
-            // DATA_SOURCE: Mercado de Valuations SaaS 2024-2025
-        </p>
     </div>
 </section>
 
-<!-- MISSION OBJECTIVES: BRIEFING DE CAMPO -->
-<section class="py-24 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10 overflow-hidden">
-    <!-- Decoração de Fundo: Grid de Coordenadas -->
-    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#8C7A5B 1px, transparent 1px); background-size: 30px 30px;"></div>
-
-    <div class="max-w-5xl mx-auto px-4 relative">
-        <!-- Título Estilo Militar -->
+<!-- OFFER -->
+<section id="offer" class="py-24 bg-black relative">
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
         <div class="text-center mb-16 fade-in-section">
-            <div class="inline-flex items-center gap-3 mb-4">
-                <span class="h-px w-8 bg-[#8C7A5B]"></span>
-                <span class="text-[#8C7A5B] font-mono text-xs tracking-[0.4em] uppercase">Tactical Syllabus</span>
-                <span class="h-px w-8 bg-[#8C7A5B]"></span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
-                O QUE VOCÊ VAI VER <br/> <span class="text-[#8C7A5B]">NA PRÁTICA</span> NO WORKSHOP
+            <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-widest uppercase">
+                ACESSO AO <span class="text-brand-gold">SISTEMA</span>
             </h2>
         </div>
 
-        <!-- Lista de Objetivos: Estilo Checkpoint -->
-        <div class="grid md:grid-cols-1 gap-3 font-mono text-sm max-w-4xl mx-auto">
-            <script>
-                const objectives = [
-                    { status: 'CRITICAL_FAIL', color: 'text-red-500', txt: "Por que insistir em modelos de ofertas black é o maior erro que operadores experientes continuam cometendo." },
-                    { status: 'STEADYFLOW', color: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência que faz o cliente continuar pagando mês após mês, mesmo sem novos estímulos agressivos." },
-                    { status: 'COMM_PROTOCOL', color: 'text-[#8C7A5B]', txt: "O ajuste simples na comunicação que aumenta drasticamente retenção, sem mexer no produto." },
-                    { status: 'THREAT_ALER T', color: 'text-amber-500', txt: "O erro silencioso que faz a maioria dos SaaS low ticket morrerem antes de completar 90 dias." },
-                    { status: 'UPGRADE_PATH', color: 'text-[#8C7A5B]', txt: "Como estruturar planos e ofertas para que o próprio cliente queira subir de nível, sem ser convencido." },
-                    { status: 'PRE_OP_LOGIC', color: 'text-[#8C7A5B]', txt: "A lógica de venda antecipada que faz o usuário entrar já predisposto a permanecer." },
-                    { status: 'SYSTEM_INTEL', color: 'text-[#8C7A5B]', txt: "Por que bônus, promessas exageradas e garantias destroem negócios recorrentes por dentro." },
-                    { status: 'LTV_ADJUST', color: 'text-[#8C7A5B]', txt: "O detalhe de checkout e onboarding que muda completamente o LTV, mesmo sem aumentar conversão inicial." },
-                    { status: 'GLOBAL_REVENUE', color: 'text-[#C2B280]', txt: "E como escalar tudo isso em dólar, fora do campo de guerra do mercado brasileiro." },
-                    { status: 'AND_BEYOND', color: 'text-white/40', txt: "E muito, muito mais." }
-                ];
-
-                objectives.forEach(obj => {
-                    document.write(`
-                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 bg-[#141612]/50 border-l-2 border-[#3E452F] p-4 hover:bg-[#1a1e16] hover:border-[#8C7A5B] transition-all group">
-                            <span class="${obj.color} font-bold text-[10px] tracking-widest min-w-[120px] opacity-80 group-hover:opacity-100">[ ${obj.status} ]</span>
-                            <p class="text-gray-300 group-hover:text-white transition-colors">${obj.txt}</p>
-                        </div>
-                    `);
-                });
-            </script>
-        </div>
-
-        <!-- CTA FINAL DA SEÇÃO -->
-        <div class="mt-16 flex flex-col items-center fade-in-section">
-            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
-                <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
-                    DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
-                </span>
-            </a>
-            
-            <div class="mt-6 flex items-center gap-2 text-[10px] font-mono text-[#8C7A5B] opacity-50 uppercase tracking-widest">
-                <i data-lucide="shield-check" class="w-3 h-3"></i>
-                Secure Access Granted // Connection Encrypted
+        <div class="relative fade-in-section group">
+            <div class="absolute -top-10 left-0 h-10 bg-brand-sand border-x-2 border-t-2 border-brand-gold rounded-t-lg px-8 flex items-center z-0 shadow-xl">
+                <span class="text-[11px] font-mono text-brand-earth font-black uppercase tracking-widest">DEPLOY_ORDER_2024</span>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================================================= -->
-<!-- SECTION: SUPPLY DROP (BÔNUS) -->
-<!-- ================================================================= -->
-<section class="py-24 px-4 relative bg-[#0F120D] overflow-hidden border-t border-[#3E452F]">
-    <!-- Elementos de Atmosfera: Fumaça/Sinalizador -->
-    <div class="absolute -top-20 -right-20 w-96 h-96 bg-red-900/10 blur-[120px] rounded-full animate-pulse"></div>
-    
-    <div class="max-w-6xl mx-auto relative z-10">
-        <!-- Título de Impacto -->
-        <div class="text-center mb-20 fade-in-section">
-            <div class="inline-flex items-center gap-2 bg-[#8C7A5B] text-black px-4 py-1 font-mono text-[10px] font-bold uppercase tracking-widest mb-4 shadow-xl">
-                <i data-lucide="package-check" class="w-4 h-4"></i> EMERGENCY_SUPPLY_INBOUND
-            </div>
-            <h2 class="text-3xl md:text-6xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
-                +3 MEGA BÔNUS QUE <br/> VOCÊ VAI <span class="text-[#8C7A5B]">LEVAR</span>
-            </h2>
-        </div>
-
-        <!-- Grid de Caixas de Suprimentos (Bonuses) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <!-- Bônus 01: Playbook -->
-            <div class="fade-in-section relative group">
-                <!-- Sombra Projetada -->
-                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
-                <!-- Crate Body -->
-                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
-                    <!-- Detalhes de Madeira/Reforço -->
-                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
-                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
-                        <i data-lucide="book-open" class="w-10 h-10 text-[#8C7A5B]"></i>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
-                        Playbook Completo <br/> <span class="text-[#8C7A5B] text-sm font-mono">Modelo de Recorrência</span>
-                    </h3>
-                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
-                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
-                        O manual tático com o passo a passo da nossa operação.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Bônus 02: Templates -->
-            <div class="fade-in-section relative group">
-                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
-                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
-                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
-                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
-                        <i data-lucide="layout-template" class="w-10 h-10 text-[#8C7A5B]"></i>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
-                        Templates de Funis <br/> <span class="text-[#8C7A5B] text-sm font-mono">Prontos para Vender</span>
-                    </h3>
-                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
-                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
-                        Arquivos prontos para deploy imediato na sua estrutura.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Bônus 03: Swipe File -->
-            <div class="fade-in-section relative group">
-                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
-                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
-                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
-                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
-                        <i data-lucide="copy" class="w-10 h-10 text-[#8C7A5B]"></i>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
-                        Swipe File Gringa <br/> <span class="text-[#8C7A5B] text-sm font-mono">Ofertas Low Ticket</span>
-                    </h3>
-                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
-                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
-                        O acervo das ofertas SaaS mais escaladas no mercado global.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SPECIAL ITEM: Mentoria Individual -->
-        <div class="mt-16 fade-in-section">
-            <div class="max-w-4xl mx-auto bg-[#141612] border-2 border-[#8b0000] p-6 relative overflow-hidden group">
-                <!-- Background Pattern -->
-                <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#8b0000,#8b0000_10px,transparent_10px,transparent_20px)]"></div>
-                
-                <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
-                    <div class="w-16 h-16 bg-[#8b0000] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(139,0,0,0.4)]">
-                        <i data-lucide="mic-2" class="text-white w-8 h-8"></i>
-                    </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <p class="text-xs font-mono text-red-500 font-black mb-1 tracking-widest uppercase">Special Incentive // High Priority</p>
-                        <h4 class="text-lg md:text-xl font-black text-white uppercase font-stencil">
-                            Concorra a uma call gratuita de Mentoria Individual
-                        </h4>
-                        <p class="text-gray-400 font-mono text-[10px] md:text-xs mt-1">
-                            Acesso direto ao comando tático (Kauê Pugliesi & Slender). 
-                            <span class="text-red-500 font-bold">*EXCLUSIVO PARA QUEM FICAR ATÉ O FINAL DO WORKSHOP.</span>
-                        </p>
-                    </div>
-                    <div class="hidden md:block">
-                        <i data-lucide="radio" class="text-red-600 animate-pulse w-8 h-8"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Rodapé da Seção -->
-        <div class="mt-12 text-center text-[10px] font-mono text-[#5D5348] uppercase tracking-[0.5em]">
-            Cargo Content Verified // Deploying Gear...
-        </div>
-    </div>
-</section>
-
-<!-- ================================================================= -->
-<!-- SECTION: GUARANTEE (GARANTIA 30 DIAS - LAYOUT ORIGINAL + COPY INTEGRAL) -->
-<!-- ================================================================= -->
-<section class="py-24 px-4 relative bg-[#0c0d0b] border-t border-[#3E452F]/30 overflow-hidden">
-    <!-- Efeito de iluminação tática para o selo PNG -->
-    <div class="absolute -right-20 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#8C7A5B]/5 blur-[120px] rounded-full pointer-events-none"></div>
-
-    <div class="max-w-6xl mx-auto relative z-10">
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            
-            <!-- TEXTO DA GARANTIA: COPYWRITING INTEGRAL -->
-            <div class="w-full lg:w-3/5 fade-in-section">
-                <!-- Badge de Protocolo -->
-                <div class="inline-flex items-center gap-2 bg-[#1a1e16] border border-[#8C7A5B]/30 px-3 py-1 mb-6">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-[#8C7A5B]"></i>
-                    <span class="text-[#8C7A5B] font-mono text-[10px] font-bold uppercase tracking-[0.2em]">Protocolo Incondicional Ativado</span>
-                </div>
-
-                <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-tighter uppercase leading-tight mb-4">
-                    GARANTIA INCONDICIONAL <br/> DE <span class="text-[#8C7A5B]">30 DIAS</span>
-                </h2>
-                
-                <p class="text-lg md:text-xl text-white font-bold mb-4">
-                    Satisfação garantida ou seu dinheiro de volta.
-                </p>
-
-                <p class="text-gray-400 font-mono text-sm md:text-base mb-8 leading-relaxed">
-                    Por lei, a garantia seria de 7 dias. <span class="text-white font-bold underline decoration-[#8C7A5B]">Mas aqui nós fazemos diferente.</span>
-                </p>
-
-                <!-- Bloco de Alerta: Experiência Prática -->
-                <div class="bg-[#161914] border-l-4 border-amber-600 p-6 mb-8 shadow-xl border border-[#3E452F]/50">
-                    <div class="flex items-start gap-4">
-                        <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0 mt-1"></i>
-                        <div class="space-y-4">
-                            <p class="text-gray-200 font-mono text-xs md:text-sm leading-relaxed">
-                                <span class="text-amber-500 font-black uppercase block mb-1">⚠️ Aviso de Autenticidade:</span>
-                                Esse workshop não foi montado com conteúdo genérico, reaproveitado ou copiado de outro lugar.
-                            </p>
-                            <p class="text-gray-300 font-mono text-xs md:text-sm leading-relaxed">
-                                Tudo o que vamos mostrar foi construído a partir da nossa própria experiência prática com negócios de recorrência em dólar, validando ideias, estruturando ofertas e operando SaaS de verdade.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Condições de Reembolso -->
-                <div class="space-y-6 mb-8">
-                    <p class="text-gray-300 font-mono text-sm md:text-base leading-relaxed">
-                        Se por qualquer motivo você sentir que esse workshop não fez sentido pra você, não agregou ou simplesmente decidir que não é o momento, é só solicitar o reembolso.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="bg-black/40 border border-[#3E452F] p-3 text-center">
-                            <span class="text-[10px] font-mono text-[#8C7A5B] block mb-1">REFUND_01</span>
-                            <p class="text-white font-stencil text-xs uppercase">Sem explicação</p>
-                        </div>
-                        <div class="bg-black/40 border border-[#3E452F] p-3 text-center">
-                            <span class="text-[10px] font-mono text-[#8C7A5B] block mb-1">REFUND_02</span>
-                            <p class="text-white font-stencil text-xs uppercase">Sem constrangimento</p>
-                        </div>
-                        <div class="bg-black/40 border border-[#3E452F] p-3 text-center">
-                            <span class="text-[10px] font-mono text-[#8C7A5B] block mb-1">REFUND_03</span>
-                            <p class="text-white font-stencil text-xs uppercase">Sem burocracia</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Texto Final de Confiança -->
-                <div class="space-y-4 font-mono text-sm md:text-base text-gray-400">
-                    <p class="text-white font-bold">
-                        Você recebe 100% do valor de volta. A gente faz isso porque confia no que vai ser entregue.
-                    </p>
-                    <p class="leading-relaxed">
-                        E porque sabemos que isso vai mudar o mercado nos próximos anos. O futuro do digital é recorrência em dólar. Queremos aqueles que acreditam no valor e entendem a importância de construir algo sólido.
-                    </p>
-                    <p class="text-[#8C7A5B] font-black uppercase tracking-[0.3em] text-xl mt-6">
-                        Simples assim.
-                    </p>
-                </div>
-            </div>
-
-            <!-- COLUNA DA IMAGEM: SELO PNG FLUTUANTE -->
-            <div class="w-full lg:w-2/5 flex justify-center items-center fade-in-section">
-                <div class="relative group">
-                    <!-- Brilho de fundo para o selo -->
-                    <div class="absolute inset-0 bg-[#8C7A5B]/20 blur-[80px] rounded-full group-hover:bg-[#8C7A5B]/30 transition-all duration-500"></div>
-                    
-                    <!-- Container da Imagem com Animação de Flutuar -->
-                    <div class="relative z-10 animate-float">
-                        <!-- Substitua o src abaixo pelo caminho do seu PNG de garantia -->
-                        <img src="CAMINHO_DO_SEU_SELO_GARANTIA.png" 
-                             alt="Garantia Incondicional 30 Dias" 
-                             class="max-w-[280px] md:max-w-[400px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                             onerror="this.style.display='none'; document.getElementById('seal-placeholder').style.display='flex';">
-                        
-                        <!-- Placeholder elegante caso a imagem não exista ainda -->
-                        <div id="seal-placeholder" class="hidden w-[280px] h-[280px] md:w-[350px] md:h-[350px] border-4 border-dashed border-[#8C7A5B]/30 rounded-full flex-col items-center justify-center text-center p-8 bg-black/20 backdrop-blur-sm">
-                            <i data-lucide="shield-check" class="w-16 h-16 text-[#8C7A5B] mb-4 opacity-50"></i>
-                            <span class="text-[10px] font-mono text-[#8C7A5B] uppercase tracking-widest leading-tight">
-                                Espaço Reservado <br/> para Selo de Garantia <br/> (30 Dias)
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Decoração de Rodapé do Selo -->
-                    <div class="absolute -bottom-10 -right-10 font-mono text-[8px] text-[#8C7A5B] opacity-30 hidden md:block">
-                        AUTHENTICITY_VERIFIED: 100%<br/>
-                        TERMS: UNCONDITIONAL_RELEASE
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-    
-<!-- ================================================================= -->
-<!-- SECTION: OFFER (OFERTA FINAL - ESTILO DOSSIÊ/ARQUIVO) -->
-<!-- ================================================================= -->
-<section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
-    <div class="max-w-4xl mx-auto px-4 relative z-10">
-        
-        <!-- Cabeçalho de Introdução -->
-        <div class="text-center mb-16 fade-in-section">
-            <h2 class="text-2xl md:text-3xl font-black text-white font-stencil tracking-wider uppercase leading-tight mb-4">
-                Agora que você já sabe o que vai receber…
-            </h2>
-            <p class="text-gray-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
-                Eu vou estar liberando o link aqui embaixo pra você garantir acesso ao "Workshop Receita Recorrente" agora mesmo!
-            </p>
-        </div>
-
-        <!-- DOSSIER CONTAINER (Estilo Pasta de Arquivo Cardboard) -->
-        <div class="relative mt-20 fade-in-section">
-            
-            <!-- Aba da Pasta (Tab) -->
-            <div class="absolute -top-9 left-0 h-10 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-8 flex items-center z-0 shadow-md">
-                <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-[0.3em] uppercase flex items-center gap-2">
-                    <i data-lucide="folder-lock" class="w-3.5 h-3.5"></i> FINAL_ACCESS_KEY
-                </span>
-            </div>
-
-            <!-- Corpo da Pasta -->
-            <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
-                <!-- Textura de Papelão -->
+            <div class="relative bg-brand-sand border-2 border-brand-gold rounded-tr-lg rounded-b-lg shadow-2xl p-8 md:p-12 text-brand-earth overflow-hidden">
                 <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
                 
-                <!-- Barra de Identificação Superior -->
-                <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
-                    <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
-                        <i data-lucide="clipboard-list" class="w-4 h-4"></i> MISSION_INVENTORY_REPORT
-                    </span>
-                    <div class="flex gap-2">
-                        <div class="w-3 h-3 bg-[#8b0000] rounded-full shadow-inner animate-pulse"></div>
-                        <div class="w-3 h-3 bg-[#3D3222] rounded-full opacity-30"></div>
+                <div class="relative z-10 flex flex-col md:flex-row gap-12">
+                    <div class="w-full md:w-1/3">
+                        <div class="aspect-square bg-gray-900 border-2 border-brand-earth/20 flex flex-col items-center justify-center p-6 text-center transform -rotate-2 shadow-xl">
+                            <i data-lucide="package" class="w-16 h-16 text-brand-gold mb-4 opacity-50"></i>
+                            <span class="text-[10px] font-mono text-gray-500 uppercase tracking-tighter leading-tight">[ WORKSHOP_ACCESS_KIT ]</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-6">
+                        <div class="space-y-3 font-mono text-xs md:text-sm font-bold uppercase tracking-tight">
+                            <div class="flex gap-3 border-b border-brand-earth/20 pb-2"><i data-lucide="check" class="text-brand-olive"></i> Acesso Direto com os Mentores</div>
+                            <div class="flex gap-3 border-b border-brand-earth/20 pb-2"><i data-lucide="check" class="text-brand-olive"></i> Acesso ao Treinamento ao Vivo</div>
+                            <div class="flex gap-3 border-b border-brand-earth/20 pb-2"><i data-lucide="zap" class="text-orange-700"></i> Bônus: Playbook Recorrência</div>
+                            <div class="flex gap-3 border-b border-brand-earth/20 pb-2"><i data-lucide="zap" class="text-orange-700"></i> Bônus: 3 Templates de Funis</div>
+                            <div class="flex gap-3 border-b border-brand-earth/20 pb-2"><i data-lucide="zap" class="text-orange-700"></i> Bônus: 5 Estudos de Caso</div>
+                        </div>
+                        <div class="pt-6 border-t-2 border-brand-earth/30 flex justify-between items-end">
+                            <div>
+                                <span class="block text-[10px] line-through opacity-50 mb-1">DE R$ 997,00</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-xs font-black uppercase tracking-tighter">por apenas</span>
+                                    <span class="text-6xl font-black font-stencil tracking-tighter">R$ 19,90</span>
+                                </div>
+                            </div>
+                            <div class="hidden md:block border-4 border-brand-earth p-2 text-brand-earth font-black font-stencil text-xs -rotate-12 opacity-30">APPROVED_AUTH</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="relative z-10 p-6 md:p-10">
-                    <div class="flex flex-col lg:flex-row gap-10">
-                        
-                        <!-- Lado Esquerdo: Imagem e Garantia -->
-                        <div class="w-full lg:w-2/5 space-y-6">
-                            <!-- Placeholder Imagem do Produto (Estilo Foto Clipada) -->
-                            <div class="relative bg-white p-2 shadow-xl transform -rotate-1 border border-gray-300">
-                                <div class="aspect-square bg-gray-900 flex flex-col items-center justify-center p-4 text-center">
-                                    <i data-lucide="package" class="w-12 h-12 text-[#8C7A5B] mb-2 opacity-50"></i>
-                                    <span class="text-[10px] font-mono text-gray-600 uppercase">[ MOCKUP: WORKSHOP_V1 ]</span>
-                                </div>
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-8 bg-gray-400/30 backdrop-blur-sm border border-white/50 transform -rotate-2"></div>
-                            </div>
-
-                            <!-- Garantia (Estilo Carimbo) -->
-                            <div class="border-2 border-dashed border-[#8b0000]/40 p-4 rounded-sm bg-white/10">
-                                <div class="flex items-center gap-3">
-                                    <i data-lucide="shield-check" class="w-6 h-6 text-[#8b0000]"></i>
-                                    <div>
-                                        <p class="text-[11px] font-black text-[#8b0000] uppercase font-mono">Garantia de 30 dias</p>
-                                        <p class="text-[9px] text-[#3D3222] font-bold font-mono uppercase leading-tight">Dinheiro de volta sem perguntas</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Lado Direito: Itens e Checklist -->
-                        <div class="w-full lg:w-3/5 space-y-6">
-                            <div class="grid grid-cols-1 gap-2">
-                                <!-- Itens de Acesso -->
-                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30">
-                                    <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
-                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso Direto com os Mentores</span>
-                                </div>
-                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30">
-                                    <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
-                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso completo ao treinamento ao vivo</span>
-                                </div>
-                                <!-- MEGA BÔNUS -->
-                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
-                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
-                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> Playbook Completo de Recorrência em Dólar</span>
-                                </div>
-                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
-                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
-                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> 3 Templates de Funis Prontos para Vender</span>
-                                </div>
-                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
-                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
-                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> 5 estudos de caso das ofertas SaaS gringa</span>
-                                </div>
-                                <div class="flex items-start gap-3 p-2 bg-[#8b0000]/10">
-                                    <i data-lucide="star" class="w-4 h-4 text-[#8b0000] mt-0.5 fill-current"></i>
-                                    <span class="text-[#8b0000] text-sm font-black font-mono uppercase tracking-tight">Bônus: Sorteio Exclusivo (Consultoria Privada)</span>
-                                </div>
-                            </div>
-
-                            <!-- Seção de Preço (Estilo Etiqueta de Preço) -->
-                            <div class="mt-8 pt-6 border-t-2 border-[#8C7A5B] flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div class="text-center md:text-left">
-                                    <span class="block text-[10px] text-gray-600 font-mono line-through">De `R$ 997,00`</span>
-                                    <div class="flex items-baseline gap-2">
-                                        <span class="text-xs font-black text-[#3D3222] font-mono uppercase tracking-tighter">por Apenas</span>
-                                        <span class="text-5xl font-black text-[#3D3222] font-stencil tracking-tighter">`R$ 19,90`</span>
-                                    </div>
-                                </div>
-                                <!-- Carimbo de Autorização -->
-                                <div class="border-4 border-[#8C7A5B] p-2 text-[#8C7A5B] font-black font-stencil text-xs -rotate-6 opacity-60">
-                                    AUTHORIZED_ACCESS
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Botão de Ação (Abaixo de Tudo na Pasta) -->
-                    <div class="mt-12">
-                        <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] border-b-8 border-[#24291B] hover:-translate-y-1 active:border-b-0 active:translate-y-1 transition-all shadow-xl clip-angled">
-                            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20"></div>
-                            <span class="relative z-10 flex items-center gap-4 font-stencil text-white text-xl md:text-2xl uppercase tracking-widest font-black">
-                                DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
-                            </span>
-                        </a>
-                    </div>
+                <div class="mt-12">
+                    <a href="#" class="group relative flex items-center justify-center w-full py-8 bg-brand-olive border-b-8 border-brand-gunmetal hover:-translate-y-1 active:border-b-0 active:translate-y-1 transition-all shadow-2xl clip-angled">
+                        <span class="relative z-10 flex items-center gap-4 font-stencil text-white text-2xl uppercase tracking-widest font-black">
+                            GARANTIR ACESSO AGORA <i data-lucide="chevron-right" class="w-8 h-8 group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </a>
                 </div>
             </div>
-
-            <!-- Decoração de Grampo de Arquivo -->
-            <div class="hidden lg:block absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-20 border-x-4 border-t-4 border-[#555] rounded-t-xl bg-transparent z-40 opacity-50"></div>
         </div>
     </div>
 </section>
 
-<!-- ================================================================= -->
-<!-- SECTION: FAQ (CORRIGIDA - VISIBILIDADE DAS RESPOSTAS) -->
-<!-- ================================================================= -->
-<section id="faq" class="py-24 bg-[#0c0d0b] relative overflow-hidden border-t border-[#3E452F]/30">
-    <div class="max-w-4xl mx-auto px-4 relative z-10">
-        
+<!-- FAQ -->
+<section id="faq" class="py-24 bg-dark-base border-t border-brand-olive/20">
+    <div class="max-w-4xl mx-auto px-6">
         <div class="text-center mb-16 fade-in-section">
-            <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-wider uppercase">
-                Perguntas <span class="text-[#8C7A5B]">Frequentes</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-widest uppercase">
+                FAQ <span class="text-brand-gold">SUPPORT</span>
             </h2>
-            <p class="text-gray-500 font-mono text-xs mt-4 uppercase tracking-[0.3em]">
-                // Intel Support: FAQ_Database_Active
-            </p>
         </div>
 
-        <div id="faq-container" class="fade-in-section">
-            <!-- Renderizado via Script -->
+        <div id="faq-container" class="space-y-4">
+            <!-- FAQ Rendered by JS -->
         </div>
     </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
-    <div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
-        <i data-lucide="target" class="w-6 h-6"></i>
+<footer class="bg-black py-16 text-center border-t border-brand-olive/20">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-6">
+        <i data-lucide="target" class="w-10 h-10 text-brand-gold opacity-30"></i>
+        <p class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em] leading-relaxed">
+            &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> 
+            DATA_ENCRYPTED // CLASSIFIED_MATERIAL_V.01
+        </p>
     </div>
-    <p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
-        &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
-    </p>
 </footer>
 
+<!-- SCRIPTS -->
 <script>
-    // Inicialização básica
+    // 1. Init Icons
     lucide.createIcons();
 
-    // Lógica de Scroll
+    // 2. Reveal Logic
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-    // Countdown Timer (Corrigido para Dourado/Caqui)
-    let time = 4 * 60 * 60 + 12 * 60 + 45; 
-    const timerContainer = document.getElementById('countdown-timer');
+    // 3. Typewriter
+    const typeTarget = document.getElementById('typewriter-text');
+    const typeText = "// BOOTING_PROTOCOL: STEADYFLOW_V1";
+    let typeIndex = 0;
+    function typeWriter() {
+        if (typeIndex < typeText.length) {
+            typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
+            typeIndex++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    setTimeout(typeWriter, 1000);
 
+    // 4. Timer
+    let time = 3 * 3600 + 45 * 60 + 12;
+    const timerBox = document.getElementById('countdown-timer');
     setInterval(() => {
-        if (time > 0) time--; else time = 15165; 
-        const h = Math.floor((time % (3600 * 24)) / 3600);
+        if (time > 0) time--;
+        const h = Math.floor(time / 3600);
         const m = Math.floor((time % 3600) / 60);
         const s = time % 60;
-        
         let html = '';
-        [h, m, s].forEach((val, i) => {
-            const labels = ['h', 'm', 's'];
+        [h, m, s].forEach((v, i) => {
+            const labels = ['H', 'M', 'S'];
             html += `
                 <div class="flex flex-col items-center mx-1">
-                    <div class="bg-[#1a1e16] text-[#8C7A5B] font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-2 border-[#24291B] rounded-sm shadow-inner">
-                        ${String(val).padStart(2, '0')}
+                    <div class="bg-[#1a1e16] text-brand-gold font-mono text-3xl md:text-5xl font-black p-3 min-w-[4rem] text-center border-2 border-brand-olive shadow-inner rounded-sm">
+                        ${String(v).padStart(2, '0')}
                     </div>
-                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${labels[i]}</span>
+                    <span class="text-[9px] text-brand-sand uppercase mt-2 font-black tracking-widest">${labels[i]}</span>
                 </div>`;
         });
-        if(timerContainer) timerContainer.innerHTML = html;
+        timerBox.innerHTML = html;
     }, 1000);
 
-    // FAQ Data
+    // 5. FAQ (Corrected Visibility)
     const faqs = [
-        { q: "1. O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo, justamente para manter o foco, a troca e a entrega no momento certo. Quem estiver presente aproveita ao máximo a experiência." },
-        { q: "2. Por que o valor é de R$ 19,90?", a: "Esse valor é apenas simbólico. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aprender, acompanhar e aplicar o que será mostrado." },
-        { q: "3. Preciso saber programar ou entender de tecnologia?", a: "Não precisa. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Mas iremos revelar uma forma de criar seu SaaS sem saber escrever 1 linha de código sequer..." },
-        { q: "4. Esse conteúdo é só para quem já está no digital?", a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." },
-        { q: "5. O modelo funciona para quem que vender no Brasil?", a: "Sim. Apesar do nosso foco ser SaaS low ticket na gringa, as estratégias que ensinaremos funcionam para rodar no Brasil (nós também rodamos Br), ou até mesmo para rodar SaaS High Ticket..." },
-        { q: "6. E se eu entrar e achar que não é pra mim?", a: "Tudo bem 😊 Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." },
-        { q: "7. Como recebo acesso ao Workshop?", a: "Ao finalizar sua inscrição, você receberá o convite para participar de nosso grupo exclusivo de Wpp, onde iremos enviar o link de acesso do Workshop." }
+        { q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops) para manter o foco e a entrega no momento certo." },
+        { q: "Por que R$ 19,90?", a: "Valor simbólico para garantir que apenas operadores realmente comprometidos com a execução participem." },
+        { q: "Preciso programar?", a: "Negativo. O foco é estratégia e negócio. Vamos revelar inclusive como criar o seu SaaS sem escrever uma linha de código." },
+        { q: "Funciona no Brasil?", a: "Sim. Embora o foco seja ganhar em Dólar na gringa, as mesmas estratégias podem ser aplicadas com escala no mercado brasileiro." },
+        { q: "E se eu não gostar?", a: "Protocolo de Risco Zero Ativado: Você tem 30 dias de garantia incondicional para pedir seu reembolso sem burocracia." },
+        { q: "Como recebo acesso?", a: "Imediatamente após a inscrição, você será integrado ao grupo exclusivo de Operações no WhatsApp para as orientações finais." }
     ];
 
-    const faqContainer = document.getElementById('faq-container');
-
-    faqs.forEach((item) => {
-        const faqEl = document.createElement('div');
-        faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
-        faqEl.innerHTML = `
-            <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
-                <div class="flex items-center gap-4 relative z-10">
-                    <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">></span>
-                    <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
-                </div>
-                <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
-                    <i data-lucide="plus" class="w-5 h-5 accordion-icon transition-transform duration-300"></i>
-                </span>
+    const faqCont = document.getElementById('faq-container');
+    faqs.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'group bg-dark-surface border border-brand-olive/30 overflow-hidden';
+        div.innerHTML = `
+            <button class="faq-btn w-full flex justify-between items-center p-6 text-left hover:bg-brand-deepOlive transition-all" aria-expanded="false">
+                <span class="text-white font-mono font-bold uppercase text-xs md:text-sm tracking-wide">${item.q}</span>
+                <i data-lucide="plus" class="faq-icon w-5 h-5 text-brand-gold transition-transform"></i>
             </button>
-            <div class="accordion-content bg-[#0c0d0b] overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
-                <div class="px-6 pb-6 pt-4 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
-                    ${item.a}
-                </div>
-            </div>
-        `;
-
-        const btn = faqEl.querySelector('.accordion-btn');
-        const content = faqEl.querySelector('.accordion-content');
-        const icon = faqEl.querySelector('.accordion-icon');
+            <div class="faq-content bg-black/40 overflow-hidden transition-all duration-300" style="max-height: 0; opacity: 0;">
+                <div class="p-6 text-gray-400 font-mono text-sm border-t border-brand-olive/20">${item.a}</div>
+            </div>`;
+        
+        const btn = div.querySelector('.faq-btn');
+        const content = div.querySelector('.faq-content');
+        const icon = div.querySelector('.faq-icon');
 
         btn.addEventListener('click', () => {
-            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-
-            // Fecha outros
-            document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
-                if (otherBtn !== btn) {
-                    otherBtn.setAttribute('aria-expanded', 'false');
-                    const otherContent = otherBtn.nextElementSibling;
-                    otherContent.style.maxHeight = "0";
-                    otherContent.style.opacity = "0";
-                    otherBtn.querySelector('.accordion-icon').style.transform = 'rotate(0deg)';
-                }
+            const open = btn.getAttribute('aria-expanded') === 'true';
+            document.querySelectorAll('.faq-btn').forEach(b => {
+                b.setAttribute('aria-expanded', 'false');
+                b.nextElementSibling.style.maxHeight = '0';
+                b.nextElementSibling.style.opacity = '0';
+                b.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
             });
-
-            // Toggle atual
-            if (isExpanded) {
-                btn.setAttribute('aria-expanded', 'false');
-                content.style.maxHeight = "0";
-                content.style.opacity = "0";
-                icon.style.transform = 'rotate(0deg)';
-            } else {
+            if (!open) {
                 btn.setAttribute('aria-expanded', 'true');
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.style.opacity = "1";
                 icon.style.transform = 'rotate(45deg)';
             }
         });
-        faqContainer.appendChild(faqEl);
+        faqCont.appendChild(div);
     });
     lucide.createIcons();
 </script>
+</body>
+</html>
