@@ -1180,122 +1180,135 @@ O Workshop Receita Recorrente começa em:
 </section>
     
 <!-- ================================================================= -->
-<!-- SECTION: OFFER (OFERTA FINAL) -->
+<!-- SECTION: OFFER (OFERTA FINAL - ESTILO DOSSIÊ/ARQUIVO) -->
 <!-- ================================================================= -->
 <section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
-    <!-- Elementos de Atmosfera Tática -->
-    <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(90deg,#8C7A5B_0px,#8C7A5B_1px,transparent_1px,transparent_40px)]"></div>
-    
     <div class="max-w-4xl mx-auto px-4 relative z-10">
         
         <!-- Cabeçalho de Introdução -->
-        <div class="text-center mb-12 fade-in-section">
-            <p class="text-[#8C7A5B] font-mono text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
-                // FINAL_BRIEFING: Deploy Sequence
-            </p>
-            <h2 class="text-2xl md:text-3xl font-bold text-white font-sans leading-tight">
-                Agora que você já sabe o que vai receber… <br/>
-                <span class="text-gray-400 text-lg md:text-xl font-normal">Eu vou estar liberando o link aqui embaixo pra você garantir acesso ao "Workshop Receita Recorrente" agora mesmo!</span>
+        <div class="text-center mb-16 fade-in-section">
+            <h2 class="text-2xl md:text-3xl font-black text-white font-stencil tracking-wider uppercase leading-tight mb-4">
+                Agora que você já sabe o que vai receber…
             </h2>
+            <p class="text-gray-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
+                Eu vou estar liberando o link aqui embaixo pra você garantir acesso ao "Workshop Receita Recorrente" agora mesmo!
+            </p>
         </div>
 
-        <!-- Container da Oferta (Estilo Caixa de Equipamento) -->
-        <div class="fade-in-section relative bg-[#141612] border-x-4 border-b-8 border-[#3D3222] shadow-2xl">
-            <!-- Barra Superior de Identificação -->
-            <div class="bg-[#3D3222] p-3 flex justify-between items-center px-6">
-                <span class="text-[10px] font-mono text-[#C2B280] font-black uppercase tracking-widest">OFFER_ID: STEADYFLOW_V1</span>
-                <div class="flex gap-2">
-                    <div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-                    <div class="w-2 h-2 rounded-full bg-[#8C7A5B]"></div>
+        <!-- DOSSIER CONTAINER (Estilo Pasta de Arquivo Cardboard) -->
+        <div class="relative mt-20 fade-in-section">
+            
+            <!-- Aba da Pasta (Tab) -->
+            <div class="absolute -top-9 left-0 h-10 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-8 flex items-center z-0 shadow-md">
+                <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-[0.3em] uppercase flex items-center gap-2">
+                    <i data-lucide="folder-lock" class="w-3.5 h-3.5"></i> FINAL_ACCESS_KEY
+                </span>
+            </div>
+
+            <!-- Corpo da Pasta -->
+            <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
+                <!-- Textura de Papelão -->
+                <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
+                
+                <!-- Barra de Identificação Superior -->
+                <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
+                    <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-4 h-4"></i> MISSION_INVENTORY_REPORT
+                    </span>
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 bg-[#8b0000] rounded-full shadow-inner animate-pulse"></div>
+                        <div class="w-3 h-3 bg-[#3D3222] rounded-full opacity-30"></div>
+                    </div>
+                </div>
+
+                <div class="relative z-10 p-6 md:p-10">
+                    <div class="flex flex-col lg:flex-row gap-10">
+                        
+                        <!-- Lado Esquerdo: Imagem e Garantia -->
+                        <div class="w-full lg:w-2/5 space-y-6">
+                            <!-- Placeholder Imagem do Produto (Estilo Foto Clipada) -->
+                            <div class="relative bg-white p-2 shadow-xl transform -rotate-1 border border-gray-300">
+                                <div class="aspect-square bg-gray-900 flex flex-col items-center justify-center p-4 text-center">
+                                    <i data-lucide="package" class="w-12 h-12 text-[#8C7A5B] mb-2 opacity-50"></i>
+                                    <span class="text-[10px] font-mono text-gray-600 uppercase">[ MOCKUP: WORKSHOP_V1 ]</span>
+                                </div>
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-8 bg-gray-400/30 backdrop-blur-sm border border-white/50 transform -rotate-2"></div>
+                            </div>
+
+                            <!-- Garantia (Estilo Carimbo) -->
+                            <div class="border-2 border-dashed border-[#8b0000]/40 p-4 rounded-sm bg-white/10">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="shield-check" class="w-6 h-6 text-[#8b0000]"></i>
+                                    <div>
+                                        <p class="text-[11px] font-black text-[#8b0000] uppercase font-mono">Garantia de 30 dias</p>
+                                        <p class="text-[9px] text-[#3D3222] font-bold font-mono uppercase leading-tight">Dinheiro de volta sem perguntas</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lado Direito: Itens e Checklist -->
+                        <div class="w-full lg:w-3/5 space-y-6">
+                            <div class="grid grid-cols-1 gap-2">
+                                <!-- Itens de Acesso -->
+                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30">
+                                    <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
+                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso Direto com os Mentores</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30">
+                                    <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
+                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso completo ao treinamento ao vivo</span>
+                                </div>
+                                <!-- MEGA BÔNUS -->
+                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
+                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
+                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> Playbook Completo de Recorrência em Dólar</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
+                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
+                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> 3 Templates de Funis Prontos para Vender</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
+                                    <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
+                                    <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> 5 estudos de caso das ofertas SaaS gringa</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-2 bg-[#8b0000]/10">
+                                    <i data-lucide="star" class="w-4 h-4 text-[#8b0000] mt-0.5 fill-current"></i>
+                                    <span class="text-[#8b0000] text-sm font-black font-mono uppercase tracking-tight">Bônus: Sorteio Exclusivo (Consultoria Privada)</span>
+                                </div>
+                            </div>
+
+                            <!-- Seção de Preço (Estilo Etiqueta de Preço) -->
+                            <div class="mt-8 pt-6 border-t-2 border-[#8C7A5B] flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div class="text-center md:text-left">
+                                    <span class="block text-[10px] text-gray-600 font-mono line-through">De `R$ 997,00`</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-xs font-black text-[#3D3222] font-mono uppercase tracking-tighter">por Apenas</span>
+                                        <span class="text-5xl font-black text-[#3D3222] font-stencil tracking-tighter">`R$ 19,90`</span>
+                                    </div>
+                                </div>
+                                <!-- Carimbo de Autorização -->
+                                <div class="border-4 border-[#8C7A5B] p-2 text-[#8C7A5B] font-black font-stencil text-xs -rotate-6 opacity-60">
+                                    AUTHORIZED_ACCESS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Ação (Abaixo de Tudo na Pasta) -->
+                    <div class="mt-12">
+                        <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] border-b-8 border-[#24291B] hover:-translate-y-1 active:border-b-0 active:translate-y-1 transition-all shadow-xl clip-angled">
+                            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20"></div>
+                            <span class="relative z-10 flex items-center gap-4 font-stencil text-white text-xl md:text-2xl uppercase tracking-widest font-black">
+                                DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="p-8 md:p-12">
-                <div class="flex flex-col md:flex-row gap-12 items-start">
-                    
-                    <!-- Lado Esquerdo: Imagem e Checkbox -->
-                    <div class="w-full md:w-1/2 space-y-8">
-                        <!-- Placeholder da Imagem do Produto -->
-                        <div class="relative group aspect-square bg-black border-2 border-dashed border-[#8C7A5B]/30 flex flex-col items-center justify-center p-4">
-                            <div class="absolute inset-0 bg-[#8C7A5B]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <i data-lucide="package" class="w-12 h-12 text-[#8C7A5B] mb-4 opacity-40"></i>
-                            <span class="text-[10px] font-mono text-gray-500 uppercase text-center">[ IMG DO PRODUTO: WORKSHOP_MOCKUP ]</span>
-                        </div>
-
-                        <!-- Garantia Rápida -->
-                        <div class="flex items-center gap-4 bg-black/40 p-4 border border-[#3E452F]">
-                            <i data-lucide="shield-check" class="w-8 h-8 text-[#8C7A5B]"></i>
-                            <div>
-                                <p class="text-[11px] font-black text-white uppercase font-stencil">Garantia de 30 dias</p>
-                                <p class="text-[9px] text-gray-500 font-mono uppercase tracking-tighter">Dinheiro de volta sem perguntas</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Lado Direito: Itens e Preço -->
-                    <div class="w-full md:w-1/2 space-y-6">
-                        <div class="space-y-3">
-                            <!-- Checklist de Itens -->
-                            <div class="flex items-start gap-3 text-xs md:text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#8C7A5B] shrink-0"></i>
-                                <span class="text-gray-200">Acesso Direto com os Mentores</span>
-                            </div>
-                            <div class="flex items-start gap-3 text-xs md:text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#8C7A5B] shrink-0"></i>
-                                <span class="text-gray-200">Acesso completo ao treinamento ao vivo</span>
-                            </div>
-                            <!-- Bônus -->
-                            <div class="flex items-start gap-3 text-xs md:text-sm border-t border-[#3E452F] pt-3">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-600 shrink-0"></i>
-                                <span class="text-gray-200"><strong class="text-[#8C7A5B]">Bônus:</strong> Playbook Completo de Recorrência em Dólar</span>
-                            </div>
-                            <div class="flex items-start gap-3 text-xs md:text-sm">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-600 shrink-0"></i>
-                                <span class="text-gray-200"><strong class="text-[#8C7A5B]">Bônus:</strong> 3 Templates de Funis Prontos para Vender</span>
-                            </div>
-                            <div class="flex items-start gap-3 text-xs md:text-sm">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-600 shrink-0"></i>
-                                <span class="text-gray-200"><strong class="text-[#8C7A5B]">Bônus:</strong> 5 estudos de caso das ofertas SaaS mais escaladas da gringa</span>
-                            </div>
-                            <div class="flex items-start gap-3 text-xs md:text-sm">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-600 shrink-0"></i>
-                                <span class="text-gray-200"><strong class="text-[#8C7A5B]">Bônus:</strong> Sorteio Exclusivo (Consultoria Privada)</span>
-                            </div>
-                        </div>
-
-                        <!-- Bloco de Preço -->
-                        <div class="pt-6 border-t border-[#3E452F]">
-                            <p class="text-xs font-mono text-gray-500 line-through mb-1">De R$ 997,00</p>
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-sm font-mono text-white uppercase">por Apenas</span>
-                                <span class="text-5xl md:text-6xl font-black text-[#8C7A5B] font-stencil tracking-tighter">`R$ 19,90`</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botão de Ação -->
-                <div class="mt-12">
-                    <a href="#" class="group relative flex items-center justify-center w-full py-7 bg-[#4B5320] border-b-8 border-[#1a1e16] hover:-translate-y-1 active:border-b-0 active:translate-y-1 transition-all shadow-2xl clip-angled">
-                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-10"></div>
-                        <span class="relative z-10 flex items-center gap-4 font-stencil text-white text-xl md:text-2xl uppercase tracking-[0.1em] font-black">
-                            DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
-                        </span>
-                    </a>
-                </div>
-
-                <!-- Selos de Segurança -->
-                <div class="mt-8 flex justify-center items-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="lock" class="w-3 h-3 text-[#8C7A5B]"></i>
-                        <span class="text-[9px] font-mono text-white uppercase">SSL Secure Payment</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-3 h-3 text-[#8C7A5B]"></i>
-                        <span class="text-[9px] font-mono text-white uppercase">Verified Operation</span>
-                    </div>
-                </div>
-            </div>
+            <!-- Decoração de Grampo de Arquivo -->
+            <div class="hidden lg:block absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-20 border-x-4 border-t-4 border-[#555] rounded-t-xl bg-transparent z-40 opacity-50"></div>
         </div>
     </div>
 </section>
