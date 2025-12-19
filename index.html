@@ -181,231 +181,228 @@ O Workshop Receita Recorrente começa em:
 
 <!-- HERO SECTION -->
 <section class="relative pt-12 pb-20 px-4 z-10">
-<div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+    <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+        
+        <!-- TIMER CONTAINER -->
+        <div class="fade-in-section mb-12 relative">
+            <!-- Floating Icons: Alterados para z-30 para flutuarem sobre o timer -->
+            <div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float z-30">
+                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
+            </div>
+            <div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed z-30">
+                <i data-lucide="satellite" class="w-8 h-8"></i>
+                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
+            </div>
 
-<!-- TIMER -->
-<div class="fade-in-section mb-12 relative">
-<!-- Floating Icons -->
-<div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float">
-<i data-lucide="bar-chart-3" class="w-8 h-8"></i>
-<span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
-</div>
-<div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed">
-<i data-lucide="satellite" class="w-8 h-8"></i>
-<span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
-</div>
+            <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
+                Mission Countdown
+            </div>
+            
+            <!-- JS Timer Rendered Here -->
+            <!-- Alteração: Adicionado text-[#8C7A5B] para que os números herdem a cor clara/dourada solicitada -->
+            <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative z-10 text-[#8C7A5B]">
+                <!-- Screws -->
+                <div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                <div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                <div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                <div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                
+                <!-- Digits inserted by JS will now be #8C7A5B -->
+            </div>
+        </div>
 
-<div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
-Mission Countdown
-</div>
+        <!-- HEADLINE -->
+        <div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
+            <div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
+                <i data-lucide="terminal" class="w-3 h-3"></i>
+                <span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
+                Domine o Jogo do <br />
+                <span class="text-[#8C7A5B] text-shadow-sm">
+                    "CashFlow Recorrente"
+                </span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
+                O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
+                <span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
+            </p>
+        </div>
 
-<!-- JS Timer Rendered Here -->
-<div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative">
-<!-- Screws -->
-<div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-<div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-<div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-<div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+        <!-- VIDEO PLACEHOLDER -->
+        <div class="fade-in-section w-full max-w-4xl relative group">
+            <!-- Floating Badge -->
+            <div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
+                <div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
+                    <div class="border border-[#8C7A5B] border-dashed p-1">
+                        <p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
+                            TOP SECRET<br/>ACCESS
+                        </p>
+                    </div>
+                    <div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+                    <div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+                </div>
+            </div>
 
-<!-- Digits inserted by JS -->
-</div>
-</div>
+            <div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
+                <div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
+                     <!-- Top Bar Decoration -->
+                     <script>
+                        for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
+                     </script>
+                </div>
 
-<!-- HEADLINE -->
-<div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
-<div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
-<i data-lucide="terminal" class="w-3 h-3"></i>
-<span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
-</div>
+                <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
+                    <div class="text-center w-full h-full flex flex-col items-center justify-center relative">
+                        <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
+                        
+                        <span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
+                        
+                        <button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
+                            <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
+                    <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
+                    <span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
+                </div>
+            </div>
+        </div>
 
-<h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
-Domine o Jogo do <br />
-<span class="text-[#8C7A5B] text-shadow-sm">
-"CashFlow Recorrente"
-</span>
-</h1>
+        <!-- INTEL TEXT -->
+        <div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
+            <div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
+                <p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
+                    // REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket"tradicional"...
+                    <br class="hidden md:block">
+                    <span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
+                </p>
+            </div>
+            
+            <div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
+                <p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
+                    Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
+                </p>
+            </div>
+        </div>
 
-<p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
-O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
-<span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
-</p>
-</div>
+        <!-- CTA SECTION & DOSSIER -->
+        <div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
+            
+            <div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
+                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+                    <i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
+                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+                    <i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
+                </div>
+            </div>
 
-<!-- VIDEO PLACEHOLDER -->
-<div class="fade-in-section w-full max-w-4xl relative group">
-<!-- Floating Badge -->
-<div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
-<div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
-<div class="border border-[#8C7A5B] border-dashed p-1">
-<p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
-TOP SECRET<br/>ACCESS
-</p>
-</div>
-<div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-<div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-</div>
-</div>
+            <!-- MAIN BUTTON -->
+            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
+                <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
+                    DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+            
+            <!-- DOSSIER LIST (Cardboard File Style) -->
+            <div class="w-full mt-20 relative z-10 max-w-3xl mx-auto">
+                <div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
+                    <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
+                        <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
+                    </span>
+                </div>
 
-<div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
-<div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
-<!-- Top Bar Decoration -->
-<script>
-for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
-</script>
-</div>
+                <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
+                    <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
+                    
+                    <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
+                        <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
+                        </span>
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+                            <div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
+                        </div>
+                    </div>
 
-<div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
-<div class="text-center w-full h-full flex flex-col items-center justify-center relative">
-<div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
+                        
+                        <!-- Alteração: Itens internos agora usam font-mono para efeito typewriter -->
+                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                            </div>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
+                                Acesso Imediato a nosso Grupo Vip
+                            </span>
+                        </div>
 
-<span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
+                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                            </div>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
+                                Aprenda a criar uma recorrência em dólar
+                            </span>
+                        </div>
 
-<button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
-<i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
-</button>
-</div>
-</div>
+                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                            </div>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
+                                Workshop Prático, com foco em Executar
+                            </span>
+                        </div>
 
-<div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
-<div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
-<span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
-</div>
-</div>
-</div>
+                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                            </div>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
+                                Acesso Diretamente aos mentores para tirar dúvidas
+                            </span>
+                        </div>
 
-<!-- INTEL TEXT (Restored) -->
-<div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
-<div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
-<p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
-// REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket"tradicional"...
-<br class="hidden md:block">
-<span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
-</p>
-</div>
+                        <div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
+                            <i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
+                            <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
+                                100% ao vivo, na terça-feira, às 20h
+                            </span>
+                        </div>
+                    </div>
 
-<div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
-<p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
-Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
-</p>
-</div>
-</div>
+                    <div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
+                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
+                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
 
-<!-- CTA SECTION & DOSSIER -->
-<div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
-
-<!-- Floating Icons -->
-<div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
-<div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-<i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
-</div>
-</div>
-<div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
-<div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-<i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
-</div>
-</div>
-
-<!-- MAIN BUTTON (Restored) -->
-<a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
-<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
-<span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
-DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
-</span>
-</a>
-
-<!-- DOSSIER LIST (Cardboard File Style) -->
-                <div class="w-full mt-24 relative z-10 max-w-3xl mx-auto">
-                <div class="w-full mt-20 relative z-10 max-w-3xl mx-auto">
-
-<!-- File Tab -->
-<div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
-<span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
-<i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
-</span>
-</div>
-
-<div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
-<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
-
-<div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
-<span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
-<i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
-</span>
-<div class="flex gap-1.5">
-<div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-<div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-<div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
-</div>
-</div>
-
-<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
-
-<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-</div>
-<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
-Acesso Imediato a nosso Grupo Vip
-</span>
-</div>
-
-<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-</div>
-<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
-Aprenda a criar uma recorrência em dólar
-</span>
-</div>
-
-<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-</div>
-<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
-Workshop Prático, com foco em Executar
-</span>
-</div>
-
-<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-</div>
-<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
-Acesso Diretamente aos mentores para tirar dúvidas
-</span>
-</div>
-
-<div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
-<i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
-<span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
-100% ao vivo, na terça-feira, às 20h
-</span>
-</div>
-</div>
-
-<div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
-<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
-<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
-
-<div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
-<div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
-<div class="relative z-10">
-<div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
-<span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
-[IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
-</span>
-</div>
-</div>
-<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
+                         <div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
+                            <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
+                            <div class="relative z-10">
+                                <div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
+                                <span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
+                                    [IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
+                                </span>
+                            </div>
+                         </div>
+                         <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
+  
 <!-- CLASSIFIED INTEL SECTION -->
 <section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
 <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#141612_20px,#141612_40px)]"></div>
