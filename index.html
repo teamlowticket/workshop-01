@@ -1,0 +1,761 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Terminal, 
+  Crosshair, 
+  ShieldAlert, 
+  Target, 
+  Users, 
+  CheckSquare, 
+  Package, 
+  Lock, 
+  Unlock, 
+  ChevronRight, 
+  AlertTriangle, 
+  Activity, 
+  Wifi,
+  Battery,
+  FileText,
+  Play,
+  Signal,
+  BarChart3,
+  Award,
+  TrendingUp,
+  DollarSign,
+  FileWarning,
+  Plus,
+  Minus
+} from 'lucide-react';
+
+// --- UTILS & COMPONENTS ---
+
+// Fade In Wrapper - Use only for main sections, not lists
+const FadeIn = ({ children, delay = 0, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay: delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+// Custom Accordion - Robust Version
+const AccordionItem = ({ question, answer, isOpen, onClick }) => {
+  return (
+    <div className="bg-[#161a14] border border-[#2b2e25] mb-4 overflow-hidden relative z-10">
+      <button 
+        onClick={onClick}
+        className="w-full flex justify-between items-center p-6 text-left hover:bg-[#1f221c] transition-colors select-none relative z-20"
+      >
+        <div className="flex items-center gap-4 relative z-10">
+          <span className={`text-[#F4C430] font-bold text-lg transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>
+            &gt;
+          </span>
+          <span className="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">
+            {question}
+          </span>
+        </div>
+        <span className="text-[#F4C430] text-xl shrink-0 ml-4 relative z-10">
+          {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+        </span>
+      </button>
+      
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden bg-[#0c0e0b]"
+          >
+            <div className="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#2b2e25]">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const TypewriterText = ({ text, delay = 0, className = "" }) => {
+  const [displayText, setDisplayText] = useState('');
+  
+  useEffect(() => {
+    let i = 0;
+    const timer = setTimeout(() => {
+      const interval = setInterval(() => {
+        setDisplayText(text.substring(0, i + 1));
+        i++;
+        if (i === text.length) clearInterval(interval);
+      }, 30); 
+      return () => clearInterval(interval);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [text, delay]);
+
+  return <span className={`font-mono tracking-tighter ${className}`}>{displayText}</span>;
+};
+
+const DetonatorTimer = () => {
+  const [time, setTime] = useState({ d: 0, h: 4, m: 12, s: 45 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(prev => {
+        let { d, h, m, s } = prev;
+        s--;
+        if (s < 0) { s = 59; m--; }
+        if (m < 0) { m = 59; h--; }
+        if (h < 0) { h = 23; d--; }
+        return { d, h, m, s };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const format = (num) => String(num).padStart(2, '0');
+
+  return (
+    <div className="flex gap-2 items-center bg-[#2b2e25] border-4 border-[#1a1c16] p-2 rounded shadow-2xl relative">
+      <div className="absolute top-1 left-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
+      <div className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
+      <div className="absolute bottom-1 left-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
+      <div className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
+
+      {['d', 'h', 'm', 's'].map((unit, i) => (
+        <div key={unit} className="flex flex-col items-center mx-1">
+          <div className="bg-[#0a0a0a] text-[#F4C430] font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-inset border-2 border-[#363b2f] rounded-sm shadow-[inset_0_0_10px_rgba(0,0,0,0.8)] font-digital">
+            {format(Object.values(time)[i])}
+          </div>
+          <span className="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">{unit}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const TacticalCard = ({ children, className = "", highlight = false, noPadding = false }) => (
+  <div className={`relative group ${className}`}>
+    <div 
+      className={`absolute inset-0 border-2 transition-all duration-300 ${
+        highlight 
+          ? 'border-[#F4C430] bg-[#1c1f17]' 
+          : 'border-[#5D5348] bg-[#1a1c16]'
+      }`}
+    />
+    <div className="absolute -top-1 -left-1 w-4 h-4 border-t-4 border-l-4 border-[#C2B280]" />
+    <div className="absolute -top-1 -right-1 w-4 h-4 border-t-4 border-r-4 border-[#C2B280]" />
+    <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-4 border-l-4 border-[#C2B280]" />
+    <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-4 border-r-4 border-[#C2B280]" />
+    <div className={`relative z-10 ${noPadding ? '' : 'p-6'} h-full`}>
+      {children}
+    </div>
+  </div>
+);
+
+const TacticalDevice = ({ children }) => (
+  <div className="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#2b2e25] rounded-[2rem] border-[8px] border-[#151712] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
+    <div className="absolute top-20 -right-2.5 w-1 h-12 bg-[#151712] rounded-r-md"></div>
+    <div className="absolute top-36 -left-2.5 w-1 h-8 bg-[#151712] rounded-l-md"></div>
+    <div className="absolute top-48 -left-2.5 w-1 h-8 bg-[#151712] rounded-l-md"></div>
+
+    <div className="flex-1 bg-[#0f110d] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
+      <div className="h-8 bg-[#1a1c16] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
+        <span>SAT_LINK_ACTIVE</span>
+        <div className="flex gap-2">
+          <Signal size={10} />
+          <Battery size={10} />
+        </div>
+      </div>
+      <div className="flex-1 relative flex items-center justify-center bg-[#0a0a0a]">
+        <div className="relative z-10 w-full h-full">
+            {children}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const OperatorCard = ({ name, rank, description, role, icon: Icon }) => (
+  <div className="relative group h-full">
+    <div className="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
+    <div className="relative bg-[#1a1c16] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
+        <div className="absolute -top-3 left-4 bg-[#F4C430] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
+            CONFIDENTIAL
+        </div>
+        <div className="p-6 flex flex-col items-center flex-grow pt-8">
+            <div className="w-28 h-28 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1">
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-300">
+                    <Users size={40} className="text-gray-500" />
+                </div>
+                <div className="absolute -top-4 right-1/2 translate-x-1/2 w-4 h-8 border-2 border-gray-400 rounded-t-full border-b-0"></div>
+            </div>
+            <div className="text-center w-full">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <Icon size={14} className="text-[#C2B280]" />
+                    <span className="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">{role}</span>
+                </div>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">{name}</h3>
+                <div className="inline-block bg-[#2b2e25] px-3 py-1 text-[10px] font-mono text-[#F4C430] border border-[#3e452f] mb-4 uppercase">
+                    {rank}
+                </div>
+                <p className="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
+                    "{description}"
+                </p>
+            </div>
+        </div>
+        <div className="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#131511]">
+            <div className="p-2 text-center border-r border-[#3e452f]">
+                <span className="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
+                <span className="text-xs font-bold text-white">CLASS A</span>
+            </div>
+            <div className="p-2 text-center">
+                <span className="block text-[9px] text-[#8C8674] font-mono uppercase">Execution</span>
+                <span className="text-xs font-bold text-white">TIER 1</span>
+            </div>
+        </div>
+    </div>
+  </div>
+);
+
+const FloatingElement = ({ children, delay = 0, className = "" }) => (
+  <motion.div
+    animate={{ y: [0, -10, 0] }}
+    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: delay }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+// --- MAIN APP COMPONENT ---
+
+export default function App() {
+  const [bootSequence, setBootSequence] = useState(true);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setBootSequence(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (bootSequence) {
+    return (
+      <div className="h-screen w-full bg-[#0F120D] flex flex-col items-center justify-center text-[#C2B280] font-mono text-sm p-8">
+        <div className="w-full max-w-md space-y-2 border-l-2 border-[#4B5320] pl-4">
+          <TypewriterText text="INITIALIZING STEADYFLOW PROTOCOL..." delay={0} />
+          <br />
+          <TypewriterText text="LOADING ASSETS..." delay={500} />
+          <br />
+          <TypewriterText text="CONNECTION SECURE." delay={1000} className="text-[#F4C430]" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#0F120D] text-[#e2e2d5] font-sans selection:bg-[#F4C430] selection:text-black overflow-x-hidden relative">
+      
+      {/* --- BACKGROUND LAYERS --- */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.05]" 
+        style={{ 
+          backgroundImage: `url("https://www.transparenttextures.com/patterns/black-felt.png")`, 
+        }}
+      ></div>
+      <div className="fixed inset-0 pointer-events-none z-0 bg-gradient-to-b from-[#0F120D] via-[#161912] to-[#0a0b08]"></div>
+
+      {/* --- TOP HUD NAV --- */}
+      <nav className="relative w-full z-[60] border-b border-[#3e452f] bg-[#0F120D]/95 backdrop-blur-md h-12 flex items-center shadow-lg">
+        <div className="max-w-7xl mx-auto w-full px-4 flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest">
+          <div className="flex items-center gap-2 text-[#F4C430]">
+            <Activity size={14} />
+            <span>SYSTEM: ONLINE</span>
+          </div>
+          <div className="flex gap-4 text-[#8C8674]">
+            <span className="hidden md:inline">OP: 23.12.24</span>
+            <div className="flex items-center gap-2">
+              <Wifi size={12} />
+              <Battery size={12} />
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* --- MAIN CONTENT WRAPPER --- */}
+      <div> 
+        {/* --- ALERT BANNER --- */}
+        <div className="w-full bg-[#F4C430] relative overflow-hidden border-b-2 border-black">
+            <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
+            <div className="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center text-center relative z-10">
+              <p className="text-[10px] md:text-xs font-bold tracking-wide text-black flex flex-col md:flex-row items-center gap-2 uppercase">
+                <span className="flex items-center gap-1 bg-black text-[#F4C430] px-2 py-0.5 rounded-sm">
+                  <AlertTriangle size={12} fill="currentColor" />
+                  Atenção
+                </span>
+                <span>
+                  A call exclusiva para infoprodutores, empresários digitais ou profissionais especialistas começa em:
+                </span>
+              </p>
+            </div>
+        </div>
+
+        {/* --- HERO SECTION --- */}
+        <section className="relative pt-12 pb-20 px-4 z-10">
+          <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+            
+            {/* Timer */}
+            <FadeIn className="mb-12 relative">
+              <FloatingElement className="absolute -left-24 top-1/2 hidden md:flex opacity-60 text-[#8C8674] items-center gap-2">
+                <BarChart3 size={32} />
+                <span className="text-[10px] font-mono tracking-widest bg-black/50 px-1">DATA_ANALYSIS</span>
+              </FloatingElement>
+              
+              <FloatingElement delay={1} className="absolute -right-24 -top-8 hidden md:flex opacity-60 text-[#8C8674] flex-col items-center">
+                <Signal size={32} />
+                <span className="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1">UPLINK</span>
+              </FloatingElement>
+
+              <div className="inline-block mb-3 text-[10px] font-mono text-[#F4C430] tracking-[0.3em] uppercase bg-[#1a1c16] border border-[#F4C430]/50 px-3 py-1 shadow-md">
+                Mission Countdown
+              </div>
+              <DetonatorTimer />
+            </FadeIn>
+
+            {/* Headline */}
+            <div className="mb-12 max-w-4xl space-y-6 relative">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="inline-flex items-center gap-2 text-[#8C8674] font-mono text-xs bg-[#1a1c16] px-4 py-1 border-l-2 border-[#F4C430]"
+              >
+                <Terminal size={12} />
+                <span>// PROTOCOL: STEADYFLOW_V1</span>
+              </motion.div>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none text-[#e2e2d5] drop-shadow-2xl font-stencil">
+                Domine o Jogo do <br />
+                <span className="text-[#F4C430] text-shadow-sm">
+                  Steadyflow
+                </span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-[#b0b0a0] font-sans max-w-2xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0">
+                O sistema que me fez faturar <span className="text-white font-bold bg-[#4B5320] px-1 shadow-sm">+R$5K por dia</span> em recorrência automática com SaaS, sem gastar 1 centavo em tráfego.
+              </p>
+            </div>
+
+            {/* Video Placeholder */}
+            <FadeIn delay={0.2} className="w-full max-w-4xl relative group">
+              <FloatingElement delay={2} className="absolute -top-6 -right-6 z-30 hidden md:block">
+                <div className="bg-[#1a1c16] border-2 border-[#F4C430] p-4 shadow-xl transform rotate-3">
+                  <div className="border border-[#F4C430] border-dashed p-1">
+                    <p className="text-[10px] font-black text-[#F4C430] uppercase tracking-widest text-center leading-tight">
+                      TOP SECRET<br/>ACCESS
+                    </p>
+                  </div>
+                  <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+                  <div className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+                </div>
+              </FloatingElement>
+
+              <div className="relative aspect-video bg-black border-4 border-[#2b2e25] shadow-2xl">
+                <div className="absolute top-0 left-0 w-full h-2 bg-[#2b2e25] flex justify-center gap-1">
+                    {[...Array(20)].map((_, i) => <div key={i} className="w-1 h-2 bg-black/30"></div>)}
+                </div>
+
+                <div className="absolute inset-0 flex items-center justify-center bg-[#0c0e0b]">
+                  <div className="text-center w-full h-full flex flex-col items-center justify-center relative">
+                    <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#1a1c16_10px,#1a1c16_20px)]"></div>
+                    
+                    <span className="text-[#8C8674] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1">[ CLASSIFIED INTEL FOOTAGE ]</span>
+                    
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-20 h-20 flex items-center justify-center border-4 border-[#F4C430] bg-[#F4C430]/10 text-[#F4C430] rounded-full hover:bg-[#F4C430] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(244,196,48,0.2)]"
+                    >
+                        <Play fill="currentColor" size={32} className="ml-1" />
+                    </motion.button>
+                  </div>
+                </div>
+                
+                <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/60 px-2 py-1 rounded-sm">
+                    <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]" />
+                    <span className="text-white font-mono text-xs font-bold tracking-widest">REC</span>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* INTEL TEXT */}
+            <FadeIn delay={0.3} className="mt-12 max-w-3xl mx-auto space-y-6 text-center">
+                <div className="border-l-4 border-[#8C8674] pl-6 text-left md:text-center md:border-none md:pl-0">
+                    <p className="text-[#b0b0a0] text-base md:text-lg leading-relaxed font-mono">
+                        // REPORT: Zero conversinha de guru. Nada de PLR, dropshipping, afiliado, X1, lançamento, nutra, gestor de tráfego ou low ticket.
+                        <br className="hidden md:block" />
+                        <span className="text-[#F4C430] font-bold bg-[#F4C430]/10 px-1 border-b border-[#F4C430]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
+                    </p>
+                </div>
+                
+                <div className="w-full max-w-3xl mx-auto bg-[#1a1c16] px-6 py-6 border-y-2 border-[#2b2e25] relative mt-6 shadow-inner">
+                    <p className="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
+                        Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
+                    </p>
+                </div>
+            </FadeIn>
+
+            {/* CTA SECTION & DOSSIER */}
+            <FadeIn delay={0.4} className="mt-12 w-full max-w-4xl flex flex-col items-center relative">
+                
+                <FloatingElement className="absolute -top-10 left-0 pointer-events-none opacity-60 hidden md:block">
+                    <div className="w-14 h-14 border-2 border-[#F4C430] rounded-full flex items-center justify-center bg-[#1a1c16] shadow-lg">
+                        <DollarSign className="text-[#F4C430]" size={24} />
+                    </div>
+                </FloatingElement>
+                <FloatingElement delay={2} className="absolute -top-5 right-0 pointer-events-none opacity-60 hidden md:block">
+                    <div className="w-14 h-14 border-2 border-[#F4C430] rounded-full flex items-center justify-center bg-[#1a1c16] shadow-lg">
+                        <Target className="text-[#F4C430]" size={24} />
+                    </div>
+                </FloatingElement>
+
+                {/* Main Tactical Button */}
+                <motion.a 
+                    href="#offer"
+                    className="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#F4C430] border-b-8 border-[#b8860b] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm"
+                >
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
+                    
+                    <span className="relative z-10 flex items-center gap-3 font-stencil text-black text-xl md:text-2xl uppercase tracking-wide font-black">
+                        DESBLOQUEAR ACESSO AO WORKSHOP <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform border-2 border-black rounded-full p-0.5"/>
+                    </span>
+                </motion.a>
+                
+                {/* Dossier List - REMOVED FADEIN AND USED STATIC DIV */}
+                <div className="w-full mt-10 relative bg-[#161814] border border-[#3e452f] rounded-sm overflow-hidden shadow-2xl relative z-10">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                    
+                    <div className="relative z-10 bg-[#2b2e25] border-b border-[#3e452f] p-4 flex justify-between items-center shadow-md">
+                        <span className="text-xs font-bold font-mono text-[#F4C430] uppercase tracking-widest flex items-center gap-2">
+                            <FileWarning size={14} /> MISSION PARAMETERS
+                        </span>
+                        <div className="flex gap-1">
+                            <div className="w-2 h-2 bg-[#F4C430] rounded-full"></div>
+                            <div className="w-2 h-2 bg-[#5D5348] rounded-full"></div>
+                            <div className="w-2 h-2 bg-[#5D5348] rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 p-0">
+                        {[
+                            "Acesso Imediato ao Grupo Vip",
+                            "Receber em Dólar",
+                            "Foco na Execução Prática",
+                            "Acesso aos mentores",
+                            "Plantão de Dúvidas",
+                            "100% ao vivo 23/12"
+                        ].map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-4 group border-b border-[#2b2e25] last:border-0 md:nth-last-child-2:border-0 p-6 hover:bg-[#1f221c] transition-colors">
+                                <div className="w-5 h-5 bg-[#F4C430] flex items-center justify-center shrink-0 rounded-sm shadow-sm group-hover:scale-110 transition-transform">
+                                    <CheckSquare size={12} className="text-black" strokeWidth={3} />
+                                </div>
+                                <span className="text-gray-300 text-sm font-bold font-sans uppercase tracking-wide group-hover:text-white transition-colors">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                
+                <FloatingElement delay={1.5} className="absolute top-1/2 -right-16 w-32 h-32 z-0 hidden lg:flex transform rotate-6 border-2 border-[#F4C430]/50 bg-[#0c0e0b]/90 backdrop-blur-sm text-[10px] text-[#F4C430] font-mono text-center items-center justify-center shadow-xl">
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#F4C430] text-black px-2 text-[8px] font-bold">STATUS REPORT</div>
+                    [IMAGEM FLUTUANTE AQUI:<br/>GRÁFICO DE SUCESSO]
+                </FloatingElement>
+            </FadeIn>
+
+          </div>
+        </section>
+
+        {/* --- CLASSIFIED INTEL --- */}
+        <section className="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#1a1c16_20px,#1a1c16_40px)]"></div>
+          
+          <div className="max-w-5xl mx-auto px-4 relative z-10">
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+              <FadeIn className="w-full md:w-1/2 space-y-6">
+                <div className="inline-block bg-[#7f1d1d] border border-red-500/50 px-3 py-1 text-white font-mono text-xs tracking-widest uppercase font-bold shadow-md">
+                  TOP SECRET // EYES ONLY
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-wider">
+                  Operação <span className="text-[#F4C430] underline decoration-[#4B5320] decoration-4 underline-offset-4">Declassified</span>
+                </h2>
+                
+                <div className="space-y-4 font-mono text-sm md:text-base text-gray-400">
+                  <p>
+                    // REPORT: Zero conversinha de guru. Nada de <span className="bg-black text-white px-1">██████</span>, dropshipping, afiliado, X1, lançamento.
+                  </p>
+                  <div className="bg-[#1a1c16] border-l-4 border-amber-600 p-6 shadow-md">
+                    <p className="text-gray-300">
+                      <span className="text-amber-500 font-bold">WARNING:</span> CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.
+                    </p>
+                  </div>
+                  <p>
+                    Estamos falando de multiplicar até <strong className="text-[#F4C430] border-b border-[#F4C430]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! Este é o jogo... Onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO.
+                  </p>
+                </div>
+              </FadeIn>
+
+              {/* Tactical Device */}
+              <FadeIn delay={0.2} className="w-full md:w-1/2 flex justify-center">
+                <TacticalDevice>
+                  <div className="w-full h-full flex flex-col bg-[#0f0f0f] relative">
+                    <div className="p-6 pb-2">
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-full bg-gray-800 border border-gray-700"></div>
+                                <div>
+                                    <div className="text-[10px] text-gray-400">Welcome back</div>
+                                    <div className="text-xs font-bold text-white">Operator</div>
+                                </div>
+                            </div>
+                            <Award size={16} className="text-[#F4C430]" />
+                        </div>
+                        <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-bold text-white">$</span>
+                            <span className="text-4xl font-bold text-white tracking-tighter">12,450</span>
+                            <span className="text-2xl font-bold text-gray-500">.00</span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1 text-[#CCFF00] text-xs font-medium">
+                            <TrendingUp size={12} />
+                            <span>+12.5% today</span>
+                        </div>
+                    </div>
+
+                    <div className="h-24 w-full relative px-2">
+                        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#CCFF00]/10 to-transparent"></div>
+                        <svg className="w-full h-full text-[#CCFF00] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
+                            <path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" strokeWidth="2" />
+                            <circle cx="100" cy="5" r="3" fill="currentColor" className="animate-pulse" />
+                        </svg>
+                    </div>
+
+                    <div className="flex-1 bg-[#151515] mt-4 rounded-t-3xl p-6 space-y-3">
+                        {[1,2,3].map(i => (
+                            <div key={i} className="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-[#CCFF00]/10 flex items-center justify-center text-[#CCFF00]">
+                                        <DollarSign size={14} />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold text-white">Sale #29{i}3</div>
+                                        <div className="text-[9px] text-gray-500">Just now</div>
+                                    </div>
+                                </div>
+                                <div className="text-xs font-bold text-white">+$49.90</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="absolute bottom-4 left-0 right-0 text-center">
+                        <p className="text-[10px] font-mono text-gray-500 bg-black/80 inline-block px-2 py-1 rounded">
+                            "A mais de 1 ano isso se tornou minha realidade."
+                        </p>
+                    </div>
+                  </div>
+                </TacticalDevice>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* --- UNIT COMMANDERS --- */}
+        <section className="py-24 px-4 relative">
+          <div className="max-w-5xl mx-auto">
+            <FadeIn className="flex items-center gap-4 mb-16 border-b border-[#3E452F] pb-4">
+              <Users className="text-[#F4C430]" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide font-stencil">Unit Commanders</h2>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <FadeIn delay={0.1}>
+                <OperatorCard 
+                  name="Kauê Pugliesi"
+                  rank="EX-CAPITÃO"
+                  role="STRATEGIST"
+                  icon={Target}
+                  description="Saiu do Exército após 11 anos e descobriu que era possível ganhar em dólar. Escalou múltiplos 7 dígitos e provou que o mercado digital realmente funciona."
+                />
+              </FadeIn>
+              <FadeIn delay={0.2}>
+                <OperatorCard 
+                  name="Slender"
+                  rank="TOP AFFILIATE"
+                  role="OPERATIVE"
+                  icon={Crosshair}
+                  description="Entrou no mercado, e em 1 ano e pouquinho conquistou mais de meio milhão ao dia, vencendo a maior competição de faturamento do Brasil da Lastlink."
+                />
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* --- MISSION OBJECTIVES (Fixed Visibility) --- */}
+        <section className="py-20 bg-[#0F120D] border-t border-[#3E452F]/30 relative z-10">
+          <div className="max-w-4xl mx-auto px-4">
+            {/* Removed FadeIn from Title */}
+            <div className="text-center mb-16">
+              <span className="text-[#F4C430] font-mono text-xs tracking-[0.2em] uppercase bg-[#1a1c16] px-2 py-1">[ Mission Briefing ]</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 font-stencil">O QUE VOCÊ VAI VER NA PRÁTICA</h2>
+            </div>
+
+            <div className="grid md:grid-cols-1 gap-4 font-mono text-sm">
+              {[
+                { status: 'LOCKED', color: 'text-red-500', icon: AlertTriangle, text: "Por que insistir em modelos black é um erro fatal." },
+                { status: 'CLEARED', color: 'text-[#F4C430]', icon: CheckSquare, text: "O bloco invisível de recorrência automática." },
+                { status: 'CLEARED', color: 'text-[#F4C430]', icon: CheckSquare, text: "Ajuste de comunicação para retenção máxima." },
+                { status: 'LOCKED', color: 'text-amber-500', icon: AlertTriangle, text: "O erro silencioso que mata SaaS low ticket em 90 dias." },
+                { status: 'CLEARED', color: 'text-[#F4C430]', icon: CheckSquare, text: "Estruturação de planos para upgrade voluntário." },
+                { status: 'CLEARED', color: 'text-[#F4C430]', icon: CheckSquare, text: "Escala global em Dólar." },
+              ].map((item, idx) => (
+                // Removed FadeIn Wrapper - Replaced with Static Div
+                <div 
+                  key={idx}
+                  className="flex items-center gap-4 bg-[#1a1c16] border-l-4 border-[#3e452f] p-4 hover:border-[#F4C430] hover:bg-[#1f221c] transition-all shadow-sm"
+                >
+                  <span className={`${item.color} font-bold min-w-[80px]`}>[{item.status}]</span>
+                  <p className="text-gray-300">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* --- SUPPLY DROP --- */}
+        <section className="py-24 px-4 relative">
+          <div className="max-w-6xl mx-auto relative z-10">
+            <h2 className="text-center text-3xl font-bold mb-16 uppercase flex items-center justify-center gap-3 font-stencil">
+              <Package className="text-[#F4C430]" />
+              Supply Drop (Bônus)
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: "Playbook Recorrência", desc: "Guia tático completo passo-a-passo.", icon: FileText },
+                { title: "Templates de Funis", desc: "Arquivos prontos para deploy.", icon: Package },
+                { title: "Sorteio Mentoria", desc: "Acesso direto ao comando (Sorteio).", icon: Users }
+              ].map((bonus, i) => {
+                const Icon = bonus.icon;
+                return (
+                  <FadeIn key={i} delay={i * 0.1} className="relative group bg-[#161a14] border-2 border-[#3e452f] p-8 text-center hover:border-[#F4C430] transition-colors shadow-lg">
+                    <div className="absolute top-0 right-0 bg-[#2b2e25] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 0{i+1}</div>
+                    
+                    <div className="w-16 h-16 mx-auto bg-[#2b2e25] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#F4C430] group-hover:text-black transition-colors rounded-sm">
+                      <Icon size={24} />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 uppercase">{bonus.title}</h3>
+                    <p className="text-gray-400 font-mono text-xs">{bonus.desc}</p>
+                  </FadeIn>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* --- CONTRACT OFFER --- */}
+        <section id="offer" className="py-24 relative overflow-hidden bg-[#0c0e0b]">
+          <FadeIn className="max-w-xl mx-auto px-4 relative z-10">
+            <div className="relative bg-[#161a14] border-4 border-[#4B5320] p-1 shadow-2xl">
+              <div className="bg-[#0F120D] p-8 md:p-12 text-center relative overflow-hidden">
+                
+                <div className="absolute top-6 right-6 border-2 border-[#F4C430] text-[#F4C430] px-2 py-1 font-stencil text-xs -rotate-12 opacity-80">
+                  DISCOUNT AUTHORIZED
+                </div>
+
+                <div className="mb-8 w-24 h-24 mx-auto bg-[#1a1c16] border-2 border-[#4B5320] flex items-center justify-center relative">
+                  <span className="text-[10px] text-gray-500 text-center px-2 uppercase font-mono">[ PRODUCT IMG ]</span>
+                </div>
+
+                <h2 className="text-2xl md:text-3xl font-black text-white mb-2 uppercase font-stencil">Workshop Receita Recorrente</h2>
+                <div className="inline-block bg-[#F4C430]/10 px-3 py-1 mb-8 border border-[#F4C430]/30">
+                  <p className="text-[#F4C430] font-mono text-[10px] tracking-[0.2em]">ACCESS KEY: STEADYFLOW</p>
+                </div>
+
+                <div className="flex flex-col items-center justify-center gap-1 mb-10 p-6 border-y-2 border-[#2b2e25] bg-[#121410]">
+                  <span className="text-gray-500 text-sm line-through font-mono decoration-red-500">VALOR: R$ 1000,00</span>
+                  <div className="flex items-baseline justify-center gap-2">
+                    <span className="text-xl text-white font-medium uppercase">Por apenas</span>
+                    <span className="text-6xl font-sans font-black text-[#F4C430] tracking-tighter drop-shadow-sm">R$9,90</span>
+                  </div>
+                  <p className="text-gray-500 text-[10px] mt-2 font-mono uppercase">// (menos de 33 centavos por dia)</p>
+                </div>
+
+                <motion.a 
+                  href="#" 
+                  className="group relative flex items-center justify-center w-full py-6 bg-[#F4C430] hover:bg-[#d4a017] text-black font-stencil text-xl md:text-2xl uppercase tracking-widest mb-8 transition-colors border-b-4 border-[#8B6508] active:border-b-0 active:translate-y-1"
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    <Unlock size={24} /> 
+                    Ready to Deploy 
+                    <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform"/>
+                  </span>
+                </motion.a>
+
+                <div className="flex items-center justify-center gap-4 opacity-60">
+                  <ShieldAlert size={20} className="text-[#F4C430]" />
+                  <div className="text-left">
+                    <p className="text-white font-bold text-xs uppercase">GARANTIA DE 30 DIAS</p>
+                    <p className="text-[10px] text-gray-500 font-mono">RISK FREE OPERATION</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </section>
+
+        {/* --- FAQ (Fixed Z-Index) --- */}
+        <section className="py-20 bg-[#0F120D] border-t border-[#3e452f] relative z-10">
+          <div className="max-w-3xl mx-auto px-4">
+            <h2 className="text-center text-3xl font-bold text-white mb-12 uppercase font-stencil">
+              <span className="text-[#F4C430]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
+            </h2>
+            
+            <div className="space-y-4">
+              {[
+                { q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops)." },
+                { q: "Por que o valor é de R$ 9,90?", a: "Esse valor é simbólico para filtrar operadores comprometidos." },
+                { q: "Preciso saber programar?", a: "Negativo. O foco é estratégia e comando." },
+                { q: "Funciona no Brasil?", a: "Sim. A operação é global, recebendo em Dólar." }
+              ].map((faq, i) => (
+                <AccordionItem 
+                  key={i}
+                  question={faq.q}
+                  answer={faq.a}
+                  isOpen={openFaqIndex === i}
+                  onClick={() => toggleFaq(i)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <footer className="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
+          <div className="flex items-center justify-center gap-2 text-[#F4C430] opacity-50 mb-4">
+            <Target size={24} />
+          </div>
+          <p className="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
+            &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
+          </p>
+        </footer>
+      </div>
+    </div>
+  );
+}
