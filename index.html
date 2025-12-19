@@ -878,36 +878,66 @@ O Workshop Receita Recorrente começa em:
     </div>
 </section>
 
-<!-- MISSION OBJECTIVES -->
-<section class="py-20 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10">
-<div class="max-w-4xl mx-auto px-4">
-<div class="text-center mb-16 fade-in-section">
-<span class="text-[#8C7A5B] font-mono text-xs tracking-[0.2em] uppercase bg-[#141612] px-2 py-1">[ Mission Briefing ]</span>
-<h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-stencil">O QUE VOCÊ VAI VER NA PRÁTICA</h2>
-</div>
+<!-- MISSION OBJECTIVES: BRIEFING DE CAMPO -->
+<section class="py-24 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10 overflow-hidden">
+    <!-- Decoração de Fundo: Grid de Coordenadas -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#8C7A5B 1px, transparent 1px); background-size: 30px 30px;"></div>
 
-<div class="grid md:grid-cols-1 gap-4 font-mono text-sm">
-<script>
-const objectives = [
-{ st: 'LOCKED', cl: 'text-red-500', txt: "Por que insistir em modelos black é um erro fatal." },
-{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência automática." },
-{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Ajuste de comunicação para retenção máxima." },
-{ st: 'LOCKED', cl: 'text-amber-500', txt: "O erro silencioso que mata SaaS low ticket em 90 dias." },
-{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Estruturação de planos para upgrade voluntário." },
-{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Escala global em Dólar." }
-];
+    <div class="max-w-5xl mx-auto px-4 relative">
+        <!-- Título Estilo Militar -->
+        <div class="text-center mb-16 fade-in-section">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <span class="h-px w-8 bg-[#8C7A5B]"></span>
+                <span class="text-[#8C7A5B] font-mono text-xs tracking-[0.4em] uppercase">Tactical Syllabus</span>
+                <span class="h-px w-8 bg-[#8C7A5B]"></span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
+                O QUE VOCÊ VAI VER <br/> <span class="text-[#8C7A5B]">NA PRÁTICA</span> NO WORKSHOP
+            </h2>
+        </div>
 
-objectives.forEach(obj => {
-document.write(`
-                           <div class="flex items-center gap-4 bg-[#141612] border-l-4 border-[#3e452f] p-4 hover:border-[#8C7A5B] hover:bg-[#1a1e16] transition-all shadow-sm">
-                               <span class="${obj.cl} font-bold min-w-[80px]">[${obj.st}]</span>
-                               <p class="text-gray-300">${obj.txt}</p>
-                           </div>
-                       `);
-});
-</script>
-</div>
-</div>
+        <!-- Lista de Objetivos: Estilo Checkpoint -->
+        <div class="grid md:grid-cols-1 gap-3 font-mono text-sm max-w-4xl mx-auto">
+            <script>
+                const objectives = [
+                    { status: 'CRITICAL_FAIL', color: 'text-red-500', txt: "Por que insistir em modelos de ofertas black é o maior erro que operadores experientes continuam cometendo." },
+                    { status: 'STEADYFLOW', color: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência que faz o cliente continuar pagando mês após mês, mesmo sem novos estímulos agressivos." },
+                    { status: 'COMM_PROTOCOL', color: 'text-[#8C7A5B]', txt: "O ajuste simples na comunicação que aumenta drasticamente retenção, sem mexer no produto." },
+                    { status: 'THREAT_ALER T', color: 'text-amber-500', txt: "O erro silencioso que faz a maioria dos SaaS low ticket morrerem antes de completar 90 dias." },
+                    { status: 'UPGRADE_PATH', color: 'text-[#8C7A5B]', txt: "Como estruturar planos e ofertas para que o próprio cliente queira subir de nível, sem ser convencido." },
+                    { status: 'PRE_OP_LOGIC', color: 'text-[#8C7A5B]', txt: "A lógica de venda antecipada que faz o usuário entrar já predisposto a permanecer." },
+                    { status: 'SYSTEM_INTEL', color: 'text-[#8C7A5B]', txt: "Por que bônus, promessas exageradas e garantias destroem negócios recorrentes por dentro." },
+                    { status: 'LTV_ADJUST', color: 'text-[#8C7A5B]', txt: "O detalhe de checkout e onboarding que muda completamente o LTV, mesmo sem aumentar conversão inicial." },
+                    { status: 'GLOBAL_REVENUE', color: 'text-[#C2B280]', txt: "E como escalar tudo isso em dólar, fora do campo de guerra do mercado brasileiro." },
+                    { status: 'AND_BEYOND', color: 'text-white/40', txt: "E muito, muito mais." }
+                ];
+
+                objectives.forEach(obj => {
+                    document.write(`
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 bg-[#141612]/50 border-l-2 border-[#3E452F] p-4 hover:bg-[#1a1e16] hover:border-[#8C7A5B] transition-all group">
+                            <span class="${obj.color} font-bold text-[10px] tracking-widest min-w-[120px] opacity-80 group-hover:opacity-100">[ ${obj.status} ]</span>
+                            <p class="text-gray-300 group-hover:text-white transition-colors">${obj.txt}</p>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+
+        <!-- CTA FINAL DA SEÇÃO -->
+        <div class="mt-16 flex flex-col items-center fade-in-section">
+            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
+                <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
+                    DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+            
+            <div class="mt-6 flex items-center gap-2 text-[10px] font-mono text-[#8C7A5B] opacity-50 uppercase tracking-widest">
+                <i data-lucide="shield-check" class="w-3 h-3"></i>
+                Secure Access Granted // Connection Encrypted
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- SUPPLY DROP -->
