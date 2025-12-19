@@ -940,44 +940,126 @@ O Workshop Receita Recorrente começa em:
     </div>
 </section>
 
-<!-- SUPPLY DROP -->
-<section class="py-24 px-4 relative">
-<div class="max-w-6xl mx-auto relative z-10">
-<h2 class="text-center text-3xl font-bold mb-16 uppercase flex items-center justify-center gap-3 font-stencil">
-<i data-lucide="package" class="w-8 h-8 text-[#8C7A5B]"></i>
-Supply Drop (Bônus)
-</h2>
+<!-- ================================================================= -->
+<!-- SECTION: SUPPLY DROP (BÔNUS) -->
+<!-- ================================================================= -->
+<section class="py-24 px-4 relative bg-[#0F120D] overflow-hidden border-t border-[#3E452F]">
+    <!-- Elementos de Atmosfera: Fumaça/Sinalizador -->
+    <div class="absolute -top-20 -right-20 w-96 h-96 bg-red-900/10 blur-[120px] rounded-full animate-pulse"></div>
+    
+    <div class="max-w-6xl mx-auto relative z-10">
+        <!-- Título de Impacto -->
+        <div class="text-center mb-20 fade-in-section">
+            <div class="inline-flex items-center gap-2 bg-[#8C7A5B] text-black px-4 py-1 font-mono text-[10px] font-bold uppercase tracking-widest mb-4 shadow-xl">
+                <i data-lucide="package-check" class="w-4 h-4"></i> EMERGENCY_SUPPLY_INBOUND
+            </div>
+            <h2 class="text-3xl md:text-6xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
+                +3 MEGA BÔNUS QUE <br/> VOCÊ VAI <span class="text-[#8C7A5B]">LEVAR</span>
+            </h2>
+        </div>
 
-<div class="grid md:grid-cols-3 gap-6">
-<!-- Bonus 1 -->
-<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 01</div>
-<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-<i data-lucide="file-text" class="w-6 h-6"></i>
-</div>
-<h3 class="text-lg font-bold text-white mb-2 uppercase">Playbook Recorrência</h3>
-<p class="text-gray-400 font-mono text-xs">Guia tático completo passo-a-passo.</p>
-</div>
-<!-- Bonus 2 -->
-<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 02</div>
-<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-<i data-lucide="package" class="w-6 h-6"></i>
-</div>
-<h3 class="text-lg font-bold text-white mb-2 uppercase">Templates de Funis</h3>
-<p class="text-gray-400 font-mono text-xs">Arquivos prontos para deploy.</p>
-</div>
-<!-- Bonus 3 -->
-<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 03</div>
-<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-<i data-lucide="users" class="w-6 h-6"></i>
-</div>
-<h3 class="text-lg font-bold text-white mb-2 uppercase">Sorteio Mentoria</h3>
-<p class="text-gray-400 font-mono text-xs">Acesso direto ao comando (Sorteio).</p>
-</div>
-</div>
-</div>
+        <!-- Grid de Caixas de Suprimentos (Bonuses) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Bônus 01: Playbook -->
+            <div class="fade-in-section relative group">
+                <!-- Sombra Projetada -->
+                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
+                <!-- Crate Body -->
+                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
+                    <!-- Detalhes de Madeira/Reforço -->
+                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
+                    
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
+                        <i data-lucide="book-open" class="w-10 h-10 text-[#8C7A5B]"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
+                        Playbook Completo <br/> <span class="text-[#8C7A5B] text-sm font-mono">Modelo de Recorrência</span>
+                    </h3>
+                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
+                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
+                        O manual tático com o passo a passo da nossa operação.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bônus 02: Templates -->
+            <div class="fade-in-section relative group">
+                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
+                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
+                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
+                    
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
+                        <i data-lucide="layout-template" class="w-10 h-10 text-[#8C7A5B]"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
+                        Templates de Funis <br/> <span class="text-[#8C7A5B] text-sm font-mono">Prontos para Vender</span>
+                    </h3>
+                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
+                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
+                        Arquivos prontos para deploy imediato na sua estrutura.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bônus 03: Swipe File -->
+            <div class="fade-in-section relative group">
+                <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
+                <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
+                    <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
+                    
+                    <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
+                        <i data-lucide="copy" class="w-10 h-10 text-[#8C7A5B]"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
+                        Swipe File Gringa <br/> <span class="text-[#8C7A5B] text-sm font-mono">Ofertas Low Ticket</span>
+                    </h3>
+                    <div class="h-px w-12 bg-[#3D3222] mx-auto mb-4"></div>
+                    <p class="text-gray-400 font-mono text-[11px] leading-relaxed uppercase tracking-tighter">
+                        O acervo das ofertas SaaS mais escaladas no mercado global.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPECIAL ITEM: Mentoria Individual -->
+        <div class="mt-16 fade-in-section">
+            <div class="max-w-4xl mx-auto bg-[#141612] border-2 border-[#8b0000] p-6 relative overflow-hidden group">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#8b0000,#8b0000_10px,transparent_10px,transparent_20px)]"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-16 h-16 bg-[#8b0000] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(139,0,0,0.4)]">
+                        <i data-lucide="mic-2" class="text-white w-8 h-8"></i>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <p class="text-xs font-mono text-red-500 font-black mb-1 tracking-widest uppercase">Special Incentive // High Priority</p>
+                        <h4 class="text-lg md:text-xl font-black text-white uppercase font-stencil">
+                            Concorra a uma call gratuita de Mentoria Individual
+                        </h4>
+                        <p class="text-gray-400 font-mono text-[10px] md:text-xs mt-1">
+                            Acesso direto ao comando tático (Kauê Pugliesi & Slender). 
+                            <span class="text-red-500 font-bold">*EXCLUSIVO PARA QUEM FICAR ATÉ O FINAL DO WORKSHOP.</span>
+                        </p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i data-lucide="radio" class="text-red-600 animate-pulse w-8 h-8"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé da Seção -->
+        <div class="mt-12 text-center text-[10px] font-mono text-[#5D5348] uppercase tracking-[0.5em]">
+            Cargo Content Verified // Deploying Gear...
+        </div>
+    </div>
 </section>
 
 <!-- OFFER SECTION -->
