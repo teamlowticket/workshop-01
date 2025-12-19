@@ -1314,12 +1314,11 @@ O Workshop Receita Recorrente começa em:
 </section>
 
 <!-- ================================================================= -->
-<!-- SECTION: FAQ (PERGUNTAS FREQUENTES - VERSÃO FINAL CONSOLIDADA) -->
+<!-- SECTION: FAQ (CORRIGIDA - VISIBILIDADE DAS RESPOSTAS) -->
 <!-- ================================================================= -->
 <section id="faq" class="py-24 bg-[#0c0d0b] relative overflow-hidden border-t border-[#3E452F]/30">
     <div class="max-w-4xl mx-auto px-4 relative z-10">
         
-        <!-- Título da Seção -->
         <div class="text-center mb-16 fade-in-section">
             <h2 class="text-3xl md:text-5xl font-black text-white font-stencil tracking-wider uppercase">
                 Perguntas <span class="text-[#8C7A5B]">Frequentes</span>
@@ -1329,9 +1328,8 @@ O Workshop Receita Recorrente começa em:
             </p>
         </div>
 
-        <!-- Container onde o JS irá renderizar as perguntas -->
         <div id="faq-container" class="fade-in-section">
-            <!-- Renderizado via Script abaixo -->
+            <!-- Renderizado via Script -->
         </div>
     </div>
 </section>
@@ -1346,12 +1344,11 @@ O Workshop Receita Recorrente começa em:
     </p>
 </footer>
 
-<!-- SCRIPTS GERAIS DA PÁGINA -->
 <script>
-    // 1. Inicialização de Ícones
+    // Inicialização básica
     lucide.createIcons();
 
-    // 2. Lógica de Animação de Revelação (Scroll)
+    // Lógica de Scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -1361,49 +1358,31 @@ O Workshop Receita Recorrente começa em:
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-    // 3. Countdown Timer (Cor Corrigida para #8C7A5B)
+    // Countdown Timer (Corrigido para Dourado/Caqui)
     let time = 4 * 60 * 60 + 12 * 60 + 45; 
     const timerContainer = document.getElementById('countdown-timer');
 
     setInterval(() => {
         if (time > 0) time--; else time = 15165; 
-
-        const d = Math.floor(time / (3600 * 24));
         const h = Math.floor((time % (3600 * 24)) / 3600);
         const m = Math.floor((time % 3600) / 60);
         const s = time % 60;
-
-        const units = ['d', 'h', 'm', 's'];
-        const values = [d, h, m, s];
-
+        
         let html = '';
-        values.forEach((val, i) => {
+        [h, m, s].forEach((val, i) => {
+            const labels = ['h', 'm', 's'];
             html += `
                 <div class="flex flex-col items-center mx-1">
                     <div class="bg-[#1a1e16] text-[#8C7A5B] font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-2 border-[#24291B] rounded-sm shadow-inner">
                         ${String(val).padStart(2, '0')}
                     </div>
-                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${units[i]}</span>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${labels[i]}</span>
                 </div>`;
         });
         if(timerContainer) timerContainer.innerHTML = html;
     }, 1000);
 
-    // 4. Efeito Typewriter
-    const typeTarget = document.getElementById('typewriter-text');
-    const typeText = "// PROTOCOL: STEADYFLOW_V1";
-    let typeIndex = 0;
-
-    function typeWriter() {
-        if (typeTarget && typeIndex < typeText.length) {
-            typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
-            typeIndex++;
-            setTimeout(typeWriter, 50);
-        }
-    }
-    setTimeout(typeWriter, 500);
-
-    // 5. Dados e Lógica do FAQ (Copy Atualizada)
+    // FAQ Data
     const faqs = [
         { q: "1. O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo, justamente para manter o foco, a troca e a entrega no momento certo. Quem estiver presente aproveita ao máximo a experiência." },
         { q: "2. Por que o valor é de R$ 19,90?", a: "Esse valor é apenas simbólico. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aprender, acompanhar e aplicar o que será mostrado." },
@@ -1416,57 +1395,58 @@ O Workshop Receita Recorrente começa em:
 
     const faqContainer = document.getElementById('faq-container');
 
-    if (faqContainer) {
-        faqs.forEach((item, index) => {
-            const faqEl = document.createElement('div');
-            faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
-            faqEl.innerHTML = `
-                <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
-                    <div class="flex items-center gap-4 relative z-10">
-                        <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">></span>
-                        <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
-                    </div>
-                    <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
-                        <i data-lucide="plus" class="w-5 h-5 accordion-icon transition-transform duration-300"></i>
-                    </span>
-                </button>
-                <div class="accordion-content bg-[#0c0d0b] max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                    <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
-                        ${item.a}
-                    </div>
+    faqs.forEach((item) => {
+        const faqEl = document.createElement('div');
+        faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
+        faqEl.innerHTML = `
+            <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
+                <div class="flex items-center gap-4 relative z-10">
+                    <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">></span>
+                    <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
                 </div>
-            `;
+                <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
+                    <i data-lucide="plus" class="w-5 h-5 accordion-icon transition-transform duration-300"></i>
+                </span>
+            </button>
+            <div class="accordion-content bg-[#0c0d0b] overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
+                <div class="px-6 pb-6 pt-4 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
+                    ${item.a}
+                </div>
+            </div>
+        `;
 
-            const btn = faqEl.querySelector('.accordion-btn');
-            const content = faqEl.querySelector('.accordion-content');
-            const icon = faqEl.querySelector('.accordion-icon');
+        const btn = faqEl.querySelector('.accordion-btn');
+        const content = faqEl.querySelector('.accordion-content');
+        const icon = faqEl.querySelector('.accordion-icon');
 
-            btn.addEventListener('click', () => {
-                const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
 
-                document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
-                    if (otherBtn !== btn) {
-                        otherBtn.setAttribute('aria-expanded', 'false');
-                        otherBtn.nextElementSibling.style.maxHeight = null;
-                        otherBtn.querySelector('.accordion-icon').style.transform = 'rotate(0deg)';
-                    }
-                });
-
-                if (isExpanded) {
-                    btn.setAttribute('aria-expanded', 'false');
-                    content.style.maxHeight = null;
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    btn.setAttribute('aria-expanded', 'true');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    icon.style.transform = 'rotate(45deg)';
+            // Fecha outros
+            document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
+                if (otherBtn !== btn) {
+                    otherBtn.setAttribute('aria-expanded', 'false');
+                    const otherContent = otherBtn.nextElementSibling;
+                    otherContent.style.maxHeight = "0";
+                    otherContent.style.opacity = "0";
+                    otherBtn.querySelector('.accordion-icon').style.transform = 'rotate(0deg)';
                 }
             });
 
-            faqContainer.appendChild(faqEl);
+            // Toggle atual
+            if (isExpanded) {
+                btn.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = "0";
+                content.style.opacity = "0";
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = "1";
+                icon.style.transform = 'rotate(45deg)';
+            }
         });
-        lucide.createIcons();
-    }
+        faqContainer.appendChild(faqEl);
+    });
+    lucide.createIcons();
 </script>
-</body>
-</html>
