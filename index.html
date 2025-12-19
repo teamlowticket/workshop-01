@@ -24,18 +24,18 @@
                 extend: {
                     colors: {
                         brand: {
-                            lime: '#CCFF00',      
-                            olive: '#4B5320',     
-                            deepOlive: '#24291B', 
-                            earth: '#5D5348',     
-                            sand: '#8C8674',      
-                            gunmetal: '#1C1C1C',
-                            gold: '#F4C430'
+                            gold: '#8C7A5B',      // Replaced Gold with Military Brown/Khaki
+                            olive: '#4B5320',     // Classic Army Green
+                            lightOlive: '#6B7A48', // Highlighting Olive
+                            deepOlive: '#1a1e16', // Darker Background
+                            earth: '#3D3222',     // Dark Military Brown
+                            sand: '#C2B280',      // Desert Sand (Secondary Text)
+                            gunmetal: '#2B2E25',  // Equipment Grey
                         },
                         dark: {
-                            base: '#0F120D',      
-                            surface: '#1A1F16',   
-                            border: '#3E452F',    
+                            base: '#0F120D',      // Very Dark Olive/Black Base
+                            surface: '#161914',   // Surface
+                            border: '#3E452F',    // Olive Border
                         }
                     },
                     fontFamily: {
@@ -46,8 +46,6 @@
                     },
                     animation: {
                         'scan': 'scan 4s linear infinite',
-                        'radar': 'radar 4s linear infinite',
-                        'blink': 'blink 1s steps(2) infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'float-delayed': 'float 6s ease-in-out 3s infinite',
@@ -56,21 +54,13 @@
                     keyframes: {
                         scan: {
                             '0%': { top: '0%', opacity: 0 },
-                            '10%': { opacity: 0.5 },
-                            '90%': { opacity: 0.5 },
+                            '10%': { opacity: 0.3 },
+                            '90%': { opacity: 0.3 },
                             '100%': { top: '100%', opacity: 0 },
-                        },
-                        radar: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
-                        },
-                        blink: {
-                            '0%': { opacity: '1' },
-                            '100%': { opacity: '0.3' },
                         },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -88,9 +78,9 @@
         /* UTILITIES */
         .clip-angled {
             clip-path: polygon(
-                20px 0, 100% 0, 
-                100% calc(100% - 20px), calc(100% - 20px) 100%, 
-                0 100%, 0 20px
+                10px 0, 100% 0, 
+                100% calc(100% - 10px), calc(100% - 10px) 100%, 
+                0 100%, 0 10px
             );
         }
 
@@ -124,7 +114,7 @@
             transition: transform 0.3s ease;
         }
         .accordion-btn[aria-expanded="true"] .accordion-icon {
-            transform: rotate(45deg); /* Turns Plus to X or similar */
+            transform: rotate(45deg); 
         }
         .accordion-arrow {
             transition: transform 0.3s ease;
@@ -142,31 +132,31 @@
             background: #0F120D; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #3E452F; 
-            border-radius: 4px;
+            background: #4B5320; 
+            border-radius: 0px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #F4C430; 
+            background: #6B7A48; 
         }
     </style>
 </head>
-<body class="antialiased font-sans selection:bg-brand-gold selection:text-black bg-dark-base relative">
+<body class="antialiased font-sans selection:bg-brand-olive selection:text-white bg-dark-base relative">
 
     <!-- BACKGROUND LAYERS -->
-    <div class="fixed inset-0 pointer-events-none z-0 opacity-[0.05]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-[0.07]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
     <div class="fixed inset-0 pointer-events-none z-0 bg-gradient-to-b from-[#0F120D] via-[#161912] to-[#0a0b08]"></div>
 
     <!-- TOP HUD NAV -->
-    <nav class="relative w-full z-[60] border-b border-[#3e452f] bg-[#0F120D]/95 backdrop-blur-md h-12 flex items-center shadow-lg">
+    <nav class="relative w-full z-[60] border-b border-[#3e452f] bg-[#0F120D]/95 backdrop-blur-md h-12 flex items-center shadow-md">
         <div class="max-w-7xl mx-auto w-full px-4 flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest">
-            <div class="flex items-center gap-2 text-[#F4C430]">
-                <i data-lucide="activity" class="w-3.5 h-3.5 animate-pulse"></i>
-                <span>SYSTEM: ONLINE</span>
+            <div class="flex items-center gap-2 text-[#8C7A5B]">
+                <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                <span>SECURE CHANNEL</span>
             </div>
-            <div class="flex gap-4 text-[#8C8674]">
-                <span class="hidden md:inline">OP: 23.12.24</span>
+            <div class="flex gap-4 text-[#6B7A48]">
+                <span class="hidden md:inline">OP: 23.12.25</span>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="wifi" class="w-3 h-3"></i>
+                    <i data-lucide="signal" class="w-3 h-3"></i>
                     <i data-lucide="battery" class="w-3 h-3"></i>
                 </div>
             </div>
@@ -174,16 +164,16 @@
     </nav>
 
     <!-- ALERT BANNER -->
-    <div class="w-full bg-[#F4C430] relative overflow-hidden border-b-2 border-black z-50">
+    <div class="w-full bg-[#3D3222] relative overflow-hidden border-b-4 border-black z-50">
         <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center text-center relative z-10">
-            <p class="text-[10px] md:text-xs font-bold tracking-wide text-black flex flex-col md:flex-row items-center gap-2 uppercase">
-                <span class="flex items-center gap-1 bg-black text-[#F4C430] px-2 py-0.5 rounded-sm">
+            <p class="text-[10px] md:text-xs font-bold tracking-wide text-[#C2B280] flex flex-col md:flex-row items-center gap-2 uppercase font-mono">
+                <span class="flex items-center gap-1 bg-black text-[#8C7A5B] px-2 py-0.5 rounded-sm">
                     <i data-lucide="alert-triangle" class="w-3 h-3 fill-current"></i>
                     Atenção
                 </span>
                 <span>
-                    A call exclusiva para infoprodutores, empresários digitais ou profissionais especialistas começa em:
+                    O Workshop Receita Recorrente começa em:
                 </span>
             </p>
         </div>
@@ -196,26 +186,26 @@
             <!-- TIMER -->
             <div class="fade-in-section mb-12 relative">
                 <!-- Floating Icons -->
-                <div class="absolute -left-24 top-1/2 hidden md:flex opacity-60 text-[#8C8674] items-center gap-2 animate-float">
+                <div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float">
                     <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
-                    <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1">DATA_ANALYSIS</span>
+                    <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
                 </div>
-                <div class="absolute -right-24 -top-8 hidden md:flex opacity-60 text-[#8C8674] flex-col items-center animate-float-delayed">
-                    <i data-lucide="signal" class="w-8 h-8"></i>
-                    <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1">UPLINK</span>
+                <div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed">
+                    <i data-lucide="satellite" class="w-8 h-8"></i>
+                    <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
                 </div>
 
-                <div class="inline-block mb-3 text-[10px] font-mono text-[#F4C430] tracking-[0.3em] uppercase bg-[#1a1c16] border border-[#F4C430]/50 px-3 py-1 shadow-md">
+                <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
                     Mission Countdown
                 </div>
                 
                 <!-- JS Timer Rendered Here -->
-                <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#2b2e25] border-4 border-[#1a1c16] p-2 rounded shadow-2xl relative">
+                <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative">
                     <!-- Screws -->
-                    <div class="absolute top-1 left-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
-                    <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
-                    <div class="absolute bottom-1 left-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
-                    <div class="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-[#1a1c16] opacity-50"></div>
+                    <div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                    <div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                    <div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+                    <div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
                     
                     <!-- Digits inserted by JS -->
                 </div>
@@ -223,20 +213,21 @@
 
             <!-- HEADLINE -->
             <div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
-                <div class="inline-flex items-center gap-2 text-[#8C8674] font-mono text-xs bg-[#1a1c16] px-4 py-1 border-l-2 border-[#F4C430]">
+                <div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
                     <i data-lucide="terminal" class="w-3 h-3"></i>
                     <span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
                 </div>
                 
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none text-[#e2e2d5] drop-shadow-2xl font-stencil">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
                     Domine o Jogo do <br />
-                    <span class="text-[#F4C430] text-shadow-sm">
-                        Steadyflow
+                    <span class="text-[#8C7A5B] text-shadow-sm">
+                        "CashFlow Recorrente"
                     </span>
                 </h1>
                 
-                <p class="text-lg md:text-xl text-[#b0b0a0] font-sans max-w-2xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0">
-                    O sistema que me fez faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm">+R$5K por dia</span> em recorrência automática com SaaS, sem gastar 1 centavo em tráfego.
+                <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
+                    O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
+                    <span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
                 </p>
             </div>
 
@@ -244,9 +235,9 @@
             <div class="fade-in-section w-full max-w-4xl relative group">
                 <!-- Floating Badge -->
                 <div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
-                    <div class="bg-[#1a1c16] border-2 border-[#F4C430] p-4 shadow-xl transform rotate-3">
-                        <div class="border border-[#F4C430] border-dashed p-1">
-                            <p class="text-[10px] font-black text-[#F4C430] uppercase tracking-widest text-center leading-tight">
+                    <div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
+                        <div class="border border-[#8C7A5B] border-dashed p-1">
+                            <p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
                                 TOP SECRET<br/>ACCESS
                             </p>
                         </div>
@@ -255,113 +246,172 @@
                     </div>
                 </div>
 
-                <div class="relative aspect-video bg-black border-4 border-[#2b2e25] shadow-2xl">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-[#2b2e25] flex justify-center gap-1">
+                <div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
                          <!-- Top Bar Decoration -->
                          <script>
-                            for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-black/30"></div>`)
+                            for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
                          </script>
                     </div>
 
-                    <div class="absolute inset-0 flex items-center justify-center bg-[#0c0e0b]">
+                    <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
                         <div class="text-center w-full h-full flex flex-col items-center justify-center relative">
-                            <div class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#1a1c16_10px,#1a1c16_20px)]"></div>
+                            <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
                             
-                            <span class="text-[#8C8674] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1">[ CLASSIFIED INTEL FOOTAGE ]</span>
+                            <span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
                             
-                            <button class="w-20 h-20 flex items-center justify-center border-4 border-[#F4C430] bg-[#F4C430]/10 text-[#F4C430] rounded-full hover:bg-[#F4C430] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(244,196,48,0.2)] group-hover:scale-105 duration-300">
+                            <button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
                                 <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
                             </button>
                         </div>
                     </div>
                     
-                    <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/60 px-2 py-1 rounded-sm">
+                    <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
                         <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
                         <span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
                     </div>
                 </div>
             </div>
 
-            <!-- INTEL TEXT -->
+            <!-- INTEL TEXT (Restored) -->
             <div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
-                <div class="border-l-4 border-[#8C8674] pl-6 text-left md:text-center md:border-none md:pl-0">
-                    <p class="text-[#b0b0a0] text-base md:text-lg leading-relaxed font-mono">
-                        // REPORT: Zero conversinha de guru. Nada de PLR, dropshipping, afiliado, X1, lançamento, nutra, gestor de tráfego ou low ticket.
+                <div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
+                    <p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
+                        // REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket"tradicional"...
                         <br class="hidden md:block">
-                        <span class="text-[#F4C430] font-bold bg-[#F4C430]/10 px-1 border-b border-[#F4C430]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
+                        <span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
                     </p>
                 </div>
                 
-                <div class="w-full max-w-3xl mx-auto bg-[#1a1c16] px-6 py-6 border-y-2 border-[#2b2e25] relative mt-6 shadow-inner">
+                <div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
                     <p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
                         Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
                     </p>
                 </div>
             </div>
 
-            <!-- CTA & DOSSIER -->
+            <!-- CTA SECTION & DOSSIER -->
             <div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
                 
                 <!-- Floating Icons -->
-                <div class="absolute -top-10 left-0 pointer-events-none opacity-60 hidden md:block animate-float">
-                    <div class="w-14 h-14 border-2 border-[#F4C430] rounded-full flex items-center justify-center bg-[#1a1c16] shadow-lg">
-                        <i data-lucide="dollar-sign" class="text-[#F4C430] w-6 h-6"></i>
+                <div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
+                    <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+                        <i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
                     </div>
                 </div>
-                <div class="absolute -top-5 right-0 pointer-events-none opacity-60 hidden md:block animate-float-delayed">
-                    <div class="w-14 h-14 border-2 border-[#F4C430] rounded-full flex items-center justify-center bg-[#1a1c16] shadow-lg">
-                        <i data-lucide="target" class="text-[#F4C430] w-6 h-6"></i>
+                <div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
+                    <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+                        <i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
                     </div>
                 </div>
 
-                <!-- MAIN BUTTON -->
-                <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#F4C430] border-b-8 border-[#b8860b] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
+                <!-- MAIN BUTTON (Restored) -->
+                <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
-                    <span class="relative z-10 flex items-center gap-3 font-stencil text-black text-xl md:text-2xl uppercase tracking-wide font-black">
-                        DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-black rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
+                    <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
+                        DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
                     </span>
                 </a>
                 
-                <!-- DOSSIER LIST (Static - Removed FadeIn for Reliability) -->
-                <div class="w-full mt-10 relative bg-[#161814] border border-[#3e452f] rounded-sm overflow-hidden shadow-2xl relative z-10">
-                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                <!-- DOSSIER LIST (Cardboard File Style) -->
+                <div class="w-full mt-16 relative z-10 max-w-3xl mx-auto">
                     
-                    <div class="relative z-10 bg-[#2b2e25] border-b border-[#3e452f] p-4 flex justify-between items-center shadow-md">
-                        <span class="text-xs font-bold font-mono text-[#F4C430] uppercase tracking-widest flex items-center gap-2">
-                            <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
+                    <!-- File Tab -->
+                    <div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
+                        <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
+                            <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
                         </span>
-                        <div class="flex gap-1">
-                            <div class="w-2 h-2 bg-[#F4C430] rounded-full"></div>
-                            <div class="w-2 h-2 bg-[#5D5348] rounded-full"></div>
-                            <div class="w-2 h-2 bg-[#5D5348] rounded-full"></div>
-                        </div>
                     </div>
 
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 p-0">
-                        <!-- List Items Generator -->
-                        <script>
-                            const items = [
-                                "Acesso Imediato ao Grupo Vip", "Receber em Dólar", "Foco na Execução Prática",
-                                "Acesso aos mentores", "Plantão de Dúvidas", "100% ao vivo 23/12"
-                            ];
-                            items.forEach(item => {
-                                document.write(`
-                                    <div class="flex items-center gap-4 group border-b border-[#2b2e25] last:border-0 md:nth-last-child-2:border-0 p-6 hover:bg-[#1f221c] transition-colors">
-                                        <div class="w-5 h-5 bg-[#F4C430] flex items-center justify-center shrink-0 rounded-sm shadow-sm group-hover:scale-110 transition-transform">
-                                            <i data-lucide="check-square" class="w-3 h-3 text-black" stroke-width="3"></i>
-                                        </div>
-                                        <span class="text-gray-300 text-sm font-bold font-sans uppercase tracking-wide group-hover:text-white transition-colors">${item}</span>
-                                    </div>
-                                `);
-                            });
-                        </script>
+                    <!-- Main File Container -->
+                    <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
+                        <!-- Paper Texture -->
+                        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
+                        
+                        <!-- Header -->
+                        <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
+                            <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
+                                <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
+                            </span>
+                            <div class="flex gap-1.5">
+                                <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+                                <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+                                <div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Content Grid -->
+                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
+                            
+                            <!-- Item 1 -->
+                            <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                                <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                                </div>
+                                <span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+                                    Acesso Imediato a nosso Grupo Vip
+                                </span>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                                <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                                </div>
+                                <span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+                                    Aprenda a criar uma recorrência em dólar
+                                </span>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                                <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                                </div>
+                                <span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+                                    Workshop Prático, com foco em Executar
+                                </span>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+                                <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+                                </div>
+                                <span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+                                    Acesso Diretamente aos mentores para tirar dúvidas
+                                </span>
+                            </div>
+
+                            <!-- Item 5 (Full Width) -->
+                            <div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
+                                <i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
+                                <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
+                                    100% ao vivo, na terça-feira, às 20h
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Attached Photo (Floating Element) -->
+                        <div class="hidden md:flex absolute -right-4 -top-6 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform rotate-3 flex-col items-center justify-center text-center p-2 z-30">
+                             <!-- Paperclip Visual -->
+                             <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
+                             <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
+
+                             <div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
+                                <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
+                                    <span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
+                                        [IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
+                                    </span>
+                                </div>
+                             </div>
+                             <!-- Photo Tape -->
+                             <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
+                        </div>
+
                     </div>
-                </div>
-                
-                <!-- Side Floating Element -->
-                <div class="hidden lg:flex absolute top-1/2 -right-16 w-32 h-32 z-0 transform rotate-6 border-2 border-[#F4C430]/50 bg-[#0c0e0b]/90 backdrop-blur-sm text-[10px] text-[#F4C430] font-mono text-center items-center justify-center shadow-xl animate-float-delayed">
-                    <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#F4C430] text-black px-2 text-[8px] font-bold">STATUS REPORT</div>
-                    [IMAGEM FLUTUANTE AQUI:<br/>GRÁFICO DE SUCESSO]
                 </div>
             </div>
 
@@ -370,7 +420,7 @@
 
     <!-- CLASSIFIED INTEL SECTION -->
     <section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#1a1c16_20px,#1a1c16_40px)]"></div>
+        <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#141612_20px,#141612_40px)]"></div>
         
         <div class="max-w-5xl mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
@@ -380,34 +430,34 @@
                     </div>
                     
                     <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-wider">
-                        Operação <span class="text-[#F4C430] underline decoration-[#4B5320] decoration-4 underline-offset-4">Declassified</span>
+                        Operação <span class="text-[#8C7A5B] underline decoration-[#4B5320] decoration-4 underline-offset-4">Declassified</span>
                     </h2>
                     
                     <div class="space-y-4 font-mono text-sm md:text-base text-gray-400">
                         <p>
                             // REPORT: Zero conversinha de guru. Nada de <span class="bg-black text-white px-1">██████</span>, dropshipping, afiliado, X1, lançamento.
                         </p>
-                        <div class="bg-[#1a1c16] border-l-4 border-amber-600 p-6 shadow-md">
+                        <div class="bg-[#141612] border-l-4 border-amber-600 p-6 shadow-md border border-[#3E452F]">
                             <p class="text-gray-300">
                                 <span class="text-amber-500 font-bold">WARNING:</span> CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.
                             </p>
                         </div>
                         <p>
-                            Estamos falando de multiplicar até <strong class="text-[#F4C430] border-b border-[#F4C430]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! Este é o jogo... Onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO.
+                            Estamos falando de multiplicar até <strong class="text-[#8C7A5B] border-b border-[#8C7A5B]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! Este é o jogo... Onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO.
                         </p>
                     </div>
                 </div>
 
                 <!-- TACTICAL DEVICE (PHONE) -->
                 <div class="fade-in-section w-full md:w-1/2 flex justify-center">
-                    <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#2b2e25] rounded-[2rem] border-[8px] border-[#151712] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
+                    <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
                         <!-- Physical Buttons -->
-                        <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#151712] rounded-r-md"></div>
-                        <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#151712] rounded-l-md"></div>
-                        <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#151712] rounded-l-md"></div>
+                        <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
+                        <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
+                        <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
 
-                        <div class="flex-1 bg-[#0f110d] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
-                            <div class="h-8 bg-[#1a1c16] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
+                        <div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
+                            <div class="h-8 bg-[#141612] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
                                 <span>SAT_LINK_ACTIVE</span>
                                 <div class="flex gap-2">
                                     <i data-lucide="signal" class="w-2.5 h-2.5 text-white"></i>
@@ -415,7 +465,7 @@
                                 </div>
                             </div>
                             <!-- Screen Content -->
-                            <div class="flex-1 relative flex flex-col bg-[#0a0a0a]">
+                            <div class="flex-1 relative flex flex-col bg-[#0c0d0b]">
                                 <div class="p-6 pb-2">
                                     <div class="flex justify-between items-center mb-4">
                                         <div class="flex items-center gap-2">
@@ -425,7 +475,7 @@
                                                 <div class="text-xs font-bold text-white">Operator</div>
                                             </div>
                                         </div>
-                                        <i data-lucide="award" class="w-4 h-4 text-[#F4C430]"></i>
+                                        <i data-lucide="award" class="w-4 h-4 text-[#8C7A5B]"></i>
                                     </div>
                                     <div class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
                                     <div class="flex items-baseline gap-1">
@@ -433,7 +483,7 @@
                                         <span class="text-4xl font-bold text-white tracking-tighter">12,450</span>
                                         <span class="text-2xl font-bold text-gray-500">.00</span>
                                     </div>
-                                    <div class="flex items-center gap-1 mt-1 text-[#CCFF00] text-xs font-medium">
+                                    <div class="flex items-center gap-1 mt-1 text-[#8C7A5B] text-xs font-medium">
                                         <i data-lucide="trending-up" class="w-3 h-3"></i>
                                         <span>+12.5% today</span>
                                     </div>
@@ -441,21 +491,21 @@
 
                                 <!-- Fake Chart -->
                                 <div class="h-24 w-full relative px-2">
-                                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#CCFF00]/10 to-transparent"></div>
-                                    <svg class="w-full h-full text-[#CCFF00] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#8C7A5B]/10 to-transparent"></div>
+                                    <svg class="w-full h-full text-[#8C7A5B] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
                                         <path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" strokeWidth="2" />
                                         <circle cx="100" cy="5" r="3" fill="currentColor" class="animate-pulse" />
                                     </svg>
                                 </div>
 
                                 <!-- List -->
-                                <div class="flex-1 bg-[#151515] mt-4 rounded-t-3xl p-6 space-y-3">
+                                <div class="flex-1 bg-[#141612] mt-4 rounded-t-3xl p-6 space-y-3">
                                     <script>
                                         for(let i=1; i<=3; i++) {
                                             document.write(`
                                                 <div class="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
                                                     <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 rounded-full bg-[#CCFF00]/10 flex items-center justify-center text-[#CCFF00]">
+                                                        <div class="w-8 h-8 rounded-full bg-[#8C7A5B]/10 flex items-center justify-center text-[#8C7A5B]">
                                                             <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
                                                         </div>
                                                         <div>
@@ -486,7 +536,7 @@
     <section class="py-24 px-4 relative">
         <div class="max-w-5xl mx-auto">
             <div class="fade-in-section flex items-center gap-4 mb-16 border-b border-[#3E452F] pb-4">
-                <i data-lucide="users" class="text-[#F4C430] w-6 h-6"></i>
+                <i data-lucide="users" class="text-[#8C7A5B] w-6 h-6"></i>
                 <h2 class="text-2xl font-bold uppercase tracking-wide font-stencil">Unit Commanders</h2>
             </div>
 
@@ -494,8 +544,8 @@
                 <!-- Commander 1 -->
                 <div class="fade-in-section relative group h-full">
                     <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                    <div class="relative bg-[#1a1c16] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                        <div class="absolute -top-3 left-4 bg-[#F4C430] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
+                    <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
+                        <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
                             CONFIDENTIAL
                         </div>
                         <div class="p-6 flex flex-col items-center flex-grow pt-8">
@@ -511,7 +561,7 @@
                                     <span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">STRATEGIST</span>
                                 </div>
                                 <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Kauê Pugliesi</h3>
-                                <div class="inline-block bg-[#2b2e25] px-3 py-1 text-[10px] font-mono text-[#F4C430] border border-[#3e452f] mb-4 uppercase">
+                                <div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
                                     EX-CAPITÃO
                                 </div>
                                 <p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
@@ -519,7 +569,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#131511]">
+                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
                             <div class="p-2 text-center border-r border-[#3e452f]">
                                 <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
                                 <span class="text-xs font-bold text-white">CLASS A</span>
@@ -535,8 +585,8 @@
                 <!-- Commander 2 -->
                 <div class="fade-in-section relative group h-full">
                     <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                    <div class="relative bg-[#1a1c16] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                        <div class="absolute -top-3 left-4 bg-[#F4C430] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
+                    <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
+                        <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
                             CONFIDENTIAL
                         </div>
                         <div class="p-6 flex flex-col items-center flex-grow pt-8">
@@ -552,7 +602,7 @@
                                     <span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">OPERATIVE</span>
                                 </div>
                                 <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Slender</h3>
-                                <div class="inline-block bg-[#2b2e25] px-3 py-1 text-[10px] font-mono text-[#F4C430] border border-[#3e452f] mb-4 uppercase">
+                                <div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
                                     TOP AFFILIATE
                                 </div>
                                 <p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
@@ -560,7 +610,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#131511]">
+                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
                             <div class="p-2 text-center border-r border-[#3e452f]">
                                 <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
                                 <span class="text-xs font-bold text-white">CLASS A</span>
@@ -577,28 +627,27 @@
     </section>
 
     <!-- MISSION OBJECTIVES -->
-    <section class="py-20 bg-[#0F120D] border-t border-[#3E452F]/30 relative z-10">
+    <section class="py-20 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10">
         <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-[#F4C430] font-mono text-xs tracking-[0.2em] uppercase bg-[#1a1c16] px-2 py-1">[ Mission Briefing ]</span>
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-[#8C7A5B] font-mono text-xs tracking-[0.2em] uppercase bg-[#141612] px-2 py-1">[ Mission Briefing ]</span>
                 <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-stencil">O QUE VOCÊ VAI VER NA PRÁTICA</h2>
             </div>
 
-            <!-- Removed FadeIn, using static grid for reliability -->
             <div class="grid md:grid-cols-1 gap-4 font-mono text-sm">
                 <script>
                     const objectives = [
                         { st: 'LOCKED', cl: 'text-red-500', txt: "Por que insistir em modelos black é um erro fatal." },
-                        { st: 'CLEARED', cl: 'text-[#F4C430]', txt: "O bloco invisível de recorrência automática." },
-                        { st: 'CLEARED', cl: 'text-[#F4C430]', txt: "Ajuste de comunicação para retenção máxima." },
+                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência automática." },
+                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Ajuste de comunicação para retenção máxima." },
                         { st: 'LOCKED', cl: 'text-amber-500', txt: "O erro silencioso que mata SaaS low ticket em 90 dias." },
-                        { st: 'CLEARED', cl: 'text-[#F4C430]', txt: "Estruturação de planos para upgrade voluntário." },
-                        { st: 'CLEARED', cl: 'text-[#F4C430]', txt: "Escala global em Dólar." }
+                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Estruturação de planos para upgrade voluntário." },
+                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Escala global em Dólar." }
                     ];
                     
                     objectives.forEach(obj => {
                         document.write(`
-                            <div class="flex items-center gap-4 bg-[#1a1c16] border-l-4 border-[#3e452f] p-4 hover:border-[#F4C430] hover:bg-[#1f221c] transition-all shadow-sm">
+                            <div class="flex items-center gap-4 bg-[#141612] border-l-4 border-[#3e452f] p-4 hover:border-[#8C7A5B] hover:bg-[#1a1e16] transition-all shadow-sm">
                                 <span class="${obj.cl} font-bold min-w-[80px]">[${obj.st}]</span>
                                 <p class="text-gray-300">${obj.txt}</p>
                             </div>
@@ -613,33 +662,33 @@
     <section class="py-24 px-4 relative">
         <div class="max-w-6xl mx-auto relative z-10">
             <h2 class="text-center text-3xl font-bold mb-16 uppercase flex items-center justify-center gap-3 font-stencil">
-                <i data-lucide="package" class="w-8 h-8 text-[#F4C430]"></i>
+                <i data-lucide="package" class="w-8 h-8 text-[#8C7A5B]"></i>
                 Supply Drop (Bônus)
             </h2>
 
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Bonus 1 -->
-                <div class="fade-in-section relative group bg-[#161a14] border-2 border-[#3e452f] p-8 text-center hover:border-[#F4C430] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#2b2e25] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 01</div>
-                    <div class="w-16 h-16 mx-auto bg-[#2b2e25] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#F4C430] group-hover:text-black transition-colors rounded-sm">
+                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 01</div>
+                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
                         <i data-lucide="file-text" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold text-white mb-2 uppercase">Playbook Recorrência</h3>
                     <p class="text-gray-400 font-mono text-xs">Guia tático completo passo-a-passo.</p>
                 </div>
                 <!-- Bonus 2 -->
-                <div class="fade-in-section relative group bg-[#161a14] border-2 border-[#3e452f] p-8 text-center hover:border-[#F4C430] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#2b2e25] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 02</div>
-                    <div class="w-16 h-16 mx-auto bg-[#2b2e25] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#F4C430] group-hover:text-black transition-colors rounded-sm">
+                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 02</div>
+                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
                         <i data-lucide="package" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold text-white mb-2 uppercase">Templates de Funis</h3>
                     <p class="text-gray-400 font-mono text-xs">Arquivos prontos para deploy.</p>
                 </div>
                 <!-- Bonus 3 -->
-                <div class="fade-in-section relative group bg-[#161a14] border-2 border-[#3e452f] p-8 text-center hover:border-[#F4C430] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#2b2e25] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 03</div>
-                    <div class="w-16 h-16 mx-auto bg-[#2b2e25] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#F4C430] group-hover:text-black transition-colors rounded-sm">
+                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 03</div>
+                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
                         <i data-lucide="users" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold text-white mb-2 uppercase">Sorteio Mentoria</h3>
@@ -650,33 +699,33 @@
     </section>
 
     <!-- OFFER SECTION -->
-    <section id="offer" class="py-24 relative overflow-hidden bg-[#0c0e0b]">
+    <section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
         <div class="fade-in-section max-w-xl mx-auto px-4 relative z-10">
-            <div class="relative bg-[#161a14] border-4 border-[#4B5320] p-1 shadow-2xl">
-                <div class="bg-[#0F120D] p-8 md:p-12 text-center relative overflow-hidden">
-                    <div class="absolute top-6 right-6 border-2 border-[#F4C430] text-[#F4C430] px-2 py-1 font-stencil text-xs -rotate-12 opacity-80">
+            <div class="relative bg-[#141612] border-4 border-[#4B5320] p-1 shadow-2xl">
+                <div class="bg-[#0c0d0b] p-8 md:p-12 text-center relative overflow-hidden">
+                    <div class="absolute top-6 right-6 border-2 border-[#8C7A5B] text-[#8C7A5B] px-2 py-1 font-stencil text-xs -rotate-12 opacity-80">
                         DISCOUNT AUTHORIZED
                     </div>
 
-                    <div class="mb-8 w-24 h-24 mx-auto bg-[#1a1c16] border-2 border-[#4B5320] flex items-center justify-center relative">
+                    <div class="mb-8 w-24 h-24 mx-auto bg-[#1a1e16] border-2 border-[#4B5320] flex items-center justify-center relative">
                         <span class="text-[10px] text-gray-500 text-center px-2 uppercase font-mono">[ PRODUCT IMG ]</span>
                     </div>
 
                     <h2 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase font-stencil">Workshop Receita Recorrente</h2>
-                    <div class="inline-block bg-[#F4C430]/10 px-3 py-1 mb-8 border border-[#F4C430]/30">
-                        <p class="text-[#F4C430] font-mono text-[10px] tracking-[0.2em]">ACCESS KEY: STEADYFLOW</p>
+                    <div class="inline-block bg-[#8C7A5B]/10 px-3 py-1 mb-8 border border-[#8C7A5B]/30">
+                        <p class="text-[#8C7A5B] font-mono text-[10px] tracking-[0.2em]">ACCESS KEY: STEADYFLOW</p>
                     </div>
 
-                    <div class="flex flex-col items-center justify-center gap-1 mb-10 p-6 border-y-2 border-[#2b2e25] bg-[#121410]">
+                    <div class="flex flex-col items-center justify-center gap-1 mb-10 p-6 border-y-2 border-[#24291B] bg-[#121410]">
                         <span class="text-gray-500 text-sm line-through font-mono decoration-red-500">VALOR: R$ 1000,00</span>
                         <div class="flex items-baseline justify-center gap-2">
                             <span class="text-xl text-white font-medium uppercase">Por apenas</span>
-                            <span class="text-6xl font-sans font-black text-[#F4C430] tracking-tighter drop-shadow-sm">R$9,90</span>
+                            <span class="text-6xl font-sans font-black text-[#8C7A5B] tracking-tighter drop-shadow-sm">R$9,90</span>
                         </div>
                         <p class="text-gray-500 text-[10px] mt-2 font-mono uppercase">// (menos de 33 centavos por dia)</p>
                     </div>
 
-                    <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#F4C430] hover:bg-[#d4a017] text-black font-stencil text-xl md:text-2xl uppercase tracking-widest mb-8 transition-colors border-b-4 border-[#8B6508] active:border-b-0 active:translate-y-1">
+                    <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] hover:bg-[#6B7A48] text-white font-stencil text-xl md:text-2xl uppercase tracking-widest mb-8 transition-colors border-b-4 border-[#24291B] active:border-b-0 active:translate-y-1">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="unlock" class="w-6 h-6"></i> 
                             Ready to Deploy 
@@ -685,7 +734,7 @@
                     </a>
 
                     <div class="flex items-center justify-center gap-4 opacity-60">
-                        <i data-lucide="shield-alert" class="w-5 h-5 text-[#F4C430]"></i>
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-[#8C7A5B]"></i>
                         <div class="text-left">
                             <p class="text-white font-bold text-xs uppercase">GARANTIA DE 30 DIAS</p>
                             <p class="text-[10px] text-gray-500 font-mono">RISK FREE OPERATION</p>
@@ -697,10 +746,10 @@
     </section>
 
     <!-- FAQ SECTION -->
-    <section class="py-20 bg-[#0F120D] border-t border-[#3e452f] relative z-10">
+    <section class="py-20 bg-[#0c0d0b] border-t border-[#3e452f] relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-center text-3xl font-bold text-white mb-12 uppercase font-stencil">
-                <span class="text-[#F4C430]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
+                <span class="text-[#8C7A5B]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
             </h2>
             
             <div id="faq-container">
@@ -711,7 +760,7 @@
 
     <!-- FOOTER -->
     <footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
-        <div class="flex items-center justify-center gap-2 text-[#F4C430] opacity-50 mb-4">
+        <div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
             <i data-lucide="target" class="w-6 h-6"></i>
         </div>
         <p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
@@ -790,19 +839,19 @@
         
         faqs.forEach((item, index) => {
             const faqEl = document.createElement('div');
-            faqEl.className = 'group bg-[#161a14] border border-[#2b2e25] mb-4 overflow-hidden relative z-10';
+            faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
             faqEl.innerHTML = `
-                <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1f221c] transition-colors select-none relative z-20" aria-expanded="false">
+                <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
                     <div class="flex items-center gap-4 relative z-10">
-                        <span class="accordion-arrow text-[#F4C430] font-bold text-lg">&gt;</span>
+                        <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">&gt;</span>
                         <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
                     </div>
-                    <span class="text-[#F4C430] text-xl shrink-0 ml-4 relative z-10">
+                    <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
                         <i data-lucide="plus" class="w-5 h-5 accordion-icon"></i>
                     </span>
                 </button>
-                <div class="accordion-content bg-[#0c0e0b]">
-                    <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#2b2e25]">
+                <div class="accordion-content bg-[#0c0d0b]">
+                    <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
                         ${item.a}
                     </div>
                 </div>
