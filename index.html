@@ -73,10 +73,9 @@
     <style>
         body { background-color: #0F120D; color: #d4d4d4; overflow-x: hidden; }
         
-        /* Tactical HUD Overlays */
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.02));
             background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 100;
         }
 
@@ -100,11 +99,9 @@
 </head>
 <body class="antialiased font-sans selection:bg-brand-gold selection:text-black bg-dark-base relative">
 
-    <!-- HUD OVERLAY -->
     <div class="scanlines"></div>
     <div class="fixed inset-0 pointer-events-none z-[90] opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
 
-    <!-- TOP NAV -->
     <nav class="fixed top-0 w-full z-[100] border-b border-brand-olive/30 bg-dark-base/90 backdrop-blur-md h-12 flex items-center">
         <div class="max-w-7xl mx-auto w-full px-6 flex justify-between items-center text-[10px] font-mono tracking-[0.2em]">
             <div class="flex items-center gap-3 text-brand-gold">
@@ -118,7 +115,6 @@
         </div>
     </nav>
 
-    <!-- ALERT BANNER -->
     <div class="w-full bg-brand-earth mt-12 relative overflow-hidden border-b-2 border-black z-50">
         <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center relative z-10">
@@ -131,11 +127,9 @@
         </div>
     </div>
 
-    <!-- HERO SECTION -->
     <section class="relative pt-20 pb-24 px-4 z-10">
         <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
             
-            <!-- TIMER -->
             <div class="fade-in-section mb-16 relative">
                 <div class="absolute -left-32 top-1/2 hidden lg:flex opacity-20 text-brand-gold items-center gap-3 animate-float">
                     <i data-lucide="activity" class="w-10 h-10"></i>
@@ -151,7 +145,6 @@
                 </div>
             </div>
 
-            <!-- HEADLINE -->
             <div class="fade-in-section mb-16 max-w-5xl space-y-8">
                 <div class="inline-flex items-center gap-3 text-brand-sand font-mono text-xs bg-black/50 px-5 py-2 border-l-4 border-brand-gold shadow-lg">
                     <i data-lucide="terminal" class="w-4 h-4 text-brand-gold"></i>
@@ -168,7 +161,6 @@
                 </p>
             </div>
 
-            <!-- VIDEO -->
             <div class="fade-in-section w-full max-w-4xl relative group">
                 <div class="absolute -top-10 -right-10 z-30 hidden md:block animate-float-delayed">
                     <div class="bg-brand-deepOlive border-2 border-brand-gold p-5 shadow-2xl transform rotate-3">
@@ -195,7 +187,6 @@
         </div>
     </section>
 
-    <!-- INTEL COLUMN -->
     <section class="py-20 bg-brand-deepOlive/50 border-y border-brand-olive/20">
         <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row gap-16 items-center">
             <div class="fade-in-section w-full md:w-1/2 space-y-8">
@@ -218,7 +209,6 @@
                 </div>
             </div>
 
-            <!-- PHONE MOCKUP -->
             <div class="fade-in-section w-full md:w-1/2">
                 <div class="relative mx-auto w-72 md:w-80 aspect-[9/18] bg-brand-gunmetal rounded-[2.5rem] border-[10px] border-brand-earth shadow-2xl overflow-hidden">
                     <div class="h-full bg-black flex flex-col">
@@ -253,7 +243,6 @@
         </div>
     </section>
 
-    <!-- WORKSHOP DELIVERABLES -->
     <section class="py-24 bg-dark-base border-b border-brand-olive/20">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 fade-in-section">
@@ -312,7 +301,6 @@
         </div>
     </section>
 
-    <!-- VALIDATION -->
     <section class="py-24 bg-[#080907] relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-brand-gold rounded-full animate-pulse"></div>
@@ -347,7 +335,6 @@
     </div>
 </section>
 
-<!-- SUPPLY DROP -->
 <section class="py-24 bg-dark-base border-t border-brand-olive/20">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-16 fade-in-section">
@@ -357,7 +344,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Crate 1 -->
             <div class="fade-in-section relative group">
                 <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
                 <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
@@ -368,7 +354,6 @@
                     <p class="text-brand-sand font-mono text-[10px] uppercase">O guia definitivo da recorrência em dólar.</p>
                 </div>
             </div>
-            <!-- Crate 2 -->
             <div class="fade-in-section relative group">
                 <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
                 <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
@@ -379,7 +364,6 @@
                     <p class="text-brand-sand font-mono text-[10px] uppercase">3 funis de alta conversão para deploy.</p>
                 </div>
             </div>
-            <!-- Crate 3 -->
             <div class="fade-in-section relative group">
                 <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 opacity-40"></div>
                 <div class="relative bg-brand-earth/80 border-4 border-brand-gunmetal p-10 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1">
@@ -392,7 +376,6 @@
             </div>
         </div>
 
-        <!-- Mentoria Special -->
         <div class="mt-16 fade-in-section max-w-4xl mx-auto bg-red-900/10 border-2 border-red-700 p-8 flex flex-col md:flex-row items-center gap-8 shadow-2xl relative">
             <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(90deg,red,red_10px,transparent_10px,transparent_20px)] opacity-30"></div>
             <div class="w-16 h-16 bg-red-700 flex items-center justify-center shrink-0 shadow-lg"><i data-lucide="mic" class="text-white w-8 h-8"></i></div>
@@ -404,7 +387,6 @@
     </div>
 </section>
 
-<!-- GUARANTEE -->
 <section class="py-24 bg-dark-base relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16">
         <div class="w-full lg:w-3/5 fade-in-section space-y-8">
@@ -439,7 +421,6 @@
     </div>
 </section>
 
-<!-- OFFER -->
 <section id="offer" class="py-24 bg-black relative">
     <div class="max-w-4xl mx-auto px-6 relative z-10">
         <div class="text-center mb-16 fade-in-section">
@@ -495,7 +476,6 @@
     </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq" class="py-24 bg-dark-base border-t border-brand-olive/20">
     <div class="max-w-4xl mx-auto px-6">
         <div class="text-center mb-16 fade-in-section">
@@ -505,12 +485,10 @@
         </div>
 
         <div id="faq-container" class="space-y-4">
-            <!-- FAQ Rendered by JS -->
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="bg-black py-16 text-center border-t border-brand-olive/20">
     <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-6">
         <i data-lucide="target" class="w-10 h-10 text-brand-gold opacity-30"></i>
@@ -521,18 +499,14 @@
     </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
-    // 1. Init Icons
     lucide.createIcons();
 
-    // 2. Reveal Logic
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-    // 3. Typewriter
     const typeTarget = document.getElementById('typewriter-text');
     const typeText = "// BOOTING_PROTOCOL: STEADYFLOW_V1";
     let typeIndex = 0;
@@ -545,17 +519,18 @@
     }
     setTimeout(typeWriter, 1000);
 
-    // 4. Timer
-    let time = 3 * 3600 + 45 * 60 + 12;
+    // COUNTDOWN ATUALIZADO COM DIAS
+    let time = 7 * 86400 + 4 * 3600 + 12 * 60 + 45; // 7 dias, 4h, 12m, 45s
     const timerBox = document.getElementById('countdown-timer');
     setInterval(() => {
         if (time > 0) time--;
-        const h = Math.floor(time / 3600);
+        const d = Math.floor(time / 86400);
+        const h = Math.floor((time % 86400) / 3600);
         const m = Math.floor((time % 3600) / 60);
         const s = time % 60;
         let html = '';
-        [h, m, s].forEach((v, i) => {
-            const labels = ['H', 'M', 'S'];
+        [d, h, m, s].forEach((v, i) => {
+            const labels = ['D', 'H', 'M', 'S'];
             html += `
                 <div class="flex flex-col items-center mx-1">
                     <div class="bg-[#1a1e16] text-brand-gold font-mono text-3xl md:text-5xl font-black p-3 min-w-[4rem] text-center border-2 border-brand-olive shadow-inner rounded-sm">
@@ -567,7 +542,6 @@
         timerBox.innerHTML = html;
     }, 1000);
 
-    // 5. FAQ (Corrected Visibility)
     const faqs = [
         { q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops) para manter o foco e a entrega no momento certo." },
         { q: "Por que R$ 19,90?", a: "Valor simbólico para garantir que apenas operadores realmente comprometidos com a execução participem." },
