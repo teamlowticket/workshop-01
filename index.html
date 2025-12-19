@@ -1,859 +1,877 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Workshop Receita Recorrente - Domine o Steadyflow</title>
 
-```
-<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-<link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap)" rel="stylesheet">
-<link href="[https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap](https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap)" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 
-<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-<script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
+<!-- Custom Config -->
 <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand: {
-                        gold: '#8C7A5B',      // Replaced Gold with Military Brown/Khaki
-                        olive: '#4B5320',     // Classic Army Green
-                        lightOlive: '#6B7A48', // Highlighting Olive
-                        deepOlive: '#1a1e16', // Darker Background
-                        earth: '#3D3222',     // Dark Military Brown
-                        sand: '#C2B280',      // Desert Sand (Secondary Text)
-                        gunmetal: '#2B2E25',  // Equipment Grey
-                    },
-                    dark: {
-                        base: '#0F120D',      // Very Dark Olive/Black Base
-                        surface: '#161914',   // Surface
-                        border: '#3E452F',    // Olive Border
-                    }
-                },
-                fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                    display: ['Outfit', 'sans-serif'],
-                    mono: ['JetBrains Mono', 'monospace'],
-                    stencil: ['Black Ops One', 'cursive'],
-                },
-                animation: {
-                    'scan': 'scan 4s linear infinite',
-                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    'float': 'float 6s ease-in-out infinite',
-                    'float-delayed': 'float 6s ease-in-out 3s infinite',
-                    'spin-slow': 'spin 12s linear infinite',
-                },
-                keyframes: {
-                    scan: {
-                        '0%': { top: '0%', opacity: 0 },
-                        '10%': { opacity: 0.3 },
-                        '90%': { opacity: 0.3 },
-                        '100%': { top: '100%', opacity: 0 },
-                    },
-                    float: {
-                        '0%, 100%': { transform: 'translateY(0)' },
-                        '50%': { transform: 'translateY(-10px)' },
-                    }
-                }
-            }
-        }
-    }
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+brand: {
+gold: '#8C7A5B',      // Replaced Gold with Military Brown/Khaki
+olive: '#4B5320',     // Classic Army Green
+lightOlive: '#6B7A48', // Highlighting Olive
+deepOlive: '#1a1e16', // Darker Background
+earth: '#3D3222',     // Dark Military Brown
+sand: '#C2B280',      // Desert Sand (Secondary Text)
+gunmetal: '#2B2E25',  // Equipment Grey
+},
+dark: {
+base: '#0F120D',      // Very Dark Olive/Black Base
+surface: '#161914',   // Surface
+border: '#3E452F',    // Olive Border
+}
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+display: ['Outfit', 'sans-serif'],
+mono: ['JetBrains Mono', 'monospace'],
+stencil: ['Black Ops One', 'cursive'],
+},
+animation: {
+'scan': 'scan 4s linear infinite',
+'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+'float': 'float 6s ease-in-out infinite',
+'float-delayed': 'float 6s ease-in-out 3s infinite',
+'spin-slow': 'spin 12s linear infinite',
+},
+keyframes: {
+scan: {
+'0%': { top: '0%', opacity: 0 },
+'10%': { opacity: 0.3 },
+'90%': { opacity: 0.3 },
+'100%': { top: '100%', opacity: 0 },
+},
+float: {
+'0%, 100%': { transform: 'translateY(0)' },
+'50%': { transform: 'translateY(-10px)' },
+}
+}
+}
+}
+}
 </script>
 
 <style>
-    body {
-        background-color: #0F120D;
-        color: #d4d4d4;
-        overflow-x: hidden;
-    }
+body {
+background-color: #0F120D;
+color: #d4d4d4;
+overflow-x: hidden;
+}
 
-    /* UTILITIES */
-    .clip-angled {
-        clip-path: polygon(
-            10px 0, 100% 0, 
-            100% calc(100% - 10px), calc(100% - 10px) 100%, 
-            0 100%, 0 10px
-        );
-    }
+/* UTILITIES */
+.clip-angled {
+clip-path: polygon(
+10px 0, 100% 0, 
+100% calc(100% - 10px), calc(100% - 10px) 100%, 
+0 100%, 0 10px
+);
+}
 
-    .text-shadow-sm {
-        text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-    }
+.text-shadow-sm {
+text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
 
-    /* FADE IN ANIMATION CLASSES */
-    .fade-in-section {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    
-    .fade-in-section.is-visible {
-        opacity: 1;
-        transform: none;
-    }
+/* FADE IN ANIMATION CLASSES */
+.fade-in-section {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
-    /* ACCORDION TRANSITION */
-    .accordion-content {
-        transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-    }
-    .accordion-content.open {
-        opacity: 1;
-    }
-    .accordion-icon {
-        transition: transform 0.3s ease;
-    }
-    .accordion-btn[aria-expanded="true"] .accordion-icon {
-        transform: rotate(45deg); 
-    }
-    .accordion-arrow {
-        transition: transform 0.3s ease;
-        display: inline-block;
-    }
-    .accordion-btn[aria-expanded="true"] .accordion-arrow {
-        transform: rotate(90deg);
-    }
+.fade-in-section.is-visible {
+opacity: 1;
+transform: none;
+}
 
-    /* CUSTOM SCROLLBAR */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #0F120D; 
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #4B5320; 
-        border-radius: 0px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #6B7A48; 
-    }
+/* ACCORDION TRANSITION */
+.accordion-content {
+transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+max-height: 0;
+opacity: 0;
+overflow: hidden;
+}
+.accordion-content.open {
+opacity: 1;
+}
+.accordion-icon {
+transition: transform 0.3s ease;
+}
+.accordion-btn[aria-expanded="true"] .accordion-icon {
+transform: rotate(45deg); 
+}
+.accordion-arrow {
+transition: transform 0.3s ease;
+display: inline-block;
+}
+.accordion-btn[aria-expanded="true"] .accordion-arrow {
+transform: rotate(90deg);
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: #0F120D; 
+}
+::-webkit-scrollbar-thumb {
+background: #4B5320; 
+border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #6B7A48; 
+}
 </style>
-
-```
-
 </head>
 <body class="antialiased font-sans selection:bg-brand-olive selection:text-white bg-dark-base relative">
 
-```
-<div class="fixed inset-0 pointer-events-none z-0 opacity-[0.07]" style="background-image: url('[https://www.transparenttextures.com/patterns/black-felt.png](https://www.transparenttextures.com/patterns/black-felt.png)');"></div>
+<!-- BACKGROUND LAYERS -->
+<div class="fixed inset-0 pointer-events-none z-0 opacity-[0.07]" style="background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');"></div>
 <div class="fixed inset-0 pointer-events-none z-0 bg-gradient-to-b from-[#0F120D] via-[#161912] to-[#0a0b08]"></div>
 
+<!-- TOP HUD NAV -->
 <nav class="relative w-full z-[60] border-b border-[#3e452f] bg-[#0F120D]/95 backdrop-blur-md h-12 flex items-center shadow-md">
-    <div class="max-w-7xl mx-auto w-full px-4 flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest">
-        <div class="flex items-center gap-2 text-[#8C7A5B]">
-            <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-            <span>SECURE CHANNEL</span>
-        </div>
-        <div class="flex gap-4 text-[#6B7A48]">
-            <span class="hidden md:inline">OP: 23.12.25</span>
-            <div class="flex items-center gap-2">
-                <i data-lucide="signal" class="w-3 h-3"></i>
-                <i data-lucide="battery" class="w-3 h-3"></i>
-            </div>
-        </div>
-    </div>
+<div class="max-w-7xl mx-auto w-full px-4 flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest">
+<div class="flex items-center gap-2 text-[#8C7A5B]">
+<i data-lucide="shield" class="w-3.5 h-3.5"></i>
+<span>SECURE CHANNEL</span>
+</div>
+<div class="flex gap-4 text-[#6B7A48]">
+<span class="hidden md:inline">OP: 23.12.25</span>
+<div class="flex items-center gap-2">
+<i data-lucide="signal" class="w-3 h-3"></i>
+<i data-lucide="battery" class="w-3 h-3"></i>
+</div>
+</div>
+</div>
 </nav>
 
+<!-- ALERT BANNER -->
 <div class="w-full bg-[#3D3222] relative overflow-hidden border-b-4 border-black z-50">
-    <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center text-center relative z-10">
-        <p class="text-[10px] md:text-xs font-bold tracking-wide text-[#C2B280] flex flex-col md:flex-row items-center gap-2 uppercase font-mono">
-            <span class="flex items-center gap-1 bg-black text-[#8C7A5B] px-2 py-0.5 rounded-sm">
-                <i data-lucide="alert-triangle" class="w-3 h-3 fill-current"></i>
-                Atenção
-            </span>
-            <span>
-                O Workshop Receita Recorrente começa em:
-            </span>
-        </p>
-    </div>
+<div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,black,black_10px,transparent_10px,transparent_20px)]"></div>
+<div class="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center text-center relative z-10">
+<p class="text-[10px] md:text-xs font-bold tracking-wide text-[#C2B280] flex flex-col md:flex-row items-center gap-2 uppercase font-mono">
+<span class="flex items-center gap-1 bg-black text-[#8C7A5B] px-2 py-0.5 rounded-sm">
+<i data-lucide="alert-triangle" class="w-3 h-3 fill-current"></i>
+Atenção
+</span>
+<span>
+O Workshop Receita Recorrente começa em:
+</span>
+</p>
+</div>
 </div>
 
+<!-- HERO SECTION -->
 <section class="relative pt-12 pb-20 px-4 z-10">
-    <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
-        
-        <div class="fade-in-section mb-12 relative">
-            <div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float z-30">
-                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
-                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
-            </div>
-            <div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed z-30">
-                <i data-lucide="satellite" class="w-8 h-8"></i>
-                <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
-            </div>
+<div class="max-w-6xl mx-auto flex flex-col items-center text-center">
 
-            <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
-                Mission Countdown
-            </div>
-            
-            <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative text-[#C2B280] font-mono">
-                <div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                <div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
-                
-                </div>
-        </div>
+<!-- TIMER -->
+<div class="fade-in-section mb-12 relative">
+<!-- Floating Icons -->
+<div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float">
+<i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+<span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
+</div>
+<div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed">
+<i data-lucide="satellite" class="w-8 h-8"></i>
+<span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
+</div>
 
-        <div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
-            <div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
-                <i data-lucide="terminal" class="w-3 h-3"></i>
-                <span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
-            </div>
-            
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
-                Domine o Jogo do <br />
-                <span class="text-[#8C7A5B] text-shadow-sm">
-                    "CashFlow Recorrente"
-                </span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
-                O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
-                <span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
-            </p>
-        </div>
+<div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
+Mission Countdown
+</div>
 
-        <div class="fade-in-section w-full max-w-4xl relative group">
-            <div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
-                <div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
-                    <div class="border border-[#8C7A5B] border-dashed p-1">
-                        <p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
-                            TOP SECRET<br/>ACCESS
-                        </p>
-                    </div>
-                    <div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-                    <div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-                </div>
-            </div>
+<!-- JS Timer Rendered Here -->
+<div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative">
+<!-- Screws -->
+<div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+<div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+<div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
+<div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
 
-            <div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
-                     <script>
-                        for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
-                     </script>
-                </div>
+<!-- Digits inserted by JS -->
+</div>
+</div>
 
-                <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
-                    <div class="text-center w-full h-full flex flex-col items-center justify-center relative">
-                        <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
-                        
-                        <span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
-                        
-                        <button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
-                            <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
-                    <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
-                    <span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
-                </div>
-            </div>
-        </div>
+<!-- HEADLINE -->
+<div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
+<div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
+<i data-lucide="terminal" class="w-3 h-3"></i>
+<span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
+</div>
 
-        <div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
-            <div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
-                <p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
-                    // REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket"tradicional"...
-                    <br class="hidden md:block">
-                    <span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
-                </p>
-            </div>
-            
-            <div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
-                <p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
-                    Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
-                </p>
-            </div>
-        </div>
+<h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
+Domine o Jogo do <br />
+<span class="text-[#8C7A5B] text-shadow-sm">
+"CashFlow Recorrente"
+</span>
+</h1>
 
-        <div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
-            
-            <div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
+<p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
+O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
+<span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
+</p>
+</div>
 
-            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
-                <div class="absolute inset-0 bg-[url('[https://www.transparenttextures.com/patterns/brushed-alum.png](https://www.transparenttextures.com/patterns/brushed-alum.png)')] opacity-20 mix-blend-multiply"></div>
-                <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
-                    DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
-                </span>
-            </a>
-            
-            <div class="w-full mt-24 relative z-10 max-w-3xl mx-auto">
-                
-                <div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
-                    <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
-                        <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
-                    </span>
-                </div>
+<!-- VIDEO PLACEHOLDER -->
+<div class="fade-in-section w-full max-w-4xl relative group">
+<!-- Floating Badge -->
+<div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
+<div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
+<div class="border border-[#8C7A5B] border-dashed p-1">
+<p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
+TOP SECRET<br/>ACCESS
+</p>
+</div>
+<div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+<div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
+</div>
+</div>
 
-                <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
-                    <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('[https://www.transparenttextures.com/patterns/cardboard.png](https://www.transparenttextures.com/patterns/cardboard.png)');"></div>
-                    
-                    <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
-                        <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
-                            <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
-                        </span>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
-                        </div>
-                    </div>
+<div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
+<div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
+<!-- Top Bar Decoration -->
+<script>
+for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
+</script>
+</div>
 
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
-                        
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Imediato a nosso Grupo Vip
-                            </span>
-                        </div>
+<div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
+<div class="text-center w-full h-full flex flex-col items-center justify-center relative">
+<div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
 
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Aprenda a criar uma recorrência em dólar
-                            </span>
-                        </div>
+<span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
 
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Workshop Prático, com foco em Executar
-                            </span>
-                        </div>
+<button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
+<i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
+</button>
+</div>
+</div>
 
-                        <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
-                            <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
-                                <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
-                            </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Diretamente aos mentores para tirar dúvidas
-                            </span>
-                        </div>
+<div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
+<div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
+<span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
+</div>
+</div>
+</div>
 
-                        <div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
-                            <i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
-                            <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
-                                100% ao vivo, na terça-feira, às 20h
-                            </span>
-                        </div>
-                    </div>
+<!-- INTEL TEXT (Restored) -->
+<div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
+<div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
+<p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
+// REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket"tradicional"...
+<br class="hidden md:block">
+<span class="text-[#8C7A5B] font-bold bg-[#8C7A5B]/10 px-1 border-b border-[#8C7A5B]">CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.</span>
+</p>
+</div>
 
-                    <div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
+<div class="w-full max-w-3xl mx-auto bg-[#141612] px-6 py-6 border-y-2 border-[#24291B] relative mt-6 shadow-inner">
+<p class="text-[#e2e2d5] font-medium relative z-10 text-sm md:text-base tracking-wide font-sans">
+Agora, o novo movimento está bem debaixo do seu nariz e ele está fazendo você deixar dinheiro na mesa sem perceber!
+</p>
+</div>
+</div>
 
-                         <div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
-                            <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
-                            <div class="relative z-10">
-                                <div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
-                                <span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
-                                    [IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
-                                </span>
-                            </div>
-                         </div>
-                         <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- CTA SECTION & DOSSIER -->
+<div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
 
-    </div>
+<!-- Floating Icons -->
+<div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
+<div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+<i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
+</div>
+</div>
+<div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
+<div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
+<i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
+</div>
+</div>
+
+<!-- MAIN BUTTON (Restored) -->
+<a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
+<span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
+DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
+</span>
+</a>
+
+<!-- DOSSIER LIST (Cardboard File Style) -->
+                <div class="w-full mt-24 relative z-10 max-w-3xl mx-auto">
+                <div class="w-full mt-20 relative z-10 max-w-3xl mx-auto">
+
+<!-- File Tab -->
+<div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
+<span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
+<i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
+</span>
+</div>
+
+<div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
+
+<div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
+<span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
+<i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
+</span>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+<div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
+<div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
+</div>
+</div>
+
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
+
+<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+</div>
+<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+Acesso Imediato a nosso Grupo Vip
+</span>
+</div>
+
+<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+</div>
+<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+Aprenda a criar uma recorrência em dólar
+</span>
+</div>
+
+<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
+<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+</div>
+<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+Workshop Prático, com foco em Executar
+</span>
+</div>
+
+<div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
+<div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
+<i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
+</div>
+<span class="text-[#3D3222] text-sm font-bold font-sans uppercase tracking-tight leading-snug">
+Acesso Diretamente aos mentores para tirar dúvidas
+</span>
+</div>
+
+<div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
+<i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
+<span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
+100% ao vivo, na terça-feira, às 20h
+</span>
+</div>
+</div>
+
+<div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
+
+<div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
+<div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
+<div class="relative z-10">
+<div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
+<span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
+[IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
+</span>
+</div>
+</div>
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 </section>
 
-    <!-- CLASSIFIED INTEL SECTION -->
-    <section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#141612_20px,#141612_40px)]"></div>
-        
-        <div class="max-w-5xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="fade-in-section w-full md:w-1/2 space-y-6">
-                    <div class="inline-block bg-[#7f1d1d] border border-red-500/50 px-3 py-1 text-white font-mono text-xs tracking-widest uppercase font-bold shadow-md">
-                        TOP SECRET // EYES ONLY
-                    </div>
-                    
-                    <h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-wider">
-                        Operação <span class="text-[#8C7A5B] underline decoration-[#4B5320] decoration-4 underline-offset-4">Declassified</span>
-                    </h2>
-                    
-                    <div class="space-y-4 font-mono text-sm md:text-base text-gray-400">
-                        <p>
-                            // REPORT: Zero conversinha de guru. Nada de <span class="bg-black text-white px-1">██████</span>, dropshipping, afiliado, X1, lançamento.
-                        </p>
-                        <div class="bg-[#141612] border-l-4 border-amber-600 p-6 shadow-md border border-[#3E452F]">
-                            <p class="text-gray-300">
-                                <span class="text-amber-500 font-bold">WARNING:</span> CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.
-                            </p>
-                        </div>
-                        <p>
-                            Estamos falando de multiplicar até <strong class="text-[#8C7A5B] border-b border-[#8C7A5B]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! Este é o jogo... Onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO.
-                        </p>
-                    </div>
-                </div>
+<!-- CLASSIFIED INTEL SECTION -->
+<section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
+<div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000,#000_20px,#141612_20px,#141612_40px)]"></div>
 
-                <!-- TACTICAL DEVICE (PHONE) -->
-                <div class="fade-in-section w-full md:w-1/2 flex justify-center">
-                    <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
-                        <!-- Physical Buttons -->
-                        <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
-                        <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
-                        <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
+<div class="max-w-5xl mx-auto px-4 relative z-10">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="fade-in-section w-full md:w-1/2 space-y-6">
+<div class="inline-block bg-[#7f1d1d] border border-red-500/50 px-3 py-1 text-white font-mono text-xs tracking-widest uppercase font-bold shadow-md">
+TOP SECRET // EYES ONLY
+</div>
 
-                        <div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
-                            <div class="h-8 bg-[#141612] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
-                                <span>SAT_LINK_ACTIVE</span>
-                                <div class="flex gap-2">
-                                    <i data-lucide="signal" class="w-2.5 h-2.5 text-white"></i>
-                                    <i data-lucide="battery" class="w-2.5 h-2.5 text-white"></i>
-                                </div>
-                            </div>
-                            <!-- Screen Content -->
-                            <div class="flex-1 relative flex flex-col bg-[#0c0d0b]">
-                                <div class="p-6 pb-2">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700"></div>
-                                            <div>
-                                                <div class="text-[10px] text-gray-400">Welcome back</div>
-                                                <div class="text-xs font-bold text-white">Operator</div>
-                                            </div>
-                                        </div>
-                                        <i data-lucide="award" class="w-4 h-4 text-[#8C7A5B]"></i>
-                                    </div>
-                                    <div class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
-                                    <div class="flex items-baseline gap-1">
-                                        <span class="text-2xl font-bold text-white">$</span>
-                                        <span class="text-4xl font-bold text-white tracking-tighter">12,450</span>
-                                        <span class="text-2xl font-bold text-gray-500">.00</span>
-                                    </div>
-                                    <div class="flex items-center gap-1 mt-1 text-[#8C7A5B] text-xs font-medium">
-                                        <i data-lucide="trending-up" class="w-3 h-3"></i>
-                                        <span>+12.5% today</span>
-                                    </div>
-                                </div>
+<h2 class="text-3xl md:text-5xl font-black uppercase text-white font-stencil tracking-wider">
+Operação <span class="text-[#8C7A5B] underline decoration-[#4B5320] decoration-4 underline-offset-4">Declassified</span>
+</h2>
 
-                                <!-- Fake Chart -->
-                                <div class="h-24 w-full relative px-2">
-                                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#8C7A5B]/10 to-transparent"></div>
-                                    <svg class="w-full h-full text-[#8C7A5B] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
-                                        <path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" strokeWidth="2" />
-                                        <circle cx="100" cy="5" r="3" fill="currentColor" class="animate-pulse" />
-                                    </svg>
-                                </div>
+<div class="space-y-4 font-mono text-sm md:text-base text-gray-400">
+<p>
+// REPORT: Zero conversinha de guru. Nada de <span class="bg-black text-white px-1">██████</span>, dropshipping, afiliado, X1, lançamento.
+</p>
+<div class="bg-[#141612] border-l-4 border-amber-600 p-6 shadow-md border border-[#3E452F]">
+<p class="text-gray-300">
+<span class="text-amber-500 font-bold">WARNING:</span> CHEGA daquelas “ofertinhas” de promessas fortes que saturaram o mercado.
+</p>
+</div>
+<p>
+Estamos falando de multiplicar até <strong class="text-[#8C7A5B] border-b border-[#8C7A5B]">5x sua margem de lucro</strong> (dinheiro no seu bolso) todos os DIAS! Este é o jogo... Onde será possível Criar as Verdadeiras EMPRESAS DO MERCADO.
+</p>
+</div>
+</div>
 
-                                <!-- List -->
-                                <div class="flex-1 bg-[#141612] mt-4 rounded-t-3xl p-6 space-y-3">
-                                    <script>
-                                        for(let i=1; i<=3; i++) {
-                                            document.write(`
-                                                <div class="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 rounded-full bg-[#8C7A5B]/10 flex items-center justify-center text-[#8C7A5B]">
-                                                            <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
-                                                        </div>
-                                                        <div>
-                                                            <div class="text-xs font-bold text-white">Sale #29${i}3</div>
-                                                            <div class="text-[9px] text-gray-500">Just now</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-xs font-bold text-white">+$49.90</div>
-                                                </div>
-                                            `);
-                                        }
-                                    </script>
-                                </div>
-                                <div class="absolute bottom-4 left-0 right-0 text-center">
-                                    <p class="text-[10px] font-mono text-gray-500 bg-black/80 inline-block px-2 py-1 rounded">
-                                        "A mais de 1 ano isso se tornou minha realidade."
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- TACTICAL DEVICE (PHONE) -->
+<div class="fade-in-section w-full md:w-1/2 flex justify-center">
+<div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
+<!-- Physical Buttons -->
+<div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
+<div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
+<div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
 
-    <!-- UNIT COMMANDERS -->
-    <section class="py-24 px-4 relative">
-        <div class="max-w-5xl mx-auto">
-            <div class="fade-in-section flex items-center gap-4 mb-16 border-b border-[#3E452F] pb-4">
-                <i data-lucide="users" class="text-[#8C7A5B] w-6 h-6"></i>
-                <h2 class="text-2xl font-bold uppercase tracking-wide font-stencil">Unit Commanders</h2>
-            </div>
+<div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
+<div class="h-8 bg-[#141612] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
+<span>SAT_LINK_ACTIVE</span>
+<div class="flex gap-2">
+<i data-lucide="signal" class="w-2.5 h-2.5 text-white"></i>
+<i data-lucide="battery" class="w-2.5 h-2.5 text-white"></i>
+</div>
+</div>
+<!-- Screen Content -->
+<div class="flex-1 relative flex flex-col bg-[#0c0d0b]">
+<div class="p-6 pb-2">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700"></div>
+<div>
+<div class="text-[10px] text-gray-400">Welcome back</div>
+<div class="text-xs font-bold text-white">Operator</div>
+</div>
+</div>
+<i data-lucide="award" class="w-4 h-4 text-[#8C7A5B]"></i>
+</div>
+<div class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-white">$</span>
+<span class="text-4xl font-bold text-white tracking-tighter">12,450</span>
+<span class="text-2xl font-bold text-gray-500">.00</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-[#8C7A5B] text-xs font-medium">
+<i data-lucide="trending-up" class="w-3 h-3"></i>
+<span>+12.5% today</span>
+</div>
+</div>
 
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-                <!-- Commander 1 -->
-                <div class="fade-in-section relative group h-full">
-                    <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                    <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                        <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
-                            CONFIDENTIAL
-                        </div>
-                        <div class="p-6 flex flex-col items-center flex-grow pt-8">
-                            <div class="w-28 h-28 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1">
-                                <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                    <i data-lucide="target" class="w-10 h-10 text-gray-500"></i>
-                                </div>
-                                <div class="absolute -top-4 right-1/2 translate-x-1/2 w-4 h-8 border-2 border-gray-400 rounded-t-full border-b-0"></div>
-                            </div>
-                            <div class="text-center w-full">
-                                <div class="flex items-center justify-center gap-2 mb-2">
-                                    <i data-lucide="target" class="w-3.5 h-3.5 text-[#C2B280]"></i>
-                                    <span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">STRATEGIST</span>
-                                </div>
-                                <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Kauê Pugliesi</h3>
-                                <div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
-                                    EX-CAPITÃO
-                                </div>
-                                <p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
-                                    "Saiu do Exército após 11 anos e descobriu que era possível ganhar em dólar. Escalou múltiplos 7 dígitos e provou que o mercado digital realmente funciona."
-                                </p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
-                            <div class="p-2 text-center border-r border-[#3e452f]">
-                                <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
-                                <span class="text-xs font-bold text-white">CLASS A</span>
-                            </div>
-                            <div class="p-2 text-center">
-                                <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Execution</span>
-                                <span class="text-xs font-bold text-white">TIER 1</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Fake Chart -->
+<div class="h-24 w-full relative px-2">
+<div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#8C7A5B]/10 to-transparent"></div>
+<svg class="w-full h-full text-[#8C7A5B] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
+<path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" strokeWidth="2" />
+<circle cx="100" cy="5" r="3" fill="currentColor" class="animate-pulse" />
+</svg>
+</div>
 
-                <!-- Commander 2 -->
-                <div class="fade-in-section relative group h-full">
-                    <div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
-                    <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
-                        <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
-                            CONFIDENTIAL
-                        </div>
-                        <div class="p-6 flex flex-col items-center flex-grow pt-8">
-                            <div class="w-28 h-28 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1">
-                                <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                    <i data-lucide="crosshair" class="w-10 h-10 text-gray-500"></i>
-                                </div>
-                                <div class="absolute -top-4 right-1/2 translate-x-1/2 w-4 h-8 border-2 border-gray-400 rounded-t-full border-b-0"></div>
-                            </div>
-                            <div class="text-center w-full">
-                                <div class="flex items-center justify-center gap-2 mb-2">
-                                    <i data-lucide="crosshair" class="w-3.5 h-3.5 text-[#C2B280]"></i>
-                                    <span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">OPERATIVE</span>
-                                </div>
-                                <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Slender</h3>
-                                <div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
-                                    TOP AFFILIATE
-                                </div>
-                                <p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
-                                    "Entrou no mercado, e em 1 ano e pouquinho conquistou mais de meio milhão ao dia, vencendo a maior competição de faturamento do Brasil da Lastlink."
-                                </p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
-                            <div class="p-2 text-center border-r border-[#3e452f]">
-                                <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
-                                <span class="text-xs font-bold text-white">CLASS A</span>
-                            </div>
-                            <div class="p-2 text-center">
-                                <span class="block text-[9px] text-[#8C8674] font-mono uppercase">Execution</span>
-                                <span class="text-xs font-bold text-white">TIER 1</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- List -->
+<div class="flex-1 bg-[#141612] mt-4 rounded-t-3xl p-6 space-y-3">
+<script>
+for(let i=1; i<=3; i++) {
+document.write(`
+                                               <div class="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
+                                                   <div class="flex items-center gap-3">
+                                                       <div class="w-8 h-8 rounded-full bg-[#8C7A5B]/10 flex items-center justify-center text-[#8C7A5B]">
+                                                           <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
+                                                       </div>
+                                                       <div>
+                                                           <div class="text-xs font-bold text-white">Sale #29${i}3</div>
+                                                           <div class="text-[9px] text-gray-500">Just now</div>
+                                                       </div>
+                                                   </div>
+                                                   <div class="text-xs font-bold text-white">+$49.90</div>
+                                               </div>
+                                           `);
+}
+</script>
+</div>
+<div class="absolute bottom-4 left-0 right-0 text-center">
+<p class="text-[10px] font-mono text-gray-500 bg-black/80 inline-block px-2 py-1 rounded">
+"A mais de 1 ano isso se tornou minha realidade."
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- MISSION OBJECTIVES -->
-    <section class="py-20 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-16 fade-in-section">
-                <span class="text-[#8C7A5B] font-mono text-xs tracking-[0.2em] uppercase bg-[#141612] px-2 py-1">[ Mission Briefing ]</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-stencil">O QUE VOCÊ VAI VER NA PRÁTICA</h2>
-            </div>
+<!-- UNIT COMMANDERS -->
+<section class="py-24 px-4 relative">
+<div class="max-w-5xl mx-auto">
+<div class="fade-in-section flex items-center gap-4 mb-16 border-b border-[#3E452F] pb-4">
+<i data-lucide="users" class="text-[#8C7A5B] w-6 h-6"></i>
+<h2 class="text-2xl font-bold uppercase tracking-wide font-stencil">Unit Commanders</h2>
+</div>
 
-            <div class="grid md:grid-cols-1 gap-4 font-mono text-sm">
-                <script>
-                    const objectives = [
-                        { st: 'LOCKED', cl: 'text-red-500', txt: "Por que insistir em modelos black é um erro fatal." },
-                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência automática." },
-                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Ajuste de comunicação para retenção máxima." },
-                        { st: 'LOCKED', cl: 'text-amber-500', txt: "O erro silencioso que mata SaaS low ticket em 90 dias." },
-                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Estruturação de planos para upgrade voluntário." },
-                        { st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Escala global em Dólar." }
-                    ];
-                    
-                    objectives.forEach(obj => {
-                        document.write(`
-                            <div class="flex items-center gap-4 bg-[#141612] border-l-4 border-[#3e452f] p-4 hover:border-[#8C7A5B] hover:bg-[#1a1e16] transition-all shadow-sm">
-                                <span class="${obj.cl} font-bold min-w-[80px]">[${obj.st}]</span>
-                                <p class="text-gray-300">${obj.txt}</p>
-                            </div>
-                        `);
-                    });
-                </script>
-            </div>
-        </div>
-    </section>
+<div class="grid md:grid-cols-2 gap-8 md:gap-12">
+<!-- Commander 1 -->
+<div class="fade-in-section relative group h-full">
+<div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
+<div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
+<div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
+CONFIDENTIAL
+</div>
+<div class="p-6 flex flex-col items-center flex-grow pt-8">
+<div class="w-28 h-28 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1">
+<div class="absolute inset-0 flex items-center justify-center bg-gray-300">
+<i data-lucide="target" class="w-10 h-10 text-gray-500"></i>
+</div>
+<div class="absolute -top-4 right-1/2 translate-x-1/2 w-4 h-8 border-2 border-gray-400 rounded-t-full border-b-0"></div>
+</div>
+<div class="text-center w-full">
+<div class="flex items-center justify-center gap-2 mb-2">
+<i data-lucide="target" class="w-3.5 h-3.5 text-[#C2B280]"></i>
+<span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">STRATEGIST</span>
+</div>
+<h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Kauê Pugliesi</h3>
+<div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
+EX-CAPITÃO
+</div>
+<p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
+"Saiu do Exército após 11 anos e descobriu que era possível ganhar em dólar. Escalou múltiplos 7 dígitos e provou que o mercado digital realmente funciona."
+</p>
+</div>
+</div>
+<div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
+<div class="p-2 text-center border-r border-[#3e452f]">
+<span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
+<span class="text-xs font-bold text-white">CLASS A</span>
+</div>
+<div class="p-2 text-center">
+<span class="block text-[9px] text-[#8C8674] font-mono uppercase">Execution</span>
+<span class="text-xs font-bold text-white">TIER 1</span>
+</div>
+</div>
+</div>
+</div>
 
-    <!-- SUPPLY DROP -->
-    <section class="py-24 px-4 relative">
-        <div class="max-w-6xl mx-auto relative z-10">
-            <h2 class="text-center text-3xl font-bold mb-16 uppercase flex items-center justify-center gap-3 font-stencil">
-                <i data-lucide="package" class="w-8 h-8 text-[#8C7A5B]"></i>
-                Supply Drop (Bônus)
-            </h2>
+<!-- Commander 2 -->
+<div class="fade-in-section relative group h-full">
+<div class="absolute top-0 left-0 w-full h-full bg-[#e2e2d5] rounded-sm transform rotate-1 translate-x-1 translate-y-1 z-0 border border-[#b0b0a0]"></div>
+<div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
+<div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20 shadow-sm">
+CONFIDENTIAL
+</div>
+<div class="p-6 flex flex-col items-center flex-grow pt-8">
+<div class="w-28 h-28 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1">
+<div class="absolute inset-0 flex items-center justify-center bg-gray-300">
+<i data-lucide="crosshair" class="w-10 h-10 text-gray-500"></i>
+</div>
+<div class="absolute -top-4 right-1/2 translate-x-1/2 w-4 h-8 border-2 border-gray-400 rounded-t-full border-b-0"></div>
+</div>
+<div class="text-center w-full">
+<div class="flex items-center justify-center gap-2 mb-2">
+<i data-lucide="crosshair" class="w-3.5 h-3.5 text-[#C2B280]"></i>
+<span class="text-[10px] font-mono text-[#C2B280] uppercase tracking-widest">OPERATIVE</span>
+</div>
+<h3 class="text-2xl font-black text-white uppercase tracking-tight mb-2 font-stencil">Slender</h3>
+<div class="inline-block bg-[#1a1e16] px-3 py-1 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">
+TOP AFFILIATE
+</div>
+<p class="text-sm text-gray-300 font-serif leading-relaxed border-t border-[#3e452f] pt-4 italic">
+"Entrou no mercado, e em 1 ano e pouquinho conquistou mais de meio milhão ao dia, vencendo a maior competição de faturamento do Brasil da Lastlink."
+</p>
+</div>
+</div>
+<div class="grid grid-cols-2 border-t-2 border-[#3e452f] bg-[#0c0d0b]">
+<div class="p-2 text-center border-r border-[#3e452f]">
+<span class="block text-[9px] text-[#8C8674] font-mono uppercase">Strategy</span>
+<span class="text-xs font-bold text-white">CLASS A</span>
+</div>
+<div class="p-2 text-center">
+<span class="block text-[9px] text-[#8C8674] font-mono uppercase">Execution</span>
+<span class="text-xs font-bold text-white">TIER 1</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Bonus 1 -->
-                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 01</div>
-                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-                        <i data-lucide="file-text" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 uppercase">Playbook Recorrência</h3>
-                    <p class="text-gray-400 font-mono text-xs">Guia tático completo passo-a-passo.</p>
-                </div>
-                <!-- Bonus 2 -->
-                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 02</div>
-                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-                        <i data-lucide="package" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 uppercase">Templates de Funis</h3>
-                    <p class="text-gray-400 font-mono text-xs">Arquivos prontos para deploy.</p>
-                </div>
-                <!-- Bonus 3 -->
-                <div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
-                    <div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 03</div>
-                    <div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
-                        <i data-lucide="users" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 uppercase">Sorteio Mentoria</h3>
-                    <p class="text-gray-400 font-mono text-xs">Acesso direto ao comando (Sorteio).</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- MISSION OBJECTIVES -->
+<section class="py-20 bg-[#0c0d0b] border-t border-[#3E452F]/30 relative z-10">
+<div class="max-w-4xl mx-auto px-4">
+<div class="text-center mb-16 fade-in-section">
+<span class="text-[#8C7A5B] font-mono text-xs tracking-[0.2em] uppercase bg-[#141612] px-2 py-1">[ Mission Briefing ]</span>
+<h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-stencil">O QUE VOCÊ VAI VER NA PRÁTICA</h2>
+</div>
 
-    <!-- OFFER SECTION -->
-    <section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
-        <div class="fade-in-section max-w-xl mx-auto px-4 relative z-10">
-            <div class="relative bg-[#141612] border-4 border-[#4B5320] p-1 shadow-2xl">
-                <div class="bg-[#0c0d0b] p-8 md:p-12 text-center relative overflow-hidden">
-                    <div class="absolute top-6 right-6 border-2 border-[#8C7A5B] text-[#8C7A5B] px-2 py-1 font-stencil text-xs -rotate-12 opacity-80">
-                        DISCOUNT AUTHORIZED
-                    </div>
+<div class="grid md:grid-cols-1 gap-4 font-mono text-sm">
+<script>
+const objectives = [
+{ st: 'LOCKED', cl: 'text-red-500', txt: "Por que insistir em modelos black é um erro fatal." },
+{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "O bloco invisível de recorrência automática." },
+{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Ajuste de comunicação para retenção máxima." },
+{ st: 'LOCKED', cl: 'text-amber-500', txt: "O erro silencioso que mata SaaS low ticket em 90 dias." },
+{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Estruturação de planos para upgrade voluntário." },
+{ st: 'CLEARED', cl: 'text-[#8C7A5B]', txt: "Escala global em Dólar." }
+];
 
-                    <div class="mb-8 w-24 h-24 mx-auto bg-[#1a1e16] border-2 border-[#4B5320] flex items-center justify-center relative">
-                        <span class="text-[10px] text-gray-500 text-center px-2 uppercase font-mono">[ PRODUCT IMG ]</span>
-                    </div>
+objectives.forEach(obj => {
+document.write(`
+                           <div class="flex items-center gap-4 bg-[#141612] border-l-4 border-[#3e452f] p-4 hover:border-[#8C7A5B] hover:bg-[#1a1e16] transition-all shadow-sm">
+                               <span class="${obj.cl} font-bold min-w-[80px]">[${obj.st}]</span>
+                               <p class="text-gray-300">${obj.txt}</p>
+                           </div>
+                       `);
+});
+</script>
+</div>
+</div>
+</section>
 
-                    <h2 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase font-stencil">Workshop Receita Recorrente</h2>
-                    <div class="inline-block bg-[#8C7A5B]/10 px-3 py-1 mb-8 border border-[#8C7A5B]/30">
-                        <p class="text-[#8C7A5B] font-mono text-[10px] tracking-[0.2em]">ACCESS KEY: STEADYFLOW</p>
-                    </div>
+<!-- SUPPLY DROP -->
+<section class="py-24 px-4 relative">
+<div class="max-w-6xl mx-auto relative z-10">
+<h2 class="text-center text-3xl font-bold mb-16 uppercase flex items-center justify-center gap-3 font-stencil">
+<i data-lucide="package" class="w-8 h-8 text-[#8C7A5B]"></i>
+Supply Drop (Bônus)
+</h2>
 
-                    <div class="flex flex-col items-center justify-center gap-1 mb-10 p-6 border-y-2 border-[#24291B] bg-[#121410]">
-                        <span class="text-gray-500 text-sm line-through font-mono decoration-red-500">VALOR: R$ 1000,00</span>
-                        <div class="flex items-baseline justify-center gap-2">
-                            <span class="text-xl text-white font-medium uppercase">Por apenas</span>
-                            <span class="text-6xl font-sans font-black text-[#8C7A5B] tracking-tighter drop-shadow-sm">R$9,90</span>
-                        </div>
-                        <p class="text-gray-500 text-[10px] mt-2 font-mono uppercase">// (menos de 33 centavos por dia)</p>
-                    </div>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Bonus 1 -->
+<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 01</div>
+<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
+<i data-lucide="file-text" class="w-6 h-6"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2 uppercase">Playbook Recorrência</h3>
+<p class="text-gray-400 font-mono text-xs">Guia tático completo passo-a-passo.</p>
+</div>
+<!-- Bonus 2 -->
+<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 02</div>
+<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
+<i data-lucide="package" class="w-6 h-6"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2 uppercase">Templates de Funis</h3>
+<p class="text-gray-400 font-mono text-xs">Arquivos prontos para deploy.</p>
+</div>
+<!-- Bonus 3 -->
+<div class="fade-in-section relative group bg-[#141612] border-2 border-[#3e452f] p-8 text-center hover:border-[#8C7A5B] transition-colors shadow-lg">
+<div class="absolute top-0 right-0 bg-[#24291B] text-[#8C8674] text-[9px] font-mono px-2 py-1">ITEM 03</div>
+<div class="w-16 h-16 mx-auto bg-[#1a1e16] border border-[#3e452f] flex items-center justify-center mb-6 group-hover:bg-[#8C7A5B] group-hover:text-black transition-colors rounded-sm">
+<i data-lucide="users" class="w-6 h-6"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2 uppercase">Sorteio Mentoria</h3>
+<p class="text-gray-400 font-mono text-xs">Acesso direto ao comando (Sorteio).</p>
+</div>
+</div>
+</div>
+</section>
 
-                    <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] hover:bg-[#6B7A48] text-white font-stencil text-xl md:text-2xl uppercase tracking-widest mb-8 transition-colors border-b-4 border-[#24291B] active:border-b-0 active:translate-y-1">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="unlock" class="w-6 h-6"></i> 
-                            Ready to Deploy 
-                            <i data-lucide="chevron-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
-                        </span>
-                    </a>
+<!-- OFFER SECTION -->
+<section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
+<div class="fade-in-section max-w-xl mx-auto px-4 relative z-10">
+<div class="relative bg-[#141612] border-4 border-[#4B5320] p-1 shadow-2xl">
+<div class="bg-[#0c0d0b] p-8 md:p-12 text-center relative overflow-hidden">
+<div class="absolute top-6 right-6 border-2 border-[#8C7A5B] text-[#8C7A5B] px-2 py-1 font-stencil text-xs -rotate-12 opacity-80">
+DISCOUNT AUTHORIZED
+</div>
 
-                    <div class="flex items-center justify-center gap-4 opacity-60">
-                        <i data-lucide="shield-alert" class="w-5 h-5 text-[#8C7A5B]"></i>
-                        <div class="text-left">
-                            <p class="text-white font-bold text-xs uppercase">GARANTIA DE 30 DIAS</p>
-                            <p class="text-[10px] text-gray-500 font-mono">RISK FREE OPERATION</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="mb-8 w-24 h-24 mx-auto bg-[#1a1e16] border-2 border-[#4B5320] flex items-center justify-center relative">
+<span class="text-[10px] text-gray-500 text-center px-2 uppercase font-mono">[ PRODUCT IMG ]</span>
+</div>
 
-    <!-- FAQ SECTION -->
-    <section class="py-20 bg-[#0c0d0b] border-t border-[#3e452f] relative z-10">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-center text-3xl font-bold text-white mb-12 uppercase font-stencil">
-                <span class="text-[#8C7A5B]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
-            </h2>
-            
-            <div id="faq-container">
-                <!-- FAQ Items Rendered by JS -->
-            </div>
-        </div>
-    </section>
+<h2 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase font-stencil">Workshop Receita Recorrente</h2>
+<div class="inline-block bg-[#8C7A5B]/10 px-3 py-1 mb-8 border border-[#8C7A5B]/30">
+<p class="text-[#8C7A5B] font-mono text-[10px] tracking-[0.2em]">ACCESS KEY: STEADYFLOW</p>
+</div>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
-        <div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
-            <i data-lucide="target" class="w-6 h-6"></i>
-        </div>
-        <p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
-            &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
-        </p>
-    </footer>
+<div class="flex flex-col items-center justify-center gap-1 mb-10 p-6 border-y-2 border-[#24291B] bg-[#121410]">
+<span class="text-gray-500 text-sm line-through font-mono decoration-red-500">VALOR: R$ 1000,00</span>
+<div class="flex items-baseline justify-center gap-2">
+<span class="text-xl text-white font-medium uppercase">Por apenas</span>
+<span class="text-6xl font-sans font-black text-[#8C7A5B] tracking-tighter drop-shadow-sm">R$9,90</span>
+</div>
+<p class="text-gray-500 text-[10px] mt-2 font-mono uppercase">// (menos de 33 centavos por dia)</p>
+</div>
 
-    <!-- SCRIPTS -->
-    <script>
-        // Init Icons
-        lucide.createIcons();
+<a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] hover:bg-[#6B7A48] text-white font-stencil text-xl md:text-2xl uppercase tracking-widest mb-8 transition-colors border-b-4 border-[#24291B] active:border-b-0 active:translate-y-1">
+<span class="relative z-10 flex items-center gap-3">
+<i data-lucide="unlock" class="w-6 h-6"></i> 
+Ready to Deploy 
+<i data-lucide="chevron-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+</span>
+</a>
 
-        // Reveal Animation Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
+<div class="flex items-center justify-center gap-4 opacity-60">
+<i data-lucide="shield-alert" class="w-5 h-5 text-[#8C7A5B]"></i>
+<div class="text-left">
+<p class="text-white font-bold text-xs uppercase">GARANTIA DE 30 DIAS</p>
+<p class="text-[10px] text-gray-500 font-mono">RISK FREE OPERATION</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-        // Countdown Timer
-        let time = 4 * 60 * 60 + 12 * 60 + 45; // 4h 12m 45s
-        const timerContainer = document.getElementById('countdown-timer');
-        
-        setInterval(() => {
-            if (time > 0) time--; else time = 15165; // Loop
-            
-            const d = Math.floor(time / (3600 * 24));
-            const h = Math.floor((time % (3600 * 24)) / 3600);
-            const m = Math.floor((time % 3600) / 60);
-            const s = time % 60;
-            
-            const units = ['d', 'h', 'm', 's'];
-            const values = [d, h, m, s];
-            
-            let html = '';
-            values.forEach((val, i) => {
-                html += `
-                <div class="flex flex-col items-center mx-1">
-                    <div class="bg-[#4a5240] text-black font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-inset border-2 border-[#363b2f] rounded-sm shadow-inner">
-                        ${String(val).padStart(2, '0')}
-                    </div>
-                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${units[i]}</span>
-                </div>`;
-            });
-            timerContainer.innerHTML = html;
-        }, 1000);
+<!-- FAQ SECTION -->
+<section class="py-20 bg-[#0c0d0b] border-t border-[#3e452f] relative z-10">
+<div class="max-w-3xl mx-auto px-4">
+<h2 class="text-center text-3xl font-bold text-white mb-12 uppercase font-stencil">
+<span class="text-[#8C7A5B]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
+</h2>
 
-        // Typewriter Effect
-        const typeTarget = document.getElementById('typewriter-text');
-        const typeText = "// PROTOCOL: STEADYFLOW_V1";
-        let typeIndex = 0;
-        
-        function typeWriter() {
-            if (typeIndex < typeText.length) {
-                typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
-                typeIndex++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        setTimeout(typeWriter, 500);
+<div id="faq-container">
+<!-- FAQ Items Rendered by JS -->
+</div>
+</div>
+</section>
 
-        // FAQ Data & Rendering
-        const faqs = [
-            { q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops). Quem estiver presente aproveita ao máximo a experiência." },
-            { q: "Por que o valor é de R$ 9,90?", a: "Esse valor é simbólico para filtrar operadores comprometidos. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aplicar o que será mostrado." },
-            { q: "Preciso saber programar?", a: "Negativo. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Existem caminhos viáveis tanto para iniciantes quanto para quem já está no mercado." },
-            { q: "Funciona no Brasil?", a: "Sim. Apesar de você estar no Brasil, o foco é vender para fora, em dólar, explorando mercados menos saturados e mais previsíveis." },
-            { q: "Só para quem já está no digital?", a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." },
-            { q: "E se eu não gostar?", a: "Tudo bem. Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." }
-        ];
+<!-- FOOTER -->
+<footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
+<div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
+<i data-lucide="target" class="w-6 h-6"></i>
+</div>
+<p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
+&copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
+</p>
+</footer>
 
-        const faqContainer = document.getElementById('faq-container');
-        
-        faqs.forEach((item, index) => {
-            const faqEl = document.createElement('div');
-            faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
-            faqEl.innerHTML = `
-                <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
-                    <div class="flex items-center gap-4 relative z-10">
-                        <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">&gt;</span>
-                        <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
-                    </div>
-                    <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
-                        <i data-lucide="plus" class="w-5 h-5 accordion-icon"></i>
-                    </span>
-                </button>
-                <div class="accordion-content bg-[#0c0d0b]">
-                    <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
-                        ${item.a}
-                    </div>
-                </div>
-            `;
-            
-            const btn = faqEl.querySelector('.accordion-btn');
-            const content = faqEl.querySelector('.accordion-content');
-            const icon = faqEl.querySelector('.accordion-icon');
-            
-            btn.addEventListener('click', () => {
-                const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                
-                // Close all others
-                document.querySelectorAll('.accordion-btn').forEach(b => {
-                    b.setAttribute('aria-expanded', 'false');
-                    b.nextElementSibling.style.maxHeight = null;
-                    b.nextElementSibling.classList.remove('open');
-                    // Reset icons for others would go here if needed
-                });
+<!-- SCRIPTS -->
+<script>
+// Init Icons
+lucide.createIcons();
 
-                if (!isExpanded) {
-                    btn.setAttribute('aria-expanded', 'true');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.classList.add('open');
-                }
-            });
+// Reveal Animation Logic
+const observer = new IntersectionObserver((entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+entry.target.classList.add('is-visible');
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-            faqContainer.appendChild(faqEl);
-        });
-        
-        // Re-init icons for dynamic content
-        lucide.createIcons();
-    </script>
+// Countdown Timer
+let time = 4 * 60 * 60 + 12 * 60 + 45; // 4h 12m 45s
+const timerContainer = document.getElementById('countdown-timer');
+
+setInterval(() => {
+if (time > 0) time--; else time = 15165; // Loop
+
+const d = Math.floor(time / (3600 * 24));
+const h = Math.floor((time % (3600 * 24)) / 3600);
+const m = Math.floor((time % 3600) / 60);
+const s = time % 60;
+
+const units = ['d', 'h', 'm', 's'];
+const values = [d, h, m, s];
+
+let html = '';
+values.forEach((val, i) => {
+html += `
+               <div class="flex flex-col items-center mx-1">
+                   <div class="bg-[#4a5240] text-black font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-inset border-2 border-[#363b2f] rounded-sm shadow-inner">
+                       ${String(val).padStart(2, '0')}
+                   </div>
+                   <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${units[i]}</span>
+               </div>`;
+});
+timerContainer.innerHTML = html;
+}, 1000);
+
+// Typewriter Effect
+const typeTarget = document.getElementById('typewriter-text');
+const typeText = "// PROTOCOL: STEADYFLOW_V1";
+let typeIndex = 0;
+
+function typeWriter() {
+if (typeIndex < typeText.length) {
+typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
+typeIndex++;
+setTimeout(typeWriter, 50);
+}
+}
+setTimeout(typeWriter, 500);
+
+// FAQ Data & Rendering
+const faqs = [
+{ q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops). Quem estiver presente aproveita ao máximo a experiência." },
+{ q: "Por que o valor é de R$ 9,90?", a: "Esse valor é simbólico para filtrar operadores comprometidos. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aplicar o que será mostrado." },
+{ q: "Preciso saber programar?", a: "Negativo. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Existem caminhos viáveis tanto para iniciantes quanto para quem já está no mercado." },
+{ q: "Funciona no Brasil?", a: "Sim. Apesar de você estar no Brasil, o foco é vender para fora, em dólar, explorando mercados menos saturados e mais previsíveis." },
+{ q: "Só para quem já está no digital?", a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." },
+{ q: "E se eu não gostar?", a: "Tudo bem. Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." }
+];
+
+const faqContainer = document.getElementById('faq-container');
+
+faqs.forEach((item, index) => {
+const faqEl = document.createElement('div');
+faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
+faqEl.innerHTML = `
+               <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
+                   <div class="flex items-center gap-4 relative z-10">
+                       <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">&gt;</span>
+                       <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
+                   </div>
+                   <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
+                       <i data-lucide="plus" class="w-5 h-5 accordion-icon"></i>
+                   </span>
+               </button>
+               <div class="accordion-content bg-[#0c0d0b]">
+                   <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
+                       ${item.a}
+                   </div>
+               </div>
+           `;
+
+const btn = faqEl.querySelector('.accordion-btn');
+const content = faqEl.querySelector('.accordion-content');
+const icon = faqEl.querySelector('.accordion-icon');
+
+btn.addEventListener('click', () => {
+const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+// Close all others
+document.querySelectorAll('.accordion-btn').forEach(b => {
+b.setAttribute('aria-expanded', 'false');
+b.nextElementSibling.style.maxHeight = null;
+b.nextElementSibling.classList.remove('open');
+// Reset icons for others would go here if needed
+});
+
+if (!isExpanded) {
+btn.setAttribute('aria-expanded', 'true');
+content.style.maxHeight = content.scrollHeight + "px";
+content.classList.add('open');
+}
+});
+
+faqContainer.appendChild(faqEl);
+});
+
+// Re-init icons for dynamic content
+lucide.createIcons();
+</script>
 </body>
 </html>
