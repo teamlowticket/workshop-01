@@ -1314,7 +1314,7 @@ O Workshop Receita Recorrente começa em:
 </section>
 
 <!-- ================================================================= -->
-<!-- SECTION: FAQ (PERGUNTAS FREQUENTES - ATUALIZADO) -->
+<!-- SECTION: FAQ (PERGUNTAS FREQUENTES - VERSÃO FINAL CONSOLIDADA) -->
 <!-- ================================================================= -->
 <section id="faq" class="py-24 bg-[#0c0d0b] relative overflow-hidden border-t border-[#3E452F]/30">
     <div class="max-w-4xl mx-auto px-4 relative z-10">
@@ -1325,54 +1325,98 @@ O Workshop Receita Recorrente começa em:
                 Perguntas <span class="text-[#8C7A5B]">Frequentes</span>
             </h2>
             <p class="text-gray-500 font-mono text-xs mt-4 uppercase tracking-[0.3em]">
-                // Intel Support: FAQ_Database_Updated
+                // Intel Support: FAQ_Database_Active
             </p>
         </div>
 
         <!-- Container onde o JS irá renderizar as perguntas -->
         <div id="faq-container" class="fade-in-section">
-            <!-- Os itens do FAQ serão inseridos aqui pelo script abaixo -->
+            <!-- Renderizado via Script abaixo -->
         </div>
-
     </div>
+</section>
 
-    <!-- Script de Renderização e Lógica do FAQ -->
-    <script>
-        // Dados do FAQ Atualizados com a nova Copy e Preço
-        const faqs = [
-            { 
-                q: "1. O workshop vai ficar gravado?", 
-                a: "Não. O workshop foi pensado para acontecer ao vivo, justamente para manter o foco, a troca e a entrega no momento certo. Quem estiver presente aproveita ao máximo a experiência." 
-            },
-            { 
-                q: "2. Por que o valor é de R$ 19,90?", 
-                a: "Esse valor é apenas simbólico. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aprender, acompanhar e aplicar o que será mostrado." 
-            },
-            { 
-                q: "3. Preciso saber programar ou entender de tecnologia?", 
-                a: "Não precisa. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Mas iremos revelar uma forma de criar seu SaaS sem saber escrever 1 linha de código sequer..." 
-            },
-            { 
-                q: "4. Esse conteúdo é só para quem já está no digital?", 
-                a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." 
-            },
-            { 
-                q: "5. O modelo funciona para quem que vender no Brasil?", 
-                a: "Sim. Apesar do nosso foco ser SaaS low ticket na gringa, as estratégias que ensinaremos funcionam para rodar no Brasil (nós também rodamos Br), ou até mesmo para rodar SaaS High Ticket..." 
-            },
-            { 
-                q: "6. E se eu entrar e achar que não é pra mim?", 
-                a: "Tudo bem 😊 Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." 
-            },
-            { 
-                q: "7. Como recebo acesso ao Workshop?", 
-                a: "Ao finalizar sua inscrição, você receberá o convite para participar de nosso grupo exclusivo de Wpp, onde iremos enviar o link de acesso do Workshop." 
+<!-- FOOTER -->
+<footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
+    <div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
+        <i data-lucide="target" class="w-6 h-6"></i>
+    </div>
+    <p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
+        &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
+    </p>
+</footer>
+
+<!-- SCRIPTS GERAIS DA PÁGINA -->
+<script>
+    // 1. Inicialização de Ícones
+    lucide.createIcons();
+
+    // 2. Lógica de Animação de Revelação (Scroll)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
             }
-        ];
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-        const faqContainer = document.getElementById('faq-container');
+    // 3. Countdown Timer (Cor Corrigida para #8C7A5B)
+    let time = 4 * 60 * 60 + 12 * 60 + 45; 
+    const timerContainer = document.getElementById('countdown-timer');
 
-        // Renderização Dinâmica dos Itens
+    setInterval(() => {
+        if (time > 0) time--; else time = 15165; 
+
+        const d = Math.floor(time / (3600 * 24));
+        const h = Math.floor((time % (3600 * 24)) / 3600);
+        const m = Math.floor((time % 3600) / 60);
+        const s = time % 60;
+
+        const units = ['d', 'h', 'm', 's'];
+        const values = [d, h, m, s];
+
+        let html = '';
+        values.forEach((val, i) => {
+            html += `
+                <div class="flex flex-col items-center mx-1">
+                    <div class="bg-[#1a1e16] text-[#8C7A5B] font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-2 border-[#24291B] rounded-sm shadow-inner">
+                        ${String(val).padStart(2, '0')}
+                    </div>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${units[i]}</span>
+                </div>`;
+        });
+        if(timerContainer) timerContainer.innerHTML = html;
+    }, 1000);
+
+    // 4. Efeito Typewriter
+    const typeTarget = document.getElementById('typewriter-text');
+    const typeText = "// PROTOCOL: STEADYFLOW_V1";
+    let typeIndex = 0;
+
+    function typeWriter() {
+        if (typeTarget && typeIndex < typeText.length) {
+            typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
+            typeIndex++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    setTimeout(typeWriter, 500);
+
+    // 5. Dados e Lógica do FAQ (Copy Atualizada)
+    const faqs = [
+        { q: "1. O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo, justamente para manter o foco, a troca e a entrega no momento certo. Quem estiver presente aproveita ao máximo a experiência." },
+        { q: "2. Por que o valor é de R$ 19,90?", a: "Esse valor é apenas simbólico. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aprender, acompanhar e aplicar o que será mostrado." },
+        { q: "3. Preciso saber programar ou entender de tecnologia?", a: "Não precisa. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Mas iremos revelar uma forma de criar seu SaaS sem saber escrever 1 linha de código sequer..." },
+        { q: "4. Esse conteúdo é só para quem já está no digital?", a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." },
+        { q: "5. O modelo funciona para quem que vender no Brasil?", a: "Sim. Apesar do nosso foco ser SaaS low ticket na gringa, as estratégias que ensinaremos funcionam para rodar no Brasil (nós também rodamos Br), ou até mesmo para rodar SaaS High Ticket..." },
+        { q: "6. E se eu entrar e achar que não é pra mim?", a: "Tudo bem 😊 Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." },
+        { q: "7. Como recebo acesso ao Workshop?", a: "Ao finalizar sua inscrição, você receberá o convite para participar de nosso grupo exclusivo de Wpp, onde iremos enviar o link de acesso do Workshop." }
+    ];
+
+    const faqContainer = document.getElementById('faq-container');
+
+    if (faqContainer) {
         faqs.forEach((item, index) => {
             const faqEl = document.createElement('div');
             faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
@@ -1400,7 +1444,6 @@ O Workshop Receita Recorrente começa em:
             btn.addEventListener('click', () => {
                 const isExpanded = btn.getAttribute('aria-expanded') === 'true';
 
-                // Fecha todos os outros antes de abrir o atual (comportamento exclusivo)
                 document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
                     if (otherBtn !== btn) {
                         otherBtn.setAttribute('aria-expanded', 'false');
@@ -1409,7 +1452,6 @@ O Workshop Receita Recorrente começa em:
                     }
                 });
 
-                // Toggle do item atual
                 if (isExpanded) {
                     btn.setAttribute('aria-expanded', 'false');
                     content.style.maxHeight = null;
@@ -1423,153 +1465,8 @@ O Workshop Receita Recorrente começa em:
 
             faqContainer.appendChild(faqEl);
         });
-
-        // Reinicializa os ícones do Lucide após a renderização dinâmica
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    </script>
-</section>
-    
-<!-- FAQ SECTION -->
-<section class="py-20 bg-[#0c0d0b] border-t border-[#3e452f] relative z-10">
-<div class="max-w-3xl mx-auto px-4">
-<h2 class="text-center text-3xl font-bold text-white mb-12 uppercase font-stencil">
-<span class="text-[#8C7A5B]">//</span> DADOS DE INTELIGÊNCIA (FAQ)
-</h2>
-
-<div id="faq-container">
-<!-- FAQ Items Rendered by JS -->
-</div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
-<div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
-<i data-lucide="target" class="w-6 h-6"></i>
-</div>
-<p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
-&copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
-</p>
-</footer>
-
-<!-- SCRIPTS -->
-<script>
-// Init Icons
-lucide.createIcons();
-
-// Reveal Animation Logic
-const observer = new IntersectionObserver((entries) => {
-entries.forEach((entry) => {
-if (entry.isIntersecting) {
-entry.target.classList.add('is-visible');
-}
-});
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
-
-// Countdown Timer
-let time = 4 * 60 * 60 + 12 * 60 + 45; // 4h 12m 45s
-const timerContainer = document.getElementById('countdown-timer');
-
-setInterval(() => {
-if (time > 0) time--; else time = 15165; // Loop
-
-const d = Math.floor(time / (3600 * 24));
-const h = Math.floor((time % (3600 * 24)) / 3600);
-const m = Math.floor((time % 3600) / 60);
-const s = time % 60;
-
-const units = ['d', 'h', 'm', 's'];
-const values = [d, h, m, s];
-
-let html = '';
-values.forEach((val, i) => {
-html += `
-               <div class="flex flex-col items-center mx-1">
-                   <div class="bg-[#4a5240] text-black font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-inset border-2 border-[#363b2f] rounded-sm shadow-inner">
-                       ${String(val).padStart(2, '0')}
-                   </div>
-                   <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${units[i]}</span>
-               </div>`;
-});
-timerContainer.innerHTML = html;
-}, 1000);
-
-// Typewriter Effect
-const typeTarget = document.getElementById('typewriter-text');
-const typeText = "// PROTOCOL: STEADYFLOW_V1";
-let typeIndex = 0;
-
-function typeWriter() {
-if (typeIndex < typeText.length) {
-typeTarget.innerHTML = typeText.substring(0, typeIndex + 1);
-typeIndex++;
-setTimeout(typeWriter, 50);
-}
-}
-setTimeout(typeWriter, 500);
-
-// FAQ Data & Rendering
-const faqs = [
-{ q: "O workshop vai ficar gravado?", a: "Não. O workshop foi pensado para acontecer ao vivo (Live Ops). Quem estiver presente aproveita ao máximo a experiência." },
-{ q: "Por que o valor é de R$ 9,90?", a: "Esse valor é simbólico para filtrar operadores comprometidos. Ele ajuda a garantir que as pessoas que participem estejam realmente interessadas em aplicar o que será mostrado." },
-{ q: "Preciso saber programar?", a: "Negativo. O foco do workshop é modelo de negócio, estratégia e tomada de decisão, não programação. Existem caminhos viáveis tanto para iniciantes quanto para quem já está no mercado." },
-{ q: "Funciona no Brasil?", a: "Sim. Apesar de você estar no Brasil, o foco é vender para fora, em dólar, explorando mercados menos saturados e mais previsíveis." },
-{ q: "Só para quem já está no digital?", a: "Não. Ele é útil tanto para quem já atua no digital quanto para profissionais, especialistas e pessoas do mercado corporativo que desejam migrar para um modelo mais previsível e escalável." },
-{ q: "E se eu não gostar?", a: "Tudo bem. Você tem 30 dias de garantia. Se sentir que o workshop não fez sentido para você, é só pedir o reembolso. Simples e sem complicações." }
-];
-
-const faqContainer = document.getElementById('faq-container');
-
-faqs.forEach((item, index) => {
-const faqEl = document.createElement('div');
-faqEl.className = 'group bg-[#141612] border border-[#24291B] mb-4 overflow-hidden relative z-10';
-faqEl.innerHTML = `
-               <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-[#1a1e16] transition-colors select-none relative z-20" aria-expanded="false">
-                   <div class="flex items-center gap-4 relative z-10">
-                       <span class="accordion-arrow text-[#8C7A5B] font-bold text-lg">&gt;</span>
-                       <span class="text-gray-100 font-bold font-mono uppercase tracking-wide text-sm md:text-base">${item.q}</span>
-                   </div>
-                   <span class="text-[#8C7A5B] text-xl shrink-0 ml-4 relative z-10">
-                       <i data-lucide="plus" class="w-5 h-5 accordion-icon"></i>
-                   </span>
-               </button>
-               <div class="accordion-content bg-[#0c0d0b]">
-                   <div class="px-6 pb-6 pt-2 text-[#d4d4d4] text-sm md:text-base leading-relaxed font-mono border-t border-[#24291B]">
-                       ${item.a}
-                   </div>
-               </div>
-           `;
-
-const btn = faqEl.querySelector('.accordion-btn');
-const content = faqEl.querySelector('.accordion-content');
-const icon = faqEl.querySelector('.accordion-icon');
-
-btn.addEventListener('click', () => {
-const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-
-// Close all others
-document.querySelectorAll('.accordion-btn').forEach(b => {
-b.setAttribute('aria-expanded', 'false');
-b.nextElementSibling.style.maxHeight = null;
-b.nextElementSibling.classList.remove('open');
-// Reset icons for others would go here if needed
-});
-
-if (!isExpanded) {
-btn.setAttribute('aria-expanded', 'true');
-content.style.maxHeight = content.scrollHeight + "px";
-content.classList.add('open');
-}
-});
-
-faqContainer.appendChild(faqEl);
-});
-
-// Re-init icons for dynamic content
-lucide.createIcons();
+        lucide.createIcons();
+    }
 </script>
 </body>
 </html>
