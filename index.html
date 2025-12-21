@@ -180,102 +180,142 @@ O Workshop Receita Recorrente começa em:
 </div>
 
 <!-- HERO SECTION -->
-<section class="relative pt-12 pb-20 px-4 z-10">
+<section class="relative pt-12 pb-20 px-4 z-10 overflow-hidden">
+    <!-- REFINAMENTOS ESTÉTICOS (CSS SCOPED) -->
+    <style>
+        @keyframes tv-flicker {
+            0% { opacity: 0.99; filter: brightness(1.01); }
+            5% { opacity: 0.97; filter: brightness(0.99); }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
+
+        /* Glow amarelado EXTREMAMENTE sutil */
+        @keyframes ultra-soft-glow {
+            0%, 100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.12; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .old-tv-font {
+            position: relative;
+            display: inline-block;
+            animation: tv-flicker 0.2s infinite;
+            text-shadow: 0.5px 0 0.5px rgba(255,0,0,0.1), -0.5px 0 0.5px rgba(0,255,255,0.1);
+        }
+
+        /* Scanlines horizontais extremamente sutis apenas no texto */
+        .old-tv-font::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 1px,
+                rgba(0, 0, 0, 0.05) 2px
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Bordas Táticas para Headline */
+        .tactical-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: rgba(140, 122, 91, 0.3);
+            pointer-events: none;
+        }
+    </style>
+
     <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
         
         <!-- TIMER CONTAINER -->
         <div class="fade-in-section mb-12 relative">
-            <!-- Floating Icons: Alterados para z-30 para flutuarem sobre o timer -->
-            <div class="absolute -left-24 top-1/2 hidden md:flex opacity-40 text-[#6B7A48] items-center gap-2 animate-float z-30">
+            <!-- Elementos Flutuantes Refinados -->
+            <div class="absolute -left-24 top-1/2 hidden md:flex opacity-30 text-[#6B7A48] items-center gap-2 animate-float z-30">
                 <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
                 <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 border border-[#3e452f]">DATA_INTEL</span>
             </div>
-            <div class="absolute -right-24 -top-8 hidden md:flex opacity-40 text-[#6B7A48] flex-col items-center animate-float-delayed z-30">
+            <div class="absolute -right-24 -top-8 hidden md:flex opacity-30 text-[#6B7A48] flex-col items-center animate-float-delayed z-30">
                 <i data-lucide="satellite" class="w-8 h-8"></i>
                 <span class="text-[10px] font-mono tracking-widest bg-black/50 px-1 mt-1 border border-[#3e452f]">SAT_UPLINK</span>
             </div>
 
-            <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md">
+            <div class="inline-block mb-3 text-[10px] font-mono text-[#8C7A5B] tracking-[0.3em] uppercase bg-[#1a1e16] border border-[#8C7A5B]/50 px-3 py-1 shadow-md animate-pulse">
                 Mission Countdown
             </div>
             
-            <!-- JS Timer Rendered Here -->
-            <!-- Alteração: Adicionado text-[#8C7A5B] para que os números herdem a cor clara/dourada solicitada -->
-            <div id="countdown-timer" class="flex gap-2 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-3 rounded shadow-2xl relative z-10 text-[#8C7A5B]">
+            <!-- CONTADOR -->
+            <div id="countdown-timer" class="flex gap-4 md:gap-6 items-center justify-center bg-[#1a1e16] border-4 border-[#24291B] p-4 rounded shadow-[0_0_30px_rgba(0,0,0,0.8)] relative z-10 text-[#8C7A5B] font-mono">
                 <!-- Screws -->
                 <div class="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
                 <div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
                 <div class="absolute bottom-1 left-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
                 <div class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#3D3222] shadow-inner"></div>
                 
-                <!-- Digits inserted by JS will now be #8C7A5B -->
+                <div class="flex flex-col items-center">
+                    <span id="days" class="text-3xl md:text-5xl font-black text-white/90">00</span>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">D</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="hours" class="text-3xl md:text-5xl font-black text-white/90">00</span>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">H</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="minutes" class="text-3xl md:text-5xl font-black text-white/90">00</span>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">M</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="seconds" class="text-3xl md:text-5xl font-black text-white/90">00</span>
+                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">S</span>
+                </div>
             </div>
         </div>
 
-        <!-- HEADLINE -->
-        <div class="fade-in-section mb-12 max-w-4xl space-y-6 relative">
-            <div class="inline-flex items-center gap-2 text-[#C2B280] font-mono text-xs bg-[#141612] px-4 py-1 border-l-4 border-[#8C7A5B]">
-                <i data-lucide="terminal" class="w-3 h-3"></i>
-                <span id="typewriter-text">// PROTOCOL: STEADYFLOW_V1</span>
+        <!-- HEADLINE AREA -->
+        <div class="fade-in-section mb-12 max-w-4xl relative p-8">
+            <!-- Cantos Decorativos -->
+            <div class="tactical-corner top-0 left-0 border-t-2 border-l-2"></div>
+            <div class="tactical-corner top-0 right-0 border-t-2 border-r-2"></div>
+            <div class="tactical-corner bottom-0 left-0 border-b-2 border-l-2"></div>
+            <div class="tactical-corner bottom-0 right-0 border-b-2 border-r-2"></div>
+
+            <!-- EXPERTS IMAGE COM GLOW ULTRA SUTIL -->
+            <div class="flex justify-center relative">
+                <!-- Ultra Soft Glow (Opacidade reduzida ao mínimo) -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#FDE68A] opacity-5 blur-[120px] rounded-full z-0 pointer-events-none" style="animation: ultra-soft-glow 8s infinite ease-in-out;"></div>
+                
+                <img src="WRR-v01-Experts-01.webp" alt="Especialistas Workshop" 
+                     class="w-full max-w-[280px] md:max-w-[400px] h-auto object-contain relative z-10">
             </div>
             
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-[#e2e2d5] drop-shadow-xl font-stencil">
-                Domine o Jogo do <br />
-                <span class="text-[#8C7A5B] text-shadow-sm">
-                    "CashFlow Recorrente"
-                </span>
-            </h1>
+            <!-- TÍTULO (Sobreposição agressiva mantida) -->
+            <div class="old-tv-font -mt-18 md:-mt-32 relative z-20">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.9)] font-stencil">
+                    Domine o Jogo do <br />
+                    <span class="text-[#8C7A5B] text-shadow-sm">
+                        "CashFlow Recorrente"
+                    </span>
+                </h1>
+            </div>
             
-            <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed">
+            <p class="text-lg md:text-xl text-[#C2B280] font-sans max-w-3xl mx-auto border-l-4 border-[#4B5320] pl-6 text-left md:text-center md:border-none md:pl-0 leading-relaxed mt-6">
                 O sistema que nos faz faturar <span class="text-white font-bold bg-[#4B5320] px-1 shadow-sm border border-[#3E452F]">múltiplos 6D por mês</span> em recorrência automática com SaaS Low Ticket.
                 <span class="block mt-2 md:inline md:mt-0">Podendo ser feito mesmo sem gastar 1 centavo em tráfego...</span>
             </p>
         </div>
 
-        <!-- VIDEO PLACEHOLDER -->
-        <div class="fade-in-section w-full max-w-4xl relative group">
-            <!-- Floating Badge -->
-            <div class="absolute -top-6 -right-6 z-30 hidden md:block animate-float-delayed">
-                <div class="bg-[#141612] border-2 border-[#8C7A5B] p-4 shadow-xl transform rotate-3">
-                    <div class="border border-[#8C7A5B] border-dashed p-1">
-                        <p class="text-[10px] font-black text-[#8C7A5B] uppercase tracking-widest text-center leading-tight">
-                            TOP SECRET<br/>ACCESS
-                        </p>
-                    </div>
-                    <div class="absolute top-1 left-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-                    <div class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#5D5348] rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="relative aspect-video bg-black border-4 border-[#24291B] shadow-2xl">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#24291B] flex justify-center gap-1">
-                     <!-- Top Bar Decoration -->
-                     <script>
-                        for(let i=0; i<20; i++) document.write(`<div class="w-1 h-2 bg-[#0c0d0b]"></div>`)
-                     </script>
-                </div>
-
-                <div class="absolute inset-0 flex items-center justify-center bg-[#0c0d0b]">
-                    <div class="text-center w-full h-full flex flex-col items-center justify-center relative">
-                        <div class="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#141612_10px,#141612_20px)]"></div>
-                        
-                        <span class="text-[#C2B280] font-mono text-xs mb-6 block relative z-10 bg-black/50 px-4 py-1 border border-[#3E452F]">[ CLASSIFIED INTEL FOOTAGE ]</span>
-                        
-                        <button class="w-20 h-20 flex items-center justify-center border-4 border-[#8C7A5B] bg-[#8C7A5B]/10 text-[#8C7A5B] rounded-full hover:bg-[#8C7A5B] hover:text-black transition-colors relative z-10 shadow-[0_0_30px_rgba(140,122,91,0.2)] group-hover:scale-105 duration-300">
-                            <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/80 px-2 py-1 border border-[#8C7A5B]/30 rounded-sm">
-                    <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
-                    <span class="text-white font-mono text-xs font-bold tracking-widest">REC</span>
-                </div>
-            </div>
+        <!-- LOGO -->
+        <div class="fade-in-section mb-8 flex justify-center relative z-20">
+            <img src="WRR-Logo-01.1.webp" alt="WRR Logo" 
+                 class="w-full max-w-[120px] md:max-w-[160px] h-auto object-contain opacity-90 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
         </div>
 
         <!-- INTEL TEXT -->
-        <div class="fade-in-section mt-12 max-w-3xl mx-auto space-y-6 text-center">
+        <div class="fade-in-section mt-6 max-w-3xl mx-auto space-y-6 text-center">
             <div class="border-l-4 border-[#3D3222] pl-6 text-left md:text-center md:border-none md:pl-0">
                 <p class="text-[#C2B280] text-base md:text-lg leading-relaxed font-mono">
                     // REPORT: Zero conversinha de guru. Nada de Nutra, afiliado, X1, lançamento, gestor de tráfego ou low ticket "tradicional"...
@@ -293,116 +333,64 @@ O Workshop Receita Recorrente começa em:
 
         <!-- CTA SECTION & DOSSIER -->
         <div class="fade-in-section mt-12 w-full max-w-4xl flex flex-col items-center relative">
-            
-            <div class="absolute -top-10 left-0 pointer-events-none opacity-40 hidden md:block animate-float">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="dollar-sign" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="absolute -top-5 right-0 pointer-events-none opacity-40 hidden md:block animate-float-delayed">
-                <div class="w-14 h-14 border-2 border-[#8C7A5B] rounded-full flex items-center justify-center bg-[#141612] shadow-lg">
-                    <i data-lucide="crosshair" class="text-[#8C7A5B] w-6 h-6"></i>
-                </div>
-            </div>
-
             <!-- MAIN BUTTON -->
-            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 rounded-sm clip-angled">
+            <a href="#offer" class="group relative inline-flex items-center justify-center w-full max-w-xl bg-[#4B5320] border-b-8 border-[#24291B] py-5 transition-all hover:-translate-y-1 active:border-b-0 active:translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.6)] z-20 rounded-sm clip-angled">
                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20 mix-blend-multiply"></div>
                 <span class="relative z-10 flex items-center gap-3 font-stencil text-white text-xl md:text-2xl uppercase tracking-wide font-black">
                     DESBLOQUEAR ACESSO AO WORKSHOP <i data-lucide="chevron-right" class="w-6 h-6 border-2 border-white rounded-full p-0.5 group-hover:translate-x-1 transition-transform"></i>
                 </span>
             </a>
             
-            <!-- DOSSIER LIST (Cardboard File Style) -->
+            <!-- DOSSIER LIST -->
             <div class="w-full mt-20 relative z-10 max-w-3xl mx-auto">
                 <div class="absolute -top-8 left-0 h-9 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-6 flex items-center z-0 shadow-md">
                     <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-widest uppercase flex items-center gap-2">
                         <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> DOC_REF: 23-12-OP
                     </span>
                 </div>
-
                 <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
                     <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
-                    
                     <div class="relative z-10 bg-[#C1A87D] border-b-2 border-[#8C7A5B] p-4 flex justify-between items-center">
                         <span class="text-xs font-black font-mono text-[#3D3222] uppercase tracking-widest flex items-center gap-2">
                             <i data-lucide="file-warning" class="w-4 h-4"></i> MISSION PARAMETERS
                         </span>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#3D3222] rounded-full opacity-30"></div>
-                            <div class="w-2.5 h-2.5 bg-[#8C7A5B] rounded-full"></div>
-                        </div>
                     </div>
-
                     <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
-                        
-                        <!-- Alteração: Itens internos agora usam font-mono para efeito typewriter -->
                         <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
                             <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
                                 <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
                             </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Imediato a nosso Grupo Vip
-                            </span>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">Acesso Imediato a nosso Grupo Vip</span>
                         </div>
-
                         <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
                             <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
                                 <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
                             </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Aprenda a criar uma recorrência em dólar
-                            </span>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">Aprenda a criar uma recorrência em dólar</span>
                         </div>
-
                         <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 p-6 hover:bg-[#C1A87D]/30 transition-colors">
                             <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
                                 <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
                             </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Workshop Prático, com foco em Executar
-                            </span>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">Workshop Prático, com foco em Executar</span>
                         </div>
-
                         <div class="flex items-start gap-4 group border-b border-[#8C7A5B]/50 md:border-l p-6 hover:bg-[#C1A87D]/30 transition-colors">
                             <div class="w-5 h-5 bg-[#3D3222] flex items-center justify-center shrink-0 rounded-sm shadow-sm mt-0.5">
                                 <i data-lucide="check" class="w-3.5 h-3.5 text-[#D6C4A0]" stroke-width="4"></i>
                             </div>
-                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">
-                                Acesso Diretamente aos mentores para tirar dúvidas
-                            </span>
+                            <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight leading-snug">Acesso Diretamente aos mentores para tirar dúvidas</span>
                         </div>
-
                         <div class="flex items-center justify-center gap-3 group md:col-span-2 p-6 bg-[#C1A87D]/20 hover:bg-[#C1A87D]/40 transition-colors border-t-2 border-[#8C7A5B]">
                             <i data-lucide="radio" class="w-5 h-5 text-[#8b0000] animate-pulse" stroke-width="2.5"></i>
-                            <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">
-                                100% ao vivo, na terça-feira, às 20h
-                            </span>
+                            <span class="text-[#8b0000] text-sm md:text-base font-black font-stencil uppercase tracking-wider">100% ao vivo, na terça-feira, às 20h</span>
                         </div>
-                    </div>
-
-                    <div class="hidden md:flex absolute -right-6 -bottom-12 w-32 h-32 bg-[#F2EFE9] border border-[#8C7A5B]/50 shadow-xl transform -rotate-3 flex-col items-center justify-center text-center p-2 z-30">
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-10 border-2 border-[#555] rounded-t-full border-b-0 bg-transparent z-40"></div>
-                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-6 border-r-2 border-[#555] rounded-tr-full z-30"></div>
-
-                         <div class="w-full h-full border border-dashed border-[#8C7A5B] flex flex-col items-center justify-center bg-[#ffffff] relative overflow-hidden">
-                            <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.02)_5px,rgba(0,0,0,0.02)_10px)]"></div>
-                            <div class="relative z-10">
-                                <div class="text-[9px] bg-[#3D3222] text-[#D6C4A0] px-2 py-0.5 font-bold mb-1 inline-block uppercase tracking-wide">STATUS REPORT</div>
-                                <span class="block text-[8px] text-[#3D3222] font-mono leading-tight mt-1">
-                                    [IMAGEM FLUTUANTE:<br>GRÁFICO DE SUCESSO]
-                                </span>
-                            </div>
-                         </div>
-                         <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#e0d6c2] opacity-80 transform -rotate-2 border border-white/50 shadow-sm"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-  
+
 <!-- CLASSIFIED INTEL SECTION -->
 <section class="py-20 border-y border-[#3E452F] bg-[#121410] relative overflow-hidden">
     <!-- Overlay de textura para profundidade -->
@@ -455,87 +443,33 @@ O Workshop Receita Recorrente começa em:
                 </div>
             </div>
 
-            <!-- TACTICAL DEVICE (PHONE MOCKUP) -->
-            <div class="fade-in-section w-full md:w-1/2 flex justify-center">
-                <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
-                    <!-- Botões Físicos -->
-                    <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
-                    <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
-                    <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
+<!-- TACTICAL DEVICE (PHONE MOCKUP) -->
+<div class="fade-in-section w-full md:w-1/2 flex justify-center">
+    <div class="relative mx-auto w-[280px] md:w-[320px] aspect-[9/18] bg-[#1a1e16] rounded-[2rem] border-[8px] border-[#24291B] shadow-2xl flex flex-col overflow-hidden ring-1 ring-[#3e452f]">
+        <!-- Botões Físicos -->
+        <div class="absolute top-20 -right-2.5 w-1 h-12 bg-[#24291B] rounded-r-md"></div>
+        <div class="absolute top-36 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
+        <div class="absolute top-48 -left-2.5 w-1 h-8 bg-[#24291B] rounded-l-md"></div>
 
-                    <div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
-                        <div class="h-8 bg-[#141612] flex justify-between items-center px-4 pt-1 text-[10px] text-[#C2B280] font-mono z-10 border-b border-[#3e452f]">
-                            <span>SAT_LINK_ACTIVE</span>
-                            <div class="flex gap-2">
-                                <i data-lucide="signal" class="w-2.5 h-2.5 text-white"></i>
-                                <i data-lucide="battery" class="w-2.5 h-2.5 text-white"></i>
-                            </div>
-                        </div>
+        <div class="flex-1 bg-[#0c0d0b] relative flex flex-col w-full h-full rounded-[1.5rem] overflow-hidden border-4 border-black">
+            <!-- Área da Tela (Preenchimento Total) -->
+            <div class="flex-1 relative w-full h-full bg-[#0c0d0b]">
+                <!-- Imagem da Tela - Agora ocupando 100% da altura interna -->
+                <img src="WRR-v01-Social-01.webp" alt="Interface Dashboard" class="w-full h-full object-cover">
 
-                        <div class="flex-1 relative flex flex-col bg-[#0c0d0b]">
-                            <div class="p-6 pb-2">
-                                <div class="flex justify-between items-center mb-4">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700"></div>
-                                        <div>
-                                            <div class="text-[10px] text-gray-400">Welcome back</div>
-                                            <div class="text-xs font-bold text-white">Operator</div>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="award" class="w-4 h-4 text-[#8C7A5B]"></i>
-                                </div>
-                                <div class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Total Revenue</div>
-                                <div class="flex items-baseline gap-1">
-                                    <span class="text-2xl font-bold text-white">$</span>
-                                    <span class="text-4xl font-bold text-white tracking-tighter">12,450</span>
-                                    <span class="text-2xl font-bold text-gray-500">.00</span>
-                                </div>
-                                <div class="flex items-center gap-1 mt-1 text-[#8C7A5B] text-xs font-medium">
-                                    <i data-lucide="trending-up" class="w-3 h-3"></i>
-                                    <span>+12.5% today</span>
-                                </div>
-                            </div>
-
-                            <div class="h-24 w-full relative px-2">
-                                <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#8C7A5B]/10 to-transparent"></div>
-                                <svg class="w-full h-full text-[#8C7A5B] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
-                                    <path d="M0 35 C 10 35, 10 20, 20 20 C 30 20, 30 30, 40 25 C 50 20, 50 5, 60 10 C 70 15, 70 25, 80 20 C 90 15, 90 0, 100 5" fill="none" stroke="currentColor" stroke-width="2" />
-                                    <circle cx="100" cy="5" r="3" fill="currentColor" class="animate-pulse" />
-                                </svg>
-                            </div>
-
-                            <div class="flex-1 bg-[#141612] mt-4 rounded-t-3xl p-6 space-y-3">
-                                <script>
-                                    for(let i=1; i<=3; i++) {
-                                        document.write(`
-                                            <div class="flex justify-between items-center p-3 bg-black/40 rounded-xl border border-white/5">
-                                                <div class="flex items-center gap-3">
-                                                    <div class="w-8 h-8 rounded-full bg-[#8C7A5B]/10 flex items-center justify-center text-[#8C7A5B]">
-                                                        <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="text-xs font-bold text-white">Sale #29${i}3</div>
-                                                        <div class="text-[9px] text-gray-500">Just now</div>
-                                                    </div>
-                                                </div>
-                                                <div class="text-xs font-bold text-white">+$49.90</div>
-                                            </div>
-                                        `);
-                                    }
-                                </script>
-                            </div>
-                            <div class="absolute bottom-4 left-0 right-0 text-center">
-                                <p class="text-[10px] font-mono text-gray-500 bg-black/80 inline-block px-2 py-1 rounded">
-                                    Há 4 meses isso se tornou a nossa Realidade...
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Texto de Destaque (Estilo Tactical HUD) -->
+                <div class="absolute bottom-10 left-0 right-0 text-center px-4 z-20">
+                    <p class="text-[12px] md:text-[13px] font-mono text-[#8C7A5B] bg-black/95 backdrop-blur-md inline-block px-6 py-3 rounded-sm border-2 border-[#8C7A5B] shadow-[0_0_20px_rgba(140,122,91,0.4)] leading-tight font-black uppercase tracking-tighter">
+                        Há 4 meses isso se tornou a nossa Realidade...
+                    </p>
                 </div>
+                
+                <!-- Gradiente de oclusão inferior para leitura -->
+                <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none"></div>
             </div>
-
         </div>
     </div>
+</div>
 </section>
 
     <!-- ================================================================= -->
@@ -674,40 +608,68 @@ O Workshop Receita Recorrente começa em:
             </div>
         </div>
 
-        <!-- Grid de Depoimentos/Prints (Placeholders) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-section">
+        <!-- Container de Depoimentos (Grid Desktop / Carousel Mobile) -->
+        <!-- No Mobile: use a rolagem lateral; No Desktop: grid de 3 colunas -->
+        <div class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide">
             
-            <!-- Card de Prova 01 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_001</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="file-text" class="w-16 h-16 text-[#8C7A5B]"></i>
+            <!-- Card Vídeo 01 -->
+            <div class="min-w-[80%] md:min-w-full snap-center group">
+                <div class="bg-[#161914] border border-[#3E452F] rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:border-[#8C7A5B]/50 relative">
+                    <div class="absolute top-3 left-3 z-20 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                        <span class="text-[9px] font-mono text-white/50 uppercase tracking-widest">DEP_01</span>
+                    </div>
+                    <div class="aspect-[9/16] bg-black relative">
+                        <video 
+                            class="w-full h-full object-cover"
+                            controls 
+                            playsinline 
+                            preload="metadata"
+                            poster="">
+                            <source src="WRR-v01-Depoimento-01.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ PRINTS DE VENDA E FATURAMENTO - ÁREA RESTRITA ]
-                </p>
             </div>
 
-            <!-- Card de Prova 02 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_002</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="users" class="w-16 h-16 text-[#8C7A5B]"></i>
+            <!-- Card Vídeo 02 -->
+            <div class="min-w-[80%] md:min-w-full snap-center group">
+                <div class="bg-[#161914] border border-[#3E452F] rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:border-[#8C7A5B]/50 relative">
+                    <div class="absolute top-3 left-3 z-20 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                        <span class="text-[9px] font-mono text-white/50 uppercase tracking-widest">DEP_02</span>
+                    </div>
+                    <div class="aspect-[9/16] bg-black relative">
+                        <video 
+                            class="w-full h-full object-cover"
+                            controls 
+                            playsinline 
+                            preload="metadata"
+                            poster="">
+                            <source src="WRR-v01-Depoimento-02.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ DEPOIMENTOS REAIS + EXPERIÊNCIA DOS OPERADORES ]
-                </p>
             </div>
 
-            <!-- Card de Prova 03 -->
-            <div class="bg-[#161914] border-2 border-dashed border-[#3E452F] aspect-square flex flex-col items-center justify-center p-8 group hover:border-[#8C7A5B]/40 transition-all duration-500 relative">
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">FILE_IMG_003</div>
-                <div class="mb-4 opacity-20 group-hover:opacity-60 transition-opacity duration-500">
-                    <i data-lucide="bar-chart-3" class="w-16 h-16 text-[#8C7A5B]"></i>
+            <!-- Card Vídeo 03 -->
+            <div class="min-w-[80%] md:min-w-full snap-center group">
+                <div class="bg-[#161914] border border-[#3E452F] rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:border-[#8C7A5B]/50 relative">
+                    <div class="absolute top-3 left-3 z-20 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                        <span class="text-[9px] font-mono text-white/50 uppercase tracking-widest">DEP_03</span>
+                    </div>
+                    <div class="aspect-[9/16] bg-black relative">
+                        <video 
+                            class="w-full h-full object-cover"
+                            controls 
+                            playsinline 
+                            preload="metadata"
+                            poster="">
+                            <source src="WRR-v01-Depoimento-03.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center leading-tight">
-                    [ DASHBOARDS DE RECORRÊNCIA EM DÓLAR - CLASSIFIED ]
-                </p>
             </div>
 
         </div>
@@ -716,11 +678,22 @@ O Workshop Receita Recorrente começa em:
         <div class="mt-16 flex flex-col items-center gap-4">
             <div class="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-[#3E452F] to-transparent"></div>
             <p class="text-[#8C7A5B] font-mono text-[9px] uppercase tracking-[0.4em] animate-pulse">
-                Sincronizando dados de faturamento... OK
+                Sincronizando depoimentos validados... OK
             </p>
         </div>
     </div>
 </section>
+
+<!-- Adicione este pequeno CSS global se ainda não tiver para esconder a barra de rolagem no mobile -->
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
     
 <!-- ================================================================= -->
 <!-- UNIT COMMANDERS & STRATEGIC BRIEFING -->
@@ -738,7 +711,7 @@ O Workshop Receita Recorrente começa em:
             <h3 class="text-xl md:text-3xl font-black text-[#8C7A5B] uppercase font-stencil">KAUÊ PUGLIESI E SLENDER</h3>
             <div class="space-y-4 font-mono text-sm md:text-base text-gray-400 leading-relaxed">
                 <p>
-                    São referências no mercado Digital. Juntos, já faturaram <span class="text-white font-bold">múltiplos 8 dígitos</span> construindo negócios digitais escaláveis e previsíveis.
+                    São referências no mercado Digital. Juntos, já faturaram <span class="text-white font-bold">8 dígitos</span> construindo negócios digitais escaláveis e previsíveis.
                 </p>
                 
                 <!-- O Problema (Mercado Quebrado) -->
@@ -766,10 +739,9 @@ O Workshop Receita Recorrente começa em:
                 <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
                     <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20">CONFIDENTIAL</div>
                     <div class="p-6 flex flex-col items-center flex-grow pt-8 text-center">
-                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1 grayscale">
-                            <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                <i data-lucide="user" class="w-10 h-10 text-gray-500"></i>
-                            </div>
+                        <!-- Imagem do Kauê com efeito grayscale e rotação -->
+                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md rotate-1 grayscale overflow-hidden">
+                            <img src="WRR-v01-Kaue-01.webp" alt="Kauê Pugliesi" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-2xl font-black text-white uppercase font-stencil mb-1">Kauê Pugliesi</h3>
                         <div class="inline-block bg-[#1a1e16] px-3 py-0.5 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">EX-CAPITÃO</div>
@@ -796,10 +768,9 @@ O Workshop Receita Recorrente começa em:
                 <div class="relative bg-[#141612] border-2 border-[#5D5348] rounded-sm h-full flex flex-col z-10 shadow-lg">
                     <div class="absolute -top-3 left-4 bg-[#8C7A5B] text-black px-4 py-1 text-xs font-bold font-mono tracking-tighter transform -rotate-1 border border-black/20">CONFIDENTIAL</div>
                     <div class="p-6 flex flex-col items-center flex-grow pt-8 text-center">
-                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md -rotate-1 grayscale">
-                            <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                <i data-lucide="user" class="w-10 h-10 text-gray-500"></i>
-                            </div>
+                        <!-- Imagem do Slender com efeito grayscale e rotação inversa -->
+                        <div class="w-24 h-24 mb-6 relative bg-gray-200 border-4 border-white shadow-md -rotate-1 grayscale overflow-hidden">
+                            <img src="WRR-v01-Slender-01.webp" alt="Slender" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-2xl font-black text-white uppercase font-stencil mb-1">Slender</h3>
                         <div class="inline-block bg-[#1a1e16] px-3 py-0.5 text-[10px] font-mono text-[#8C7A5B] border border-[#3e452f] mb-4 uppercase">TOP OPERATIVE</div>
@@ -844,14 +815,10 @@ O Workshop Receita Recorrente começa em:
         <div class="fade-in-section relative group">
             <div class="absolute -inset-1 bg-gradient-to-r from-[#3D3222] via-[#8C7A5B] to-[#3D3222] opacity-20 blur group-hover:opacity-40 transition-opacity duration-500"></div>
             <div class="relative bg-black border-2 border-[#8C7A5B]/30 rounded-sm overflow-hidden shadow-2xl">
-                <!-- Banner Image Placeholder -->
-                <div class="aspect-[21/9] bg-[#0c0d0b] flex flex-col items-center justify-center p-8 border-b border-[#8C7A5B]/20">
-                    <div class="mb-4 text-[#8C7A5B] opacity-50">
-                        <i data-lucide="trending-up" class="w-16 h-16"></i>
-                    </div>
-                    <span class="text-[10px] font-mono text-gray-600 tracking-[0.5em] uppercase">
-                        [ RECTANGULAR BANNER: VALUATION_REPORT_01 ]
-                    </span>
+                
+                <!-- Imagem do Banner: Ajustada para o arquivo WRR-v01-Social-02.webp -->
+                <div class="bg-[#0c0d0b] border-b border-[#8C7A5B]/20 overflow-hidden">
+                    <img src="WRR-v01-Social-02.webp" alt="Relatório de Valuation" class="w-full h-auto block object-contain" width="1146" height="252">
                 </div>
                 
                 <!-- Info do Banner -->
@@ -944,37 +911,67 @@ O Workshop Receita Recorrente começa em:
 <!-- SECTION: SUPPLY DROP (BÔNUS) -->
 <!-- ================================================================= -->
 <section class="py-24 px-4 relative bg-[#0F120D] overflow-hidden border-t border-[#3E452F]">
+    <!-- Estilos Locais para o Efeito de TV Antiga -->
+    <style>
+        @keyframes tv-flicker-bonus {
+            0% { opacity: 0.99; filter: brightness(1.01); }
+            5% { opacity: 0.97; filter: brightness(0.99); }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
+
+        .old-tv-bonus {
+            position: relative;
+            display: inline-block;
+            animation: tv-flicker-bonus 0.2s infinite;
+            text-shadow: 0.5px 0 0.5px rgba(255,0,0,0.1), -0.5px 0 0.5px rgba(0,255,255,0.1);
+        }
+
+        .old-tv-bonus::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 1px,
+                rgba(0, 0, 0, 0.08) 2px
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+    </style>
+
     <!-- Elementos de Atmosfera: Fumaça/Sinalizador -->
     <div class="absolute -top-20 -right-20 w-96 h-96 bg-red-900/10 blur-[120px] rounded-full animate-pulse"></div>
     
     <div class="max-w-6xl mx-auto relative z-10">
-        <!-- Título de Impacto -->
-        <div class="text-center mb-20 fade-in-section">
-            <div class="inline-flex items-center gap-2 bg-[#8C7A5B] text-black px-4 py-1 font-mono text-[10px] font-bold uppercase tracking-widest mb-4 shadow-xl">
+        <!-- Título de Impacto: Selo acima do título -->
+        <div class="text-center mb-20 fade-in-section flex flex-col items-center">
+            <div class="inline-flex items-center gap-2 bg-[#8C7A5B] text-black px-4 py-1 font-mono text-[10px] font-bold uppercase tracking-widest mb-6 shadow-xl">
                 <i data-lucide="package-check" class="w-4 h-4"></i> EMERGENCY_SUPPLY_INBOUND
             </div>
-            <h2 class="text-3xl md:text-6xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
-                +3 MEGA BÔNUS QUE <br/> VOCÊ VAI <span class="text-[#8C7A5B]">LEVAR</span>
-            </h2>
+            
+            <div class="old-tv-bonus">
+                <h2 class="text-3xl md:text-6xl font-black text-white font-stencil tracking-tighter uppercase leading-tight">
+                    +3 MEGA BÔNUS QUE <br/> VOCÊ VAI <span class="text-[#8C7A5B]">LEVAR</span>
+                </h2>
+            </div>
         </div>
 
         <!-- Grid de Caixas de Suprimentos (Bonuses) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
             <!-- Bônus 01: Playbook -->
             <div class="fade-in-section relative group">
-                <!-- Sombra Projetada -->
                 <div class="absolute inset-0 bg-black/40 translate-x-2 translate-y-2"></div>
-                <!-- Crate Body -->
                 <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
-                    <!-- Detalhes de Madeira/Reforço -->
                     <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
                     <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
                     <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
                         <i data-lucide="book-open" class="w-10 h-10 text-[#8C7A5B]"></i>
                     </div>
-                    
                     <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
                         Playbook Completo <br/> <span class="text-[#8C7A5B] text-sm font-mono">Modelo de Recorrência</span>
                     </h3>
@@ -991,11 +988,9 @@ O Workshop Receita Recorrente começa em:
                 <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
                     <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
                     <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
                     <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
                         <i data-lucide="layout-template" class="w-10 h-10 text-[#8C7A5B]"></i>
                     </div>
-                    
                     <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
                         Templates de Funis <br/> <span class="text-[#8C7A5B] text-sm font-mono">Prontos para Vender</span>
                     </h3>
@@ -1012,11 +1007,9 @@ O Workshop Receita Recorrente começa em:
                 <div class="relative bg-[#1A1612] border-4 border-[#3D3222] p-8 text-center transition-transform group-hover:-translate-y-2 group-hover:-translate-x-1 duration-300">
                     <div class="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-[#5D5348]"></div>
                     <div class="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-[#5D5348]"></div>
-                    
                     <div class="w-20 h-20 mx-auto bg-black/40 border-2 border-dashed border-[#8C7A5B]/30 flex items-center justify-center mb-6 shadow-inner group-hover:bg-[#8C7A5B]/10 transition-colors">
                         <i data-lucide="copy" class="w-10 h-10 text-[#8C7A5B]"></i>
                     </div>
-                    
                     <h3 class="text-xl font-black text-white mb-4 uppercase font-stencil leading-tight">
                         Swipe File Gringa <br/> <span class="text-[#8C7A5B] text-sm font-mono">Ofertas Low Ticket</span>
                     </h3>
@@ -1031,7 +1024,6 @@ O Workshop Receita Recorrente começa em:
         <!-- SPECIAL ITEM: Mentoria Individual -->
         <div class="mt-16 fade-in-section">
             <div class="max-w-4xl mx-auto bg-[#141612] border-2 border-[#8b0000] p-6 relative overflow-hidden group">
-                <!-- Background Pattern -->
                 <div class="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#8b0000,#8b0000_10px,transparent_10px,transparent_20px)]"></div>
                 
                 <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
@@ -1047,6 +1039,13 @@ O Workshop Receita Recorrente começa em:
                             Acesso direto ao comando tático (Kauê Pugliesi & Slender). 
                             <span class="text-red-500 font-bold">*EXCLUSIVO PARA QUEM FICAR ATÉ O FINAL DO WORKSHOP.</span>
                         </p>
+                        
+                        <!-- Compliance Text: Mais evidente com fundo e borda -->
+                        <div class="mt-4 p-3 bg-red-950/20 border-l-2 border-red-600">
+                            <p class="text-[10px] md:text-[11px] text-gray-300 font-mono uppercase leading-tight tracking-wide">
+                                <span class="text-red-500 font-black">[!] AVISO:</span> Quem ficar até o final terá a possibilidade de concorrer a uma call gratuita de mentoria individual avaliada em mais de `R$ 5.000`.
+                            </p>
+                        </div>
                     </div>
                     <div class="hidden md:block">
                         <i data-lucide="radio" class="text-red-600 animate-pulse w-8 h-8"></i>
@@ -1066,7 +1065,7 @@ O Workshop Receita Recorrente começa em:
 <!-- SECTION: GUARANTEE (GARANTIA 30 DIAS - LAYOUT ORIGINAL + COPY INTEGRAL) -->
 <!-- ================================================================= -->
 <section class="py-24 px-4 relative bg-[#0c0d0b] border-t border-[#3E452F]/30 overflow-hidden">
-    <!-- Efeito de iluminação tática para o selo PNG -->
+    <!-- Efeito de iluminação tática para o selo -->
     <div class="absolute -right-20 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#8C7A5B]/5 blur-[120px] rounded-full pointer-events-none"></div>
 
     <div class="max-w-6xl mx-auto relative z-10">
@@ -1098,7 +1097,7 @@ O Workshop Receita Recorrente começa em:
                         <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0 mt-1"></i>
                         <div class="space-y-4">
                             <p class="text-gray-200 font-mono text-xs md:text-sm leading-relaxed">
-                                <span class="text-amber-500 font-black uppercase block mb-1">⚠️ Aviso de Autenticidade:</span>
+                                <span class="text-amber-500 font-black uppercase block mb-1">Aviso de Autenticidade:</span>
                                 Esse workshop não foi montado com conteúdo genérico, reaproveitado ou copiado de outro lugar.
                             </p>
                             <p class="text-gray-300 font-mono text-xs md:text-sm leading-relaxed">
@@ -1152,23 +1151,23 @@ O Workshop Receita Recorrente começa em:
                     
                     <!-- Container da Imagem com Animação de Flutuar -->
                     <div class="relative z-10 animate-float">
-                        <!-- Substitua o src abaixo pelo caminho do seu PNG de garantia -->
-                        <img src="CAMINHO_DO_SEU_SELO_GARANTIA.png" 
+                        <!-- Imagem do Selo de Garantia -->
+                        <img src="WRR-v01-Garantia-01.webp" 
                              alt="Garantia Incondicional 30 Dias" 
-                             class="max-w-[280px] md:max-w-[400px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                             class="w-full max-w-[320px] md:max-w-[480px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] object-contain"
                              onerror="this.style.display='none'; document.getElementById('seal-placeholder').style.display='flex';">
                         
-                        <!-- Placeholder elegante caso a imagem não exista ainda -->
-                        <div id="seal-placeholder" class="hidden w-[280px] h-[280px] md:w-[350px] md:h-[350px] border-4 border-dashed border-[#8C7A5B]/30 rounded-full flex-col items-center justify-center text-center p-8 bg-black/20 backdrop-blur-sm">
-                            <i data-lucide="shield-check" class="w-16 h-16 text-[#8C7A5B] mb-4 opacity-50"></i>
+                        <!-- Placeholder adaptado para formato retangular -->
+                        <div id="seal-placeholder" class="hidden w-[280px] h-[180px] md:w-[400px] md:h-[250px] border-2 border-dashed border-[#8C7A5B]/30 rounded-xl flex-col items-center justify-center text-center p-6 bg-black/20 backdrop-blur-sm">
+                            <i data-lucide="shield-check" class="w-12 h-12 text-[#8C7A5B] mb-3 opacity-50"></i>
                             <span class="text-[10px] font-mono text-[#8C7A5B] uppercase tracking-widest leading-tight">
-                                Espaço Reservado <br/> para Selo de Garantia <br/> (30 Dias)
+                                Selo de Garantia <br/> (30 Dias)
                             </span>
                         </div>
                     </div>
 
                     <!-- Decoração de Rodapé do Selo -->
-                    <div class="absolute -bottom-10 -right-10 font-mono text-[8px] text-[#8C7A5B] opacity-30 hidden md:block">
+                    <div class="absolute -bottom-10 right-0 font-mono text-[8px] text-[#8C7A5B] opacity-30 hidden md:block text-right">
                         AUTHENTICITY_VERIFIED: 100%<br/>
                         TERMS: UNCONDITIONAL_RELEASE
                     </div>
@@ -1183,29 +1182,85 @@ O Workshop Receita Recorrente começa em:
 <!-- SECTION: OFFER (OFERTA FINAL - ESTILO DOSSIÊ/ARQUIVO) -->
 <!-- ================================================================= -->
 <section id="offer" class="py-24 relative overflow-hidden bg-[#0c0d0b]">
+    <!-- Estilos Locais para Efeitos Analógicos e Interface -->
+    <style>
+        @keyframes tv-flicker-offer {
+            0% { opacity: 0.99; filter: brightness(1.01); }
+            5% { opacity: 0.97; filter: brightness(0.99); }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
+
+        .old-tv-offer {
+            position: relative;
+            display: inline-block;
+            animation: tv-flicker-offer 0.2s infinite;
+            text-shadow: 0.5px 0 0.5px rgba(255,0,0,0.1), -0.5px 0 0.5px rgba(0,255,255,0.1);
+        }
+
+        /* Monitor Analógico com Efeito Evidente */
+        .analog-display-frame {
+            background: #080a07;
+            position: relative;
+            border: 2px solid #3d3222;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,1);
+        }
+
+        /* Scanlines e Grid mais nítidos */
+        .analog-display-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(140, 122, 91, 0.08) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(140, 122, 91, 0.08) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Efeito de Interferência e Scanline Horizontal */
+        .analog-display-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.2) 0px,
+                rgba(0, 0, 0, 0.2) 1px,
+                transparent 2px
+            );
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+    </style>
+
     <div class="max-w-4xl mx-auto px-4 relative z-10">
         
         <!-- Cabeçalho de Introdução -->
         <div class="text-center mb-16 fade-in-section">
-            <h2 class="text-2xl md:text-3xl font-black text-white font-stencil tracking-wider uppercase leading-tight mb-4">
-                Agora que você já sabe o que vai receber…
-            </h2>
-            <p class="text-gray-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
+            <div class="old-tv-offer">
+                <h2 class="text-2xl md:text-3xl font-black text-white font-stencil tracking-wider uppercase leading-tight mb-4">
+                    Agora que você já sabe o que vai receber…
+                </h2>
+            </div>
+            <p class="text-gray-400 font-mono text-sm md:text-base max-w-2xl mx-auto mt-4">
                 Eu vou estar liberando o link aqui embaixo pra você garantir acesso ao "Workshop Receita Recorrente" agora mesmo!
             </p>
         </div>
 
-        <!-- DOSSIER CONTAINER (Estilo Pasta de Arquivo Cardboard) -->
+        <!-- DOSSIER CONTAINER -->
         <div class="relative mt-20 fade-in-section">
             
-            <!-- Aba da Pasta (Tab) -->
+            <!-- Aba da Pasta -->
             <div class="absolute -top-9 left-0 h-10 bg-[#C1A87D] border-t-2 border-l-2 border-r-2 border-[#8C7A5B] rounded-t-md px-8 flex items-center z-0 shadow-md">
                 <span class="text-[11px] font-mono text-[#3D3222] font-bold tracking-[0.3em] uppercase flex items-center gap-2">
                     <i data-lucide="folder-lock" class="w-3.5 h-3.5"></i> FINAL_ACCESS_KEY
                 </span>
             </div>
 
-            <!-- Corpo da Pasta -->
             <div class="relative bg-[#D6C4A0] border-2 border-[#8C7A5B] rounded-tr-md rounded-b-md shadow-2xl overflow-visible">
                 <!-- Textura de Papelão -->
                 <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');"></div>
@@ -1224,18 +1279,25 @@ O Workshop Receita Recorrente começa em:
                 <div class="relative z-10 p-6 md:p-10">
                     <div class="flex flex-col lg:flex-row gap-10">
                         
-                        <!-- Lado Esquerdo: Imagem e Garantia -->
+                        <!-- Lado Esquerdo: Logo e Garantia -->
                         <div class="w-full lg:w-2/5 space-y-6">
-                            <!-- Placeholder Imagem do Produto (Estilo Foto Clipada) -->
-                            <div class="relative bg-white p-2 shadow-xl transform -rotate-1 border border-gray-300">
-                                <div class="aspect-square bg-gray-900 flex flex-col items-center justify-center p-4 text-center">
-                                    <i data-lucide="package" class="w-12 h-12 text-[#8C7A5B] mb-2 opacity-50"></i>
-                                    <span class="text-[10px] font-mono text-gray-600 uppercase">[ MOCKUP: WORKSHOP_V1 ]</span>
+                            <!-- Display Analógico da Logo -->
+                            <div class="analog-display-frame aspect-square flex items-center justify-center p-6 shadow-2xl">
+                                <!-- Cantos da Mira -->
+                                <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#8C7A5B]/50 z-10"></div>
+                                <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#8C7A5B]/50 z-10"></div>
+                                <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#8C7A5B]/50 z-10"></div>
+                                <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#8C7A5B]/50 z-10"></div>
+                                
+                                <!-- Logo: Ajustada com object-contain para não recortar nada -->
+                                <img src="WRR-Logo-01.1.webp" alt="Workshop Receita Recorrente" class="w-full h-full object-contain relative z-20 animate-float drop-shadow-[0_0_15px_rgba(140,122,91,0.3)]">
+                                
+                                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[7px] font-mono text-[#8C7A5B]/50 uppercase tracking-[0.3em] z-10 bg-black/40 px-2">
+                                    SIGNAL_LOCK_V1.1
                                 </div>
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-8 bg-gray-400/30 backdrop-blur-sm border border-white/50 transform -rotate-2"></div>
                             </div>
 
-                            <!-- Garantia (Estilo Carimbo) -->
+                            <!-- Garantia -->
                             <div class="border-2 border-dashed border-[#8b0000]/40 p-4 rounded-sm bg-white/10">
                                 <div class="flex items-center gap-3">
                                     <i data-lucide="shield-check" class="w-6 h-6 text-[#8b0000]"></i>
@@ -1250,7 +1312,6 @@ O Workshop Receita Recorrente começa em:
                         <!-- Lado Direito: Itens e Checklist -->
                         <div class="w-full lg:w-3/5 space-y-6">
                             <div class="grid grid-cols-1 gap-2">
-                                <!-- Itens de Acesso -->
                                 <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30">
                                     <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
                                     <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso Direto com os Mentores</span>
@@ -1259,7 +1320,6 @@ O Workshop Receita Recorrente começa em:
                                     <i data-lucide="check" class="w-4 h-4 text-[#3D3222] mt-0.5" stroke-width="4"></i>
                                     <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight">Acesso completo ao treinamento ao vivo</span>
                                 </div>
-                                <!-- MEGA BÔNUS -->
                                 <div class="flex items-start gap-3 p-2 border-b border-[#8C7A5B]/30 bg-[#C1A87D]/20">
                                     <i data-lucide="flame" class="w-4 h-4 text-orange-700 mt-0.5"></i>
                                     <span class="text-[#3D3222] text-sm font-bold font-mono uppercase tracking-tight"><strong class="text-orange-900">Bônus:</strong> Playbook Completo de Recorrência em Dólar</span>
@@ -1278,24 +1338,18 @@ O Workshop Receita Recorrente começa em:
                                 </div>
                             </div>
 
-                            <!-- Seção de Preço (Estilo Etiqueta de Preço) -->
-                            <div class="mt-8 pt-6 border-t-2 border-[#8C7A5B] flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div class="text-center md:text-left">
-                                    <span class="block text-[10px] text-gray-600 font-mono line-through">De `R$ 997,00`</span>
-                                    <div class="flex items-baseline gap-2">
-                                        <span class="text-xs font-black text-[#3D3222] font-mono uppercase tracking-tighter">por Apenas</span>
-                                        <span class="text-5xl font-black text-[#3D3222] font-stencil tracking-tighter">`R$ 19,90`</span>
-                                    </div>
-                                </div>
-                                <!-- Carimbo de Autorização -->
-                                <div class="border-4 border-[#8C7A5B] p-2 text-[#8C7A5B] font-black font-stencil text-xs -rotate-6 opacity-60">
-                                    AUTHORIZED_ACCESS
+                            <!-- Seção de Preço (Layout Vertical Solicitado) -->
+                            <div class="mt-8 pt-6 border-t-2 border-[#8C7A5B] flex flex-col items-center md:items-start text-center md:text-left gap-1">
+                                <span class="text-[10px] text-gray-700 font-mono line-through uppercase tracking-widest">De `R$ 997,00`</span>
+                                <span class="text-xs font-black text-[#3D3222] font-mono uppercase tracking-tighter">por Apenas</span>
+                                <div class="flex items-baseline mt-1">
+                                    <span class="text-4xl md:text-5xl font-black text-[#3D3222] font-stencil tracking-tighter leading-none">`R$ 19,90`</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Botão de Ação (Abaixo de Tudo na Pasta) -->
+                    <!-- Botão de Ação -->
                     <div class="mt-12">
                         <a href="#" class="group relative flex items-center justify-center w-full py-6 bg-[#4B5320] border-b-8 border-[#24291B] hover:-translate-y-1 active:border-b-0 active:translate-y-1 transition-all shadow-xl clip-angled">
                             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20"></div>
@@ -1306,9 +1360,6 @@ O Workshop Receita Recorrente começa em:
                     </div>
                 </div>
             </div>
-
-            <!-- Decoração de Grampo de Arquivo -->
-            <div class="hidden lg:block absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-20 border-x-4 border-t-4 border-[#555] rounded-t-xl bg-transparent z-40 opacity-50"></div>
         </div>
     </div>
 </section>
@@ -1334,14 +1385,58 @@ O Workshop Receita Recorrente começa em:
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-[#080907] py-12 border-t border-[#3e452f] text-center relative z-10">
-    <div class="flex items-center justify-center gap-2 text-[#8C7A5B] opacity-50 mb-4">
-        <i data-lucide="target" class="w-6 h-6"></i>
+<!-- ================================================================= -->
+<!-- SECTION: FOOTER (TERMINAL DE ENCERRAMENTO) -->
+<!-- ================================================================= -->
+<footer class="bg-[#080907] py-16 border-t border-[#3e452f] relative z-10 overflow-hidden">
+    <!-- Efeito Sutil de Scanline no Footer -->
+    <div class="absolute inset-0 opacity-[0.02] pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,#fff_1px,#fff_2px)] bg-[length:100%_3px]"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+        
+        <!-- Logo Ajustada: Pequena e Cor Original -->
+        <div class="flex flex-col items-center mb-10">
+            <img src="WRR-Logo-01.1.webp" alt="Workshop Receita Recorrente" class="h-8 md:h-10 object-contain mb-6 hover:scale-105 transition-transform duration-500">
+            <div class="w-16 h-[1px] bg-[#8C7A5B] opacity-20"></div>
+        </div>
+
+        <!-- Links de Navegação Táticos -->
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12">
+            <a href="#" class="text-[10px] font-mono text-gray-500 hover:text-[#8C7A5B] transition-colors uppercase tracking-[0.2em]">Políticas de Privacidade</a>
+            <a href="#" class="text-[10px] font-mono text-gray-500 hover:text-[#8C7A5B] transition-colors uppercase tracking-[0.2em]">Termos de Uso</a>
+            <a href="#" class="text-[10px] font-mono text-gray-500 hover:text-[#8C7A5B] transition-colors uppercase tracking-[0.2em]">Contato</a>
+        </div>
+
+        <!-- Copyright e Classificação -->
+        <div class="text-center space-y-8">
+            <div class="space-y-2">
+                <p class="text-gray-600 text-[10px] font-mono uppercase tracking-[0.3em]">
+                    &copy; 2025 Workshop Receita Recorrente. Todos os direitos reservados.
+                </p>
+                <p class="text-[#4B5320] text-[9px] font-mono font-bold uppercase tracking-[0.5em] animate-pulse">
+                    [ CLASSIFIED MATERIAL // EYES ONLY ]
+                </p>
+            </div>
+
+            <!-- Disclaimer de Compliance (Meta/Google) -->
+            <div class="max-w-3xl mx-auto pt-8 border-t border-[#3e452f]/30 text-justify md:text-center">
+                <p class="text-gray-600 text-[9px] font-sans leading-relaxed opacity-50 italic">
+                    Este site não faz parte do site do Meta ou do Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Meta de nenhuma maneira. META é uma marca comercial independente da Meta Platforms, Inc. O Workshop Receita Recorrente é um treinamento independente e não possui vínculo oficial com as plataformas de tráfego mencionadas.
+                </p>
+            </div>
+
+            <!-- Indicador de Status Final -->
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 bg-black/40 border border-[#3e452f] rounded-sm">
+                <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8C7A5B] opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#8C7A5B]"></span>
+                </span>
+                <span class="text-[9px] font-mono text-[#6B7A48] uppercase tracking-widest">
+                    Secure connection terminated // Uplink closed
+                </span>
+            </div>
+        </div>
     </div>
-    <p class="text-gray-600 text-[10px] font-mono uppercase tracking-widest">
-        &copy; 2024 STEADYFLOW SYSTEMS. ALL RIGHTS RESERVED. <br /> CLASSIFIED MATERIAL.
-    </p>
 </footer>
 
 <script>
@@ -1358,28 +1453,27 @@ O Workshop Receita Recorrente começa em:
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
 
-    // Countdown Timer (Corrigido para Dourado/Caqui)
-    let time = 4 * 60 * 60 + 12 * 60 + 45; 
-    const timerContainer = document.getElementById('countdown-timer');
+    // Countdown Timer (Corrigido para 4 unidades: D, H, M, S)
+    // Tempo inicial em segundos (exemplo: 2 dias, 4 horas, 12 min, 45 seg)
+    let time = (2 * 24 * 3600) + (4 * 3600) + (12 * 60) + 45; 
+    
+    const dEl = document.getElementById('days');
+    const hEl = document.getElementById('hours');
+    const mEl = document.getElementById('minutes');
+    const sEl = document.getElementById('seconds');
 
     setInterval(() => {
-        if (time > 0) time--; else time = 15165; 
-        const h = Math.floor((time % (3600 * 24)) / 3600);
+        if (time > 0) time--; else time = 187965; // Reset para manter o timer rodando
+        
+        const d = Math.floor(time / (24 * 3600));
+        const h = Math.floor((time % (24 * 3600)) / 3600);
         const m = Math.floor((time % 3600) / 60);
         const s = time % 60;
         
-        let html = '';
-        [h, m, s].forEach((val, i) => {
-            const labels = ['h', 'm', 's'];
-            html += `
-                <div class="flex flex-col items-center mx-1">
-                    <div class="bg-[#1a1e16] text-[#8C7A5B] font-mono text-3xl md:text-5xl font-bold p-2 min-w-[3.5rem] text-center border-2 border-[#24291B] rounded-sm shadow-inner">
-                        ${String(val).padStart(2, '0')}
-                    </div>
-                    <span class="text-[10px] text-[#C2B280] uppercase mt-1 font-bold tracking-widest">${labels[i]}</span>
-                </div>`;
-        });
-        if(timerContainer) timerContainer.innerHTML = html;
+        if(dEl) dEl.innerText = String(d).padStart(2, '0');
+        if(hEl) hEl.innerText = String(h).padStart(2, '0');
+        if(mEl) mEl.innerText = String(m).padStart(2, '0');
+        if(sEl) sEl.innerText = String(s).padStart(2, '0');
     }, 1000);
 
     // FAQ Data
